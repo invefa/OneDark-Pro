@@ -24,7 +24,7 @@ token分三层，皮肤改的是这三层的值：
 
 映射与[DeepSeek网页皮肤](../deepseek-chat/README.md)共用同一份。`dsh/build/gen.py`把`deepseek-chat/build/gen.py`当模块加载，直接调用它的`token_block()`，再补DSH独有的26个token（文档预览、deep diving状态、菜单、diff、switch这类）。色表只有一份，两边不会各自漂移。
 
-代码块走Shiki的`css-variables`主题，每个token的颜色是`var(--shiki-token-*)`，定义这组变量就能整体换色。这套主题只有十个类别：`entity.name.type`、`entity.name.function`与`meta.function-call`共用`--shiki-token-function`，数字与普通变量共用`--shiki-token-constant`。所以类型名与函数名同色、数字与变量同色。常量槽取了变量黄`#e5c07b`，因为标识符远多于数字；代价是数字也变黄，VSCode里数字是橙色`#d19a66`。
+代码块走Shiki的`css-variables`主题，每个token的颜色是`var(--shiki-token-*)`，定义这组变量就能整体换色。这套主题只有十个类别：`entity.name.type`、`entity.name.function`与`meta.function-call`共用`--shiki-token-function`，数字与普通变量共用`--shiki-token-constant`。所以类型名与函数名同色、数字与变量同色。常量槽用数字橙`#d19a66`，标识符与数字同色；VSCode里标识符是黄`#e5c07b`、数字是橙，这里只能取一个。
 
 推理块单独处理。DSH用正文色渲染推理行，展开后与答复同色，只能靠字号和22px缩进区分，所以给它加一条左侧细线、压一档灰、收紧行距。推理正文不总包在`<p>`里，选择器用`._3GBCTG_thinkBody :not(pre):not(code):not(a):not(.md-code-block)`，除代码与链接外全部压暗，不依赖段落标签。
 

@@ -94,7 +94,7 @@ SHIKI = {
     "token-keyword": site.Y["keyword"],
     "token-string": site.Y["string"],
     "token-string-expression": site.Y["string"],
-    "token-constant": site.Y["type"],
+    "token-constant": site.Y["numeric"],
     "token-function": site.Y["function"],
     "token-parameter": site.Y["variable"],
     "token-punctuation": site.FG,

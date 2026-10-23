@@ -1,6 +1,6 @@
 {
   "name": "dsh-onedark",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "description": "Apply the One Dark Pro Darker palette to the DSH web interface.",
   "type": "module",
