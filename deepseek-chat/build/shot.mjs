@@ -4,8 +4,9 @@
 import { spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import { BROWSER } from "./edge.mjs";
 
-const EDGE = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
+const EDGE = BROWSER;
 const PORT = 9333;
 const PROFILE = path.join(import.meta.dirname, "profile");
 const cssPath = process.argv[2];
@@ -132,17 +133,17 @@ const MOCK = `(() => {
     "&#160;&#160;" + t("keyword", "return") + " " + t("variable", "items") + t("punctuation", ".") +
       t("property", "map") + t("punctuation", "(") + t("parameter", "item") + t("punctuation", " =&gt; ") +
       t("string", "\\"hi\\"") + t("punctuation", ")") + t("punctuation", ";"),
-    "&#160;&#160;" + t("comment", "// 42 是常量，console 是内置对象"),
+    "&#160;&#160;" + t("comment", "// 42 is a constant, log is builtin"),
     t("punctuation", "}") + t("punctuation", ";") + " " + t("class-name", "Widget") + t("punctuation", ".")
       + t("builtin", "log") + t("punctuation", "(") + t("number", "42") + t("punctuation", ")"),
   ].join("<br>");
   wrap.innerHTML =
     '<div class="ds-markdown" style="max-width:780px">' +
-      '<p>这是一段回答正文，含 <strong>加粗</strong>、<em>斜体</em>、<a href="#">链接</a> 与 <code>inline_code()</code>。</p>' +
-      '<ul><li>列表项一</li><li>列表项二</li></ul>' +
+      '<p>Answer body with <strong>bold</strong>, <em>italic</em>, an <a href="#">inline link</a> and <code>inline_code()</code>.</p>' +
+      '<ul><li>First list item</li><li>Second list item</li></ul>' +
       '<pre class="md-code-block md-code-block-dark" style="padding:12px 14px;border-radius:4px;overflow:auto;white-space:pre">' +
         '<code class="language-javascript">' + code + '</code></pre>' +
-      '<blockquote><p>引用一段内容</p></blockquote>' +
+      '<blockquote><p>A quoted line</p></blockquote>' +
     '</div>';
   const codeEl = wrap.querySelector("code");
   if (codeEl) codeEl.style.whiteSpace = "pre";

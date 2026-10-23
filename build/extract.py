@@ -11,8 +11,12 @@ import os
 from PIL import Image, ImageDraw, ImageFont
 
 OUT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-EXT_ROOT = os.path.expandvars(r"%USERPROFILE%\.vscode\extensions")
-THEME_GLOB = os.path.join(EXT_ROOT, "zhuangtongfa.material-theme-*", "themes", "OneDark-Pro-darker.json")
+# The VSCode extension root is taken from the environment so the script does not
+# carry a local install path; VSCODE_EXTENSIONS overrides the usual location.
+EXT_ROOT = os.environ.get("VSCODE_EXTENSIONS") or os.path.expandvars(r"%USERPROFILE%\.vscode\extensions")
+THEME_GLOB = os.path.join(
+    EXT_ROOT, "zhuangtongfa.material-theme-*", "themes", "OneDark-Pro-darker.json"
+)
 THEME_PATH = sorted(glob.glob(THEME_GLOB))[-1]
 PKG_PATH = os.path.join(os.path.dirname(os.path.dirname(THEME_PATH)), "package.json")
 

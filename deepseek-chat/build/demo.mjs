@@ -3,8 +3,9 @@ import { spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { BROWSER } from "./edge.mjs";
 
-const EDGE = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
+const EDGE = BROWSER;
 const PORT = 9337;
 const PROFILE = path.join(import.meta.dirname, "profile5");
 const dir = import.meta.dirname;

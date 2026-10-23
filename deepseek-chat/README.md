@@ -150,3 +150,10 @@ python build\gen.py
 ```powershell
 Invoke-WebRequest -Uri "https://fe-static.deepseek.com/chat/static/main.1e9681a4d3.css" -OutFile build\ds-main.css
 ```
+
+截图与探针脚本用CDP驱动本机的Chromium内核浏览器，浏览器路径不写死：先在`PATH`里找`msedge`、`chrome`、`chromium`，找不到就读`EDGE_PATH`环境变量。
+
+```powershell
+$env:EDGE_PATH = "<浏览器可执行文件路径>"
+node build\shot.mjs
+```

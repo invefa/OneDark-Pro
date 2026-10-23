@@ -4,8 +4,9 @@
 import { spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import { BROWSER } from "./edge.mjs";
 
-const EDGE = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
+const EDGE = BROWSER;
 const PORT = 9334;
 const PROFILE = path.join(import.meta.dirname, "profile2");
 const css = fs.readFileSync(process.argv[2], "utf-8");
@@ -75,10 +76,8 @@ const PROBE = `(() => {
     const cs = getComputedStyle(el);
     rows.push([label, el.tagName.toLowerCase() + "." + String(el.className).split(" ").slice(0,2).join("."), cs.backgroundColor, cs.color]);
   };
-  const byText = (t) => [...document.querySelectorAll("button,div")].find((e) => e.textContent.trim() === t);
-  add("login button", byText("登录"));
-  add("send code", byText("发送验证码"));
-  add("password login", byText("密码登录"));
+  add("primary button", document.querySelector(".ds-button--primary"));
+  add("text label button", document.querySelector(".ds-button--textLabelTertiary"));
   add("input field", document.querySelector("input"));
   const qr = document.querySelector("canvas,img[alt],div");
   const sheets = [...document.styleSheets].map((s) => (s.href || "inline").split("/").pop());
