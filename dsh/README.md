@@ -74,6 +74,7 @@ document.head.appendChild(s);
 - 类名是构建哈希。`_3GBCTG_`对应`@deepseek-ai/dsh-client-ui-chat`当前版本的ReasoningRow，DSH升级后前缀可能变，推理块的规则会静默失效，token配色不受影响。排查办法：`build/extract-css.py`重新抽一次，看前缀。
 - 代码块依赖`css-variables`主题。DSH若换成别的Shiki主题，`--shiki-token-*`不再被引用，代码块会回到高亮器自带的配色。
 - 只做配色，字号、字体、圆角、间距不动。
+- diff的增删底色用rgba叠在页面底色上，不跟随主题变浅变深；换浅色主题时需要重算。
 
 ## 五、文件
 
