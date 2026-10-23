@@ -156,7 +156,7 @@ Darker只动了底色这一层，31个键整体下移一档。
 | [README.md](README.md) | 本文 |
 | [onedark-pro.css](onedark-pro.css) | 74个CSS变量，分表面、文字、强调、状态、语法、终端、合成值七组 |
 | [onedark-pro.json](onedark-pro.json) | 结构化色板，含`workbenchColors`全部223个原始键 |
-| [palette.png](palette.png) | 色板图，600x602 |
+| [palette.png](palette.png) | 色板图，1800x1806，按容器宽等比显示 |
 | [extract.py](build/extract.py) | 提取脚本，读主题文件后重新生成上面三个产物 |
 | [deepseek-chat/](deepseek-chat/README.md) | 把同一套色板套到chat.deepseek.com的油猴脚本 |
 

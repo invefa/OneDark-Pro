@@ -211,35 +211,48 @@ def write_json():
         fh.write("\n")
 
 
-FONT_DIR = r"C:\Windows\Fonts"
+FONT_DIR = os.path.join(os.environ.get("WINDIR") or os.path.join(os.sep, "Windows"), "Fonts")
+
+# The sheet is laid out in 600px design units and rendered at three times that
+# density, so text stays sharp when the image is shown at 600 CSS pixels.
+SCALE = 3
 
 
-def load(name, size):
-    return ImageFont.truetype(os.path.join(FONT_DIR, name), size)
+def s(value):
+    return value * SCALE
+
+
+def load(candidates, size):
+    for name in candidates:
+        path = os.path.join(FONT_DIR, name)
+        if os.path.exists(path):
+            return ImageFont.truetype(path, int(round(s(size))))
+    return ImageFont.load_default()
 
 
 def write_png():
-    width, margin = 600, 20
+    width, margin = s(600), s(20)
     content = width - margin * 2
 
-    title_font = load("segoeuib.ttf", 16)
-    sub_font = load("segoeui.ttf", 10)
-    label_font = load("segoeuib.ttf", 9)
-    role_font = load("segoeui.ttf", 8)
-    hex_font = load("consola.ttf", 9)
+    title_font = load(["segoeuib.ttf", "arialbd.ttf"], 16)
+    sub_font = load(["segoeui.ttf", "arial.ttf"], 10)
+    label_font = load(["segoeuib.ttf", "arialbd.ttf"], 9)
+    role_font = load(["segoeui.ttf", "arial.ttf"], 8)
+    hex_font = load(["consola.ttf", "cour.ttf"], 9)
 
-    img = Image.new("RGB", (width, 1200), c("editor.background"))
+    img = Image.new("RGB", (width, s(1200)), c("editor.background"))
     draw = ImageDraw.Draw(img)
     state = {"y": margin}
 
     def section(title, items, per_row, chip_h, role_labels):
         y = state["y"]
         draw.text((margin, y), title.upper(), font=label_font, fill=c("statusBar.foreground"))
-        y += 15
-        gap = 8
+        y += s(15)
+        gap = s(8)
+        chip_h = s(chip_h)
         chip_w = (content - gap * (per_row - 1)) / per_row
-        label_h = 12 if role_labels else 0
-        step = chip_h + label_h + 16
+        label_h = s(12) if role_labels else 0
+        step = chip_h + label_h + s(16)
         for index, (name, value) in enumerate(items):
             col, row = index % per_row, index // per_row
             x = margin + col * (chip_w + gap)
@@ -247,19 +260,19 @@ def write_png():
             if role_labels:
                 draw.text((x, top), name, font=role_font, fill=c("statusBar.foreground"))
             cy = top + label_h
-            draw.rounded_rectangle([x, cy, x + chip_w, cy + chip_h], radius=3,
+            draw.rounded_rectangle([x, cy, x + chip_w, cy + chip_h], radius=s(3),
                                    fill=value, outline=c("editorGroup.border"))
             tw = draw.textlength(value, font=hex_font)
-            draw.text((x + (chip_w - tw) / 2, cy + chip_h + 3), value, font=hex_font,
+            draw.text((x + (chip_w - tw) / 2, cy + chip_h + s(3)), value, font=hex_font,
                       fill=scope_color("comment")[0])
         rows = (len(items) + per_row - 1) // per_row
-        state["y"] = y + rows * step + 6
+        state["y"] = y + rows * step + s(6)
 
     y0 = margin
     draw.text((margin, y0), "One Dark Pro Darker", font=title_font, fill=c("tab.activeForeground"))
-    draw.text((margin, y0 + 22), "zhuangtongfa.material-theme {}".format(VERSION), font=sub_font,
+    draw.text((margin, y0 + s(22)), "zhuangtongfa.material-theme {}".format(VERSION), font=sub_font,
               fill=c("titleBar.inactiveForeground"))
-    state["y"] = y0 + 46
+    state["y"] = y0 + s(46)
 
     section("surface", pairs(SURFACE), 9, 34, False)
     section("text", pairs(TEXT), 6, 30, False)
@@ -268,7 +281,9 @@ def write_png():
     section("terminal", pairs(TERMINAL), 8, 28, False)
     section("terminal bright", pairs(TERMINAL_BRIGHT), 8, 28, False)
 
-    img.crop((0, 0, width, int(state["y"]) + 10)).save(os.path.join(OUT, "palette.png"))
+    height = int(state["y"] + s(10))
+    img.crop((0, 0, width, height)).save(os.path.join(OUT, "palette.png"))
+    print("palette.png {}x{}".format(width, height))
 
 
 def md_table(header, rows):
