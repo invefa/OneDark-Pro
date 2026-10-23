@@ -6,3 +6,5 @@ deepseek-chat/build/profile*/
 **/__pycache__/
 *.pyc
 *.log
+# Screenshots are rendered into the images folder before being committed.
+deepseek-chat/build/*.png
