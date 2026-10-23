@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>DeepSeek 深度思考块</title>
+<!-- 站点真实样式表 -->
+<link rel="stylesheet" href="ds-main.css">
+<style>
+  html, body { margin: 0; height: 100%; }
+  .page { max-width: 760px; margin: 0 auto; padding: 28px 24px 40px; }
+  .toolbar { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; }
+  .turn { margin-bottom: 26px; }
+  .turn-label {
+    font: 11px/16px ui-sans-serif, system-ui, sans-serif;
+    color: var(--dsw-alias-label-caption);
+    letter-spacing: .04em; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .think-head {
+    display: flex; align-items: center; gap: 8px;
+    font: var(--dsw-font-markdown-small);
+    color: var(--dsw-alias-label-tertiary);
+    margin: 12px 0 4px;
+  }
+  .think-head svg { flex: none; }
+</style>
+</head>
+<body data-ds-dark-theme>
+<div class="page">
+
+  <div class="turn">
+    <div class="turn-label">答复与思考</div>
+
+    <div class="ds-markdown">
+      <p>这是答复正文。它和下面的思考块在字号、行高、颜色上应该一眼能分开，读长回答时不需要重新找起点。</p>
+      <p>答复用正文色与常规行距，思考落在左侧竖线之内，颜色更低一档。</p>
+    </div>
+
+    <div class="think-head">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
+        <circle cx="8" cy="8" r="5.6"></circle><path d="M8 5.2v3.4l2.2 1.4"></path>
+      </svg>
+      已深度思考（用时 18 秒）
+    </div>
+
+    <div class="e1675d8b ds-think-content">
+      <div class="_9b52f6c">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
+          <circle cx="8" cy="8" r="5.6"></circle><path d="M8 5.2v3.4l2.2 1.4"></path>
+        </svg>
+      </div>
+      <div class="_9ecc93a"></div>
+      <div class="ds-markdown">
+        <p>用户在问主题色值，先要判断他指的是哪一层：编辑器底、侧栏底还是强调色。</p>
+        <p>从版式看是暗色主题，侧栏比正文区更深，符合 One Dark Pro 的层级。</p>
+        <p>结论：先给色板，再按用途分组，比逐条念键名有用。</p>
+        <p><strong>补充：</strong>终端那套色比语法色饱和，不能直接搬到代码高亮上。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

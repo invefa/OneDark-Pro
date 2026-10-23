@@ -1,0 +1,93 @@
+/* One Dark Pro Darker, extracted from zhuangtongfa.material-theme 3.20.3
+   Source: themes/OneDark-Pro-darker.json
+   Translucent editor overlays are flattened onto editor.background. */
+
+:root {
+  /* surface */
+  --odp-bg-editor: #23272e;
+  --odp-bg-sidebar: #1e2227;
+  --odp-bg-input: #1d1f23;
+  --odp-bg-raised: #2c313c;
+  --odp-bg-hover: #2c313a;
+  --odp-bg-inactive: #323842;
+  --odp-bg-quote: #2e3440;
+  --odp-line-strong: #3e4452;
+  --odp-line-soft: #181a1f;
+
+  /* text */
+  --odp-fg: #abb2bf;
+  --odp-fg-strong: #dcdcdc;
+  --odp-fg-ui: #d7dae0;
+  --odp-fg-muted: #9da5b4;
+  --odp-fg-dim: #6b717d;
+  --odp-fg-faint: #495162;
+
+  /* accent */
+  --odp-accent: #4d78cc;
+  --odp-cursor: #528bff;
+  --odp-link: #61afef;
+
+  /* status */
+  --odp-error: #c24038;
+  --odp-warning: #d19a66;
+  --odp-added: #109868;
+  --odp-modified: #948b60;
+  --odp-deleted: #9a353d;
+
+  /* syntax */
+  --odp-text: #abb2bf;
+  --odp-variable: #e06c75;
+  --odp-keyword: #c678dd;
+  --odp-keyword-op: #c678dd;
+  --odp-operator: #abb2bf;
+  --odp-function: #61afef;
+  --odp-type: #e5c07b;
+  --odp-namespace: #e5c07b;
+  --odp-builtin: #56b6c2;
+  --odp-numeric: #d19a66;
+  --odp-string: #98c379;
+  --odp-comment: #7f848e;
+  --odp-tag: #e06c75;
+  --odp-attribute: #d19a66;
+  --odp-illegal: #ffffff;
+  --odp-error-token: #f44747;
+  --odp-md-heading: #e06c75;
+  --odp-md-section: #61afef;
+  --odp-md-bold: #d19a66;
+  --odp-md-quote: #5c6370;
+  --odp-diff-inserted: #98c379;
+  --odp-diff-deleted: #e06c75;
+  --odp-diff-changed: #e5c07b;
+
+  /* terminal */
+  --odp-ansi-black: #3f4451;
+  --odp-ansi-red: #e05561;
+  --odp-ansi-green: #8cc265;
+  --odp-ansi-yellow: #d18f52;
+  --odp-ansi-blue: #4aa5f0;
+  --odp-ansi-magenta: #c162de;
+  --odp-ansi-cyan: #42b3c2;
+  --odp-ansi-white: #d7dae0;
+  --odp-ansi-bright-black: #4f5666;
+  --odp-ansi-bright-red: #ff616e;
+  --odp-ansi-bright-green: #a5e075;
+  --odp-ansi-bright-yellow: #f0a45d;
+  --odp-ansi-bright-blue: #4dc4ff;
+  --odp-ansi-bright-magenta: #de73ff;
+  --odp-ansi-bright-cyan: #4cd1e0;
+  --odp-ansi-bright-white: #e6e6e6;
+
+  /* translucent overlays, flattened */
+  --odp-flat-editor-selectionbackground: #3d4555;
+  --odp-flat-editor-selectionhighlightbackground: #5e5532;
+  --odp-flat-editor-wordhighlightbackground: #434955;
+  --odp-flat-editor-findmatchbackground: #51463d;
+  --odp-flat-editor-findmatchhighlightbackground: #40444a;
+  --odp-flat-editorindentguide-activebackground1: #5d5f64;
+  --odp-flat-editorwhitespace-foreground: #3c4046;
+  --odp-flat-editorruler-foreground: #373c44;
+  --odp-flat-terminal-selectionbackground: #3d4149;
+  --odp-flat-scrollbarslider-background: #30363f;
+  --odp-flat-scrollbarslider-hoverbackground: #3c434e;
+  --odp-flat-scrollbarslider-activebackground: #49505c;
+}
