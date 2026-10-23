@@ -1,0 +1,5 @@
+# Normalize line endings; the tooling writes LF and the scripts are portable.
+* text=auto eol=lf
+
+*.png binary
+*.woff2 binary

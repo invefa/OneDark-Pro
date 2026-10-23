@@ -1,0 +1,8 @@
+# Snapshots of third-party stylesheets, refetch before running the demos.
+deepseek-chat/build/ds-main.css
+
+# Browser profiles and caches created by the verification scripts.
+deepseek-chat/build/profile*/
+**/__pycache__/
+*.pyc
+*.log
