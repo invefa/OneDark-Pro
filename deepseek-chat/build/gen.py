@@ -170,11 +170,15 @@ ALIAS = {
     "--dsw-alias-button-tool-bar-fill-invisible": "rgba(24, 26, 31, .36)",
     "--dsw-alias-button-contrast-fill": FG,
     # Text
+    # One Dark Pro keeps almost every UI text on #abb2bf and drops to #9da5b4
+    # only for status-like copy, so the site's four text levels collapse onto
+    # three: primary, secondary and tertiary all read as body text, while
+    # caption and dimmed carry the muted roles.
     "--dsw-alias-label-primary": FG,
     "--dsw-alias-label-primary-dimmed": FG_MUTED,
-    "--dsw-alias-label-secondary": FG_MUTED,
-    "--dsw-alias-label-tertiary": GRAY,
-    "--dsw-alias-label-caption": FG_DIM,
+    "--dsw-alias-label-secondary": FG,
+    "--dsw-alias-label-tertiary": FG,
+    "--dsw-alias-label-caption": FG_MUTED,
     "--dsw-alias-label-dimmed": FG_FAINT,
     "--dsw-alias-label-primary-foreground": WHITE,
     "--dsw-alias-label-primary-inverted": EDITOR,
@@ -295,9 +299,9 @@ def build_css():
     out.append("")
 
     out.append("/* thinking block: a process column under the answer")
-    out.append("   The site already ships the icon, the left rule and the 22px indent; what it lacks is text hierarchy:")
-    out.append("   the answer is 16px/28px on label-primary, thinking is 14px/24px on label-secondary,")
-    out.append("   and after the One Dark mapping those two steps sit too close, so thinking drops to comment grey. */")
+    out.append("   The site already ships the icon, the left rule and the 22px indent, but it colours")
+    out.append("   reasoning with label-secondary, which in this mapping is the body colour, so the block")
+    out.append("   needs its own step down. */")
     out.append("{} .ds-think-content .ds-markdown {{\n  color: {};\n  line-height: 22px;\n}}".format(SCOPE, GRAY))
     out.append("")
     out.append("{} .ds-think-content .ds-markdown :is(h1, h2, h3, h4, h5, h6) {{\n  color: {};\n}}".format(SCOPE, FG_MUTED))

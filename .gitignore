@@ -8,3 +8,4 @@ deepseek-chat/build/profile*/
 *.log
 # Screenshots are rendered into the images folder before being committed.
 deepseek-chat/build/*.png
+deepseek-chat/build/*.json

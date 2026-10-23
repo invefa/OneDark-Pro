@@ -42,14 +42,17 @@ Stylus用户直接导入[onedark-deepseek.css](onedark-deepseek.css)，URL前缀
 | `--dsw-alias-bg-layer-2` | `#323842` | 失焦选中 |
 | `--dsw-alias-border-l2` | `#3e4452` | 强线条 |
 | `--dsw-alias-label-primary` | `#abb2bf` | 正文 |
-| `--dsw-alias-label-tertiary` | `#7f848e` | 注释灰 |
-| `--dsw-alias-label-caption` | `#6b717d` | 灰化 |
+| `--dsw-alias-label-secondary` | `#abb2bf` | 与正文同色 |
+| `--dsw-alias-label-tertiary` | `#abb2bf` | 会话标题、列表项 |
+| `--dsw-alias-label-caption` | `#9da5b4` | 灰化、占位符 |
 | `--dsw-alias-brand-primary` | `#4d78cc` | 强调 |
 | `--dsw-alias-brand-text` | `#61afef` | 链接 |
 | `--dsw-static-red-400` | `#e06c75` | 变量红兼错误 |
 | `--dsw-static-green-500` | `#98c379` | 字符串绿兼成功 |
 | `--dsw-static-amber-500` | `#d19a66` | 数字橙兼警告 |
 | `--dsw-alias-markdown-code-block` | `#1e2227` | 代码块底 |
+
+文字层级按VSCode的实际用法合并。One Dark Pro的界面文字几乎全用`#abb2bf`，只有状态栏这类降到`#9da5b4`；站点有四级文字，所以primary、secondary、tertiary都落到`#abb2bf`，caption用`#9da5b4`，dimmed留给最弱的提示。早先按"越次要越灰"逐级压暗，会话标题落到`#7f848e`，而VSCode里同一位置的资源管理器文件名是`#abb2bf`，对比之下整片发灰。
 
 中性阶`--dsw-static-neutral-bluish-*`从00到1000共19档，主题里只有9个中性值，多档合并到同一个值。合并后仍保持由亮到暗的方向，直接读这组变量的地方不会拿到相反的颜色。
 
@@ -98,7 +101,7 @@ Stylus用户直接导入[onedark-deepseek.css](onedark-deepseek.css)，URL前缀
 
 ## 五、深度思考块
 
-站点的深度思考块自带图标、左侧竖线和22px缩进，结构上是分开的。问题在文字层级：答复取`label-primary`，思考取`label-secondary`，站点原值相差不小，但换成One Dark的映射后两档挨得太近，展开的思考几乎和答复同色。
+站点的深度思考块自带图标、左侧竖线和22px缩进，结构上是分开的。问题在文字层级：答复取`label-primary`，思考取`label-secondary`，站点原值`#f9fafb`与`#cfd3d6`相差明显，但这套映射把两档都落到`#abb2bf`，展开后思考与答复完全同色，只剩字号和缩进的区别。
 
 | 位置 | 站点原值 | 皮肤初版 | 现在 |
 |---|---|---|---|
@@ -112,7 +115,7 @@ Stylus用户直接导入[onedark-deepseek.css](onedark-deepseek.css)，URL前缀
 
 ![思考块改后](images/06-think-after.png)
 
-两张图只差这一组规则：前一张思考与答复接近同色，后一张过程与结论分开。
+两张图只差这一组规则：前一张思考与答复同色，后一张过程与结论分开。
 
 ## 六、已知边界
 

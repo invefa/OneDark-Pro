@@ -98,9 +98,9 @@ body[data-ds-dark-theme] {
   --dsw-alias-button-contrast-fill: #abb2bf !important;
   --dsw-alias-label-primary: #abb2bf !important;
   --dsw-alias-label-primary-dimmed: #9da5b4 !important;
-  --dsw-alias-label-secondary: #9da5b4 !important;
-  --dsw-alias-label-tertiary: #7f848e !important;
-  --dsw-alias-label-caption: #6b717d !important;
+  --dsw-alias-label-secondary: #abb2bf !important;
+  --dsw-alias-label-tertiary: #abb2bf !important;
+  --dsw-alias-label-caption: #9da5b4 !important;
   --dsw-alias-label-dimmed: #495162 !important;
   --dsw-alias-label-primary-foreground: #ffffff !important;
   --dsw-alias-label-primary-inverted: #23272e !important;
@@ -135,9 +135,9 @@ body[data-ds-dark-theme] {
 }
 
 /* thinking block: a process column under the answer
-   The site already ships the icon, the left rule and the 22px indent; what it lacks is text hierarchy:
-   the answer is 16px/28px on label-primary, thinking is 14px/24px on label-secondary,
-   and after the One Dark mapping those two steps sit too close, so thinking drops to comment grey. */
+   The site already ships the icon, the left rule and the 22px indent, but it colours
+   reasoning with label-secondary, which in this mapping is the body colour, so the block
+   needs its own step down. */
 body[data-ds-dark-theme] .ds-think-content .ds-markdown {
   color: #7f848e;
   line-height: 22px;
