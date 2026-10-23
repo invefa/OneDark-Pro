@@ -148,7 +148,7 @@ body[data-ds-dark-theme] .ds-think-content .ds-markdown :is(h1, h2, h3, h4, h5, 
 }
 
 body[data-ds-dark-theme] .ds-think-content .ds-markdown :is(strong, b) {
-  color: #abb2bf;
+  color: #9da5b4;
 }
 
 body[data-ds-dark-theme] .ds-think-content .ds-markdown :is(p, .ds-markdown-paragraph) {
