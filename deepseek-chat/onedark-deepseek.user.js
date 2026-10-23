@@ -11,18 +11,18 @@
 // ==/UserScript==
 
 (function () {
-  "use strict";
+    "use strict";
 
-  var CONFIG = {
-    // set to false to switch the whole skin off
-    enabled: true,
-    // these tokens only exist in dark mode; switch the site to dark first
-    requireDarkAttribute: true
-  };
+    var CONFIG = {
+        // set to false to switch the whole skin off
+        enabled: true,
+        // these tokens only exist in dark mode; switch the site to dark first
+        requireDarkAttribute: true
+    };
 
-  if (!CONFIG.enabled) return;
+    if (!CONFIG.enabled) return;
 
-  var CSS = String.raw`/* One Dark Pro Darker for chat.deepseek.com
+    var CSS = String.raw`/* One Dark Pro Darker for chat.deepseek.com
    Palette extracted from VSCode theme zhuangtongfa.material-theme 3.20.3.
    Applied to DeepSeek's own design tokens, so newly rendered parts follow too. */
 
@@ -328,33 +328,33 @@ body[data-ds-dark-theme] ::selection {
 }
 `;
 
-  function inject() {
-    if (document.getElementById("onedark-pro-darker")) return;
-    if (CONFIG.requireDarkAttribute && !document.body.hasAttribute("data-ds-dark-theme")) {
-      // in light mode leave the page alone and wait for the dark theme attribute
-      var wait = new MutationObserver(function () {
-        if (document.body.hasAttribute("data-ds-dark-theme")) {
-          wait.disconnect();
-          inject();
+    function inject() {
+        if (document.getElementById("onedark-pro-darker")) return;
+        if (CONFIG.requireDarkAttribute && !document.body.hasAttribute("data-ds-dark-theme")) {
+            // in light mode leave the page alone and wait for the dark theme attribute
+            var wait = new MutationObserver(function () {
+                if (document.body.hasAttribute("data-ds-dark-theme")) {
+                    wait.disconnect();
+                    inject();
+                }
+            });
+            wait.observe(document.body, { attributes: true, attributeFilter: ["data-ds-dark-theme"] });
+            return;
         }
-      });
-      wait.observe(document.body, { attributes: true, attributeFilter: ["data-ds-dark-theme"] });
-      return;
+        var style = document.createElement("style");
+        style.id = "onedark-pro-darker";
+        style.textContent = CSS;
+        document.head.appendChild(style);
+        console.log("[One Dark Pro Darker] skin injected");
     }
-    var style = document.createElement("style");
-    style.id = "onedark-pro-darker";
-    style.textContent = CSS;
-    document.head.appendChild(style);
-    console.log("[One Dark Pro Darker] skin injected");
-  }
 
-  function start() {
-    if (document.body) {
-      inject();
-    } else {
-      document.addEventListener("DOMContentLoaded", inject, { once: true });
+    function start() {
+        if (document.body) {
+            inject();
+        } else {
+            document.addEventListener("DOMContentLoaded", inject, { once: true });
+        }
     }
-  }
 
-  start();
+    start();
 })();

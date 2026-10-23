@@ -1,0 +1,24 @@
+{
+  "name": "dsh-reasoning-style",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Give reasoning rows a subordinate process column so they read apart from the answer body.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "inject": [],
+      "platform": "web"
+    }
+  },
+  "license": "MIT"
+}

@@ -9,3 +9,8 @@ deepseek-chat/build/profile*/
 # Screenshots are rendered into the images folder before being committed.
 deepseek-chat/build/*.png
 deepseek-chat/build/*.json
+# DSH frontend stylesheet snapshots, refetch before running the demos.
+dsh/build/*.css
+dsh/build/css/
+dsh/build/*.json
+dsh/build/profile*/

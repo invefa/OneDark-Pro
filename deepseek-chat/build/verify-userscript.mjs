@@ -3,7 +3,7 @@
 import { spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import { BROWSER } from "./edge.mjs";
+import { BROWSER } from "../../build/edge.mjs";
 
 const EDGE = BROWSER;
 const PORT = 9336;

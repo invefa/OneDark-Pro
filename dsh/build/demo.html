@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>DSH reasoning and answer</title>
+<!-- the real DSH frontend styles: tokens, base styles, ReasoningRow and AssistantMarkdown -->
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="css/ReasoningRow.css">
+<link rel="stylesheet" href="css/AssistantMarkdown.css">
+<style>
+  /* typography variables the app injects at runtime, supplied here */
+  html, body { margin: 0; height: 100%; }
+  body {
+    --dsh-content-font-size: 14px;
+    --dsh-content-font-size-secondary: 13px;
+    --dsh-content-font-delta: 0px;
+    --dsh-content-font-delta-secondary: 0px;
+    --dsh-chat-content-width: 720px;
+    background: var(--dsw-alias-bg-base);
+    padding: 28px 32px;
+    box-sizing: border-box;
+  }
+  .stage { max-width: 720px; margin: 0 auto; }
+  .turn { margin-bottom: 28px; }
+  .turn-label {
+    font: 11px/16px ui-sans-serif, system-ui, sans-serif;
+    color: var(--dsw-alias-label-caption);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .row-head {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; line-height: 20px;
+    color: var(--dsw-alias-label-tertiary);
+  }
+  .row-icon { width: 16px; height: 16px; display: inline-flex; }
+  .answer p { margin: 0 0 12px; }
+  .answer p:last-child { margin-bottom: 0; }
+  .demo-answer-body { display: flex; flex-direction: column; gap: 12px; }
+</style>
+</head>
+<body data-ds-dark-theme>
+<div class="stage">
+
+  <div class="turn">
+    <div class="turn-label">default</div>
+    <div class="v5IAXa_root">
+      <div class="v5IAXa_body">
+        <div class="_3GBCTG_root" data-expanded data-preview>
+          <div class="_3GBCTG_row">
+            <div class="row-head" data-disclosure-header>
+              <span class="row-icon">
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4">
+                  <circle cx="8" cy="8" r="5.6"></circle><path d="M8 5.2v3.4l2.2 1.4"></path>
+                </svg>
+              </span>
+              <span class="_3GBCTG_title">Thought for 18 seconds</span>
+            </div>
+          </div>
+          <div class="_3GBCTG_thinkBody">
+            <div class="_compact_1ypvv_331">
+              <p>The ask is about a theme colour, so the first step is deciding which layer: editor, sidebar or accent.</p>
+              <p>The layout reads as a dark theme with a darker sidebar than the content area, which matches One Dark Pro.</p>
+              <p>Conclusion: hand over the palette grouped by use, which beats listing keys one by one.</p>
+            </div>
+          </div>
+        </div>
+        <div class="answer">
+          <p>This is the answer body. It should read as clearly separate from the reasoning block above in size, leading and colour, so a long reply never loses its start.</p>
+          <p>The answer keeps body colour and normal leading; reasoning sits one step lower inside the left rule.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="turn">
+    <div class="turn-label">collapsed</div>
+    <div class="v5IAXa_root">
+      <div class="v5IAXa_body">
+        <div class="_3GBCTG_root" data-preview>
+          <div class="_3GBCTG_row">
+            <div class="row-head" data-disclosure-header>
+              <span class="row-icon">
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4">
+                  <circle cx="8" cy="8" r="5.6"></circle><path d="M8 5.2v3.4l2.2 1.4"></path>
+                </svg>
+              </span>
+              <span class="_3GBCTG_title">Thought for 6 seconds</span>
+              <span class="_3GBCTG_separator"></span>
+              <span class="_3GBCTG_summary">
+                <span class="_3GBCTG_summaryText">Confirm the theme source, then pull the colours</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="answer">
+          <p>Collapsed state keeps one summary line; the process column appears once expanded.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

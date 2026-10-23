@@ -1,0 +1,34 @@
+/* Reasoning and answer hierarchy
+ *
+ * DSH defaults: the answer body is 14px/24px on --dsw-alias-label-primary,
+ * reasoning is 13px/20px on --dsw-alias-label-tertiary with a 22px indent.
+ * One font step and one grey step apart, they are hard to tell apart when expanded.
+ *
+ * This turns the reasoning block into its own process column: a thin rule on the left,
+ * tighter leading, and room below. Nothing on the answer side changes.
+ *
+ * The class names are build hashes (_3GBCTG_ is the ReasoningRow prefix of
+ * @deepseek-ai/dsh-client-ui-chat); re-check them after a DSH upgrade.
+ */
+
+/* process column: the rule sits on the icon column, text keeps its 22px indent */
+._3GBCTG_thinkBody {
+  border-left: 1px solid var(--dsw-alias-border-l3);
+  padding-bottom: 14px;
+}
+
+/* push reasoning text below the answer: one grey step down.
+   Only text blocks, so code keeps its own colours. */
+._3GBCTG_thinkBody :is(p, li, td, th, blockquote, h1, h2, h3, h4, h5, h6, dt, dd) {
+  color: color-mix(in srgb, var(--dsw-alias-label-tertiary) 72%, var(--dsw-alias-bg-base));
+}
+
+/* tighter leading, so it reads as a note rather than body copy */
+._3GBCTG_thinkBody :is(p, li) {
+  line-height: 19px;
+}
+
+/* the collapsed summary line gets the same step down */
+._3GBCTG_summary {
+  color: color-mix(in srgb, var(--dsw-alias-label-tertiary) 86%, var(--dsw-alias-bg-base));
+}
