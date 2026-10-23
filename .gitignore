@@ -1,16 +1,17 @@
-# Snapshots of third-party stylesheets, refetch before running the demos.
+# Third-party snapshots, refetch before running the demos.
 deepseek-chat/build/ds-main.css
+dsh/build/*.css
+dsh/build/css/
+dsh/build/*.js
 
-# Browser profiles and caches created by the verification scripts.
+# Screenshots and probe output rendered by the verification scripts.
+deepseek-chat/build/*.png
+deepseek-chat/build/*.json
+dsh/build/*.json
+
+# Browser profiles and caches.
 deepseek-chat/build/profile*/
+dsh/build/profile*/
 **/__pycache__/
 *.pyc
 *.log
-# Screenshots are rendered into the images folder before being committed.
-deepseek-chat/build/*.png
-deepseek-chat/build/*.json
-# DSH frontend stylesheet snapshots, refetch before running the demos.
-dsh/build/*.css
-dsh/build/css/
-dsh/build/*.json
-dsh/build/profile*/

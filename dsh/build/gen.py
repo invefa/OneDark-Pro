@@ -68,9 +68,11 @@ REASONING = """
     padding-bottom: 14px;
 }
 
-/* reasoning text: one grey step below the answer, without touching code blocks */
-._3GBCTG_thinkBody :is(p, li, td, th, blockquote, h1, h2, h3, h4, h5, h6, dt, dd) {
-    color: color-mix(in srgb, var(--dsw-alias-label-tertiary) 72%, var(--dsw-alias-bg-base));
+/* Reasoning text: one grey step below the answer. The rule covers every
+   descendant because the reasoning markdown does not always wrap text in <p>;
+   code keeps its inline Shiki colours, links keep the brand colour. */
+._3GBCTG_thinkBody :not(pre):not(code):not(a):not(.md-code-block) {
+    color: color-mix(in srgb, var(--dsw-alias-label-tertiary) 65%, var(--dsw-alias-bg-base));
 }
 
 ._3GBCTG_thinkBody :is(p, li) {
@@ -79,7 +81,7 @@ REASONING = """
 
 /* the collapsed summary line gets the same step down */
 ._3GBCTG_summary {
-    color: color-mix(in srgb, var(--dsw-alias-label-tertiary) 86%, var(--dsw-alias-bg-base));
+    color: color-mix(in srgb, var(--dsw-alias-label-tertiary) 78%, var(--dsw-alias-bg-base));
 }
 """
 
