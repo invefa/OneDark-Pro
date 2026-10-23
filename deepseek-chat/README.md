@@ -10,6 +10,12 @@
 2. 新建脚本，粘贴[onedark-deepseek.user.js](onedark-deepseek.user.js)全文，保存。
 3. 打开chat.deepseek.com，右下角设置里确认是深色模式。
 
+脚本头部带`@updateURL`与`@downloadURL`，指向仓库里的raw地址，Tampermonkey按`@version`检查更新。也可以直接从raw地址装：
+
+```text
+https://github.com/invefa/OneDark-Pro/raw/refs/heads/main/deepseek-chat/onedark-deepseek.user.js
+```
+
 Stylus用户直接导入[onedark-deepseek.css](onedark-deepseek.css)，URL前缀填`https://chat.deepseek.com/`，不需要额外写选择器。
 
 亮色模式下皮肤不生效：脚本先等`data-ds-dark-theme`出现再注入，由`CONFIG.requireDarkAttribute`控制。设成`false`会对亮色也生效，但亮色的token映射没验证过。
