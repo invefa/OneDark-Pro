@@ -80,6 +80,9 @@ const probe = `(() => {
     answerSize: pick(answer, "font-size"),
     bodyBorder: pick(body, "border-left-width") + " " + pick(body, "border-left-color"),
     bodyBottom: pick(body, "padding-bottom"),
+    shiki: ["keyword", "string", "comment", "function", "parameter"]
+      .map((name) => name + "=" + pick(document.querySelector('[style*="--shiki-token-' + name + '"]'), "color"))
+      .join(" "),
   };
 })()`;
 

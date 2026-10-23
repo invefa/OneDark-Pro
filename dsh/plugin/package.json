@@ -1,6 +1,6 @@
 {
-  "name": "dsh-reasoning-style",
-  "version": "0.3.0",
+  "name": "dsh-onedark",
+  "version": "0.4.0",
   "private": true,
   "description": "Apply the One Dark Pro Darker palette to the DSH web interface.",
   "type": "module",

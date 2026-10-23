@@ -83,15 +83,41 @@ REASONING = """
 }
 """
 
+# The frontend highlights code with Shiki's css-variables theme, so every token
+# carries `var(--shiki-token-*)` and the palette can be set from CSS.
+SHIKI = {
+    "foreground": site.FG,
+    "background": "transparent",
+    "token-comment": site.GRAY,
+    "token-keyword": site.Y["keyword"],
+    "token-string": site.Y["string"],
+    "token-string-expression": site.Y["string"],
+    "token-constant": site.Y["numeric"],
+    "token-function": site.Y["function"],
+    "token-parameter": site.Y["variable"],
+    "token-punctuation": site.FG,
+    "token-link": site.LINK,
+    "token-inserted": site.Y["diff-inserted"],
+    "token-deleted": site.Y["diff-deleted"],
+    "token-changed": site.Y["diff-changed"],
+}
+
 
 def build_css():
     out = []
     out.append("/* One Dark Pro Darker for the DSH web interface")
     out.append("   Token mapping shared with the DeepSeek web skin; the extra tokens below are")
-    out.append("   declared by the DSH frontend only. Code blocks are coloured by the inline")
-    out.append("   styles the highlighter writes, so only their surfaces are themed. */")
+    out.append("   declared by the DSH frontend only. Code blocks read the Shiki css-variables")
+    out.append("   palette, so their token colours are set here as well. */")
     out.append("")
     out.extend(site.token_block(DSH_ALIAS))
+
+    out.append("/* code block syntax: Shiki css-variables palette */")
+    out.append("{} {{".format(SCOPE))
+    for name, value in SHIKI.items():
+        out.append("  --shiki-{}: {} !important;".format(name, value))
+    out.append("}")
+    out.append("")
     out.append(REASONING.strip())
     out.append("")
     return "\n".join(out)

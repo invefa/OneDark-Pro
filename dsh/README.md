@@ -24,7 +24,7 @@ token分三层，皮肤改的是这三层的值：
 
 映射与[DeepSeek网页皮肤](../deepseek-chat/README.md)共用同一份。`dsh/build/gen.py`把`deepseek-chat/build/gen.py`当模块加载，直接调用它的`token_block()`，再补DSH独有的26个token（文档预览、deep diving状态、菜单、diff、switch这类）。色表只有一份，两边不会各自漂移。
 
-代码块不在覆盖范围。DSH的高亮器把颜色写成内联样式，CSS改不到，这里只主题化了代码块的底色与描边。
+代码块走Shiki的`css-variables`主题，每个token的颜色是`var(--shiki-token-*)`，所以定义这组变量就能整体换色。前景、背景加13个token变量，对应One Dark Pro的八色加两个灰。
 
 推理块单独处理。DSH用正文色渲染推理行，展开后与答复同色，只能靠字号和22px缩进区分，所以给它加一条左侧细线、压一档灰、收紧行距。
 
@@ -39,6 +39,11 @@ token分三层，皮肤改的是这三层的值：
 | 推理正文 | `rgb(173,178,184)` | `rgb(133,139,150)` |
 | 推理行高 | 24px | 19px |
 | 推理栏左边线 | 无 | 1px `rgb(73,81,98)` |
+| 代码keyword | 跟随正文 `rgb(249,250,251)` | `rgb(198,120,221)` |
+| 代码string | 同上 | `rgb(152,195,121)` |
+| 代码comment | 同上 | `rgb(127,132,142)` |
+| 代码function | 同上 | `rgb(97,175,239)` |
+| 代码parameter | 同上 | `rgb(224,108,117)` |
 
 ## 三、安装
 
@@ -46,7 +51,7 @@ token分三层，皮肤改的是这三层的值：
 
 1. 侧边栏打开Plugins页，安装本地目录`plugin/`；或在该profile目录（`~/.dsh/profiles/web`）下执行`pnpm add file:<仓库路径>/dsh/plugin`。
 
-2. 确认`dsh-reasoning-style`这条bundle处于启用状态。
+2. 确认`dsh-onedark`这条bundle处于启用状态。
 
 3. 重启DSH。
 
@@ -67,7 +72,7 @@ document.head.appendChild(s);
 ## 四、边界
 
 - 类名是构建哈希。`_3GBCTG_`对应`@deepseek-ai/dsh-client-ui-chat`当前版本的ReasoningRow，DSH升级后前缀可能变，推理块的规则会静默失效，token配色不受影响。排查办法：`build/extract-css.py`重新抽一次，看前缀。
-- 代码块只改底色。高亮色是内联样式，换掉需要改高亮器的主题配置。
+- 代码块依赖`css-variables`主题。DSH若换成别的Shiki主题，`--shiki-token-*`不再被引用，代码块会回到高亮器自带的配色。
 - 只做配色，字号、字体、圆角、间距不动。
 
 ## 五、文件

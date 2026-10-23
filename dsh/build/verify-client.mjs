@@ -41,7 +41,7 @@ const run = new Function("window", "document", source);
 run(window, document);
 
 if (!registered) throw new Error("plugin did not register with the module loader");
-if (registered.id !== "dsh-reasoning-style") throw new Error("unexpected plugin id: " + registered.id);
+if (registered.id !== "dsh-onedark") throw new Error("unexpected plugin id: " + registered.id);
 
 const exportsObj = registered.factory(() => {
     throw new Error("the plugin must not require any client module");
@@ -53,7 +53,7 @@ if (created.length !== 1) throw new Error("expected one stylesheet, got " + crea
 
 const tag = created[0];
 if (tag.tag !== "style") throw new Error("expected a style element");
-if (tag.dataset.plugin !== "dsh-reasoning-style") throw new Error("plugin dataset mismatch");
+if (tag.dataset.plugin !== "dsh-onedark") throw new Error("plugin dataset mismatch");
 if (!tag.textContent.includes("_3GBCTG_thinkBody")) throw new Error("stylesheet lost the reasoning rule");
 if (!tag.textContent.includes("border-left")) throw new Error("stylesheet lost the rule line");
 
