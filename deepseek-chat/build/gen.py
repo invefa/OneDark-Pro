@@ -127,7 +127,7 @@ STATIC_EXTRA = {
 }
 
 ALIAS = {
-    # 表面
+    # Surfaces
     "--dsw-alias-bg-base": EDITOR,
     "--dsw-alias-bg-layer-1": RAISED,
     "--dsw-alias-bg-layer-2": INACTIVE,
@@ -136,7 +136,7 @@ ALIAS = {
     "--dsw-alias-bg-multi-select": INACTIVE,
     "--dsw-alias-bg-module-platform": INACTIVE,
     "--dsw-alias-bg-skeleton": HOVER,
-    # 线条
+    # Lines
     "--dsw-alias-border-l1": RAISED,
     "--dsw-alias-border-l2": LINE_STRONG,
     "--dsw-alias-border-l2-darkmode-thin": RAISED,
@@ -144,13 +144,13 @@ ALIAS = {
     "--dsw-alias-border-l4": "#515a6b",
     "--dsw-alias-border-inverted": RAISED,
     "--dsw-alias-border-inverted2": LINE_STRONG,
-    # 交互态
+    # Interaction
     "--dsw-alias-interactive-bg-hover": HOVER,
     "--dsw-alias-interactive-bg-hover-accent": INACTIVE,
     "--dsw-alias-interactive-bg-active": RAISED,
     "--dsw-alias-interactive-bg-hover-danger": "rgba(224, 108, 117, .15)",
     "--dsw-alias-interactive-bg-hover-solid": HOVER,
-    # 品牌与按钮
+    # Brand and buttons
     "--dsw-alias-brand-primary": ACCENT,
     "--dsw-alias-brand-primary-invert": WHITE,
     "--dsw-alias-brand-text": LINK,
@@ -169,7 +169,7 @@ ALIAS = {
     "--dsw-alias-button-tool-bar-hover": "rgba(44, 49, 58, .8)",
     "--dsw-alias-button-tool-bar-fill-invisible": "rgba(24, 26, 31, .36)",
     "--dsw-alias-button-contrast-fill": FG,
-    # 文字
+    # Text
     "--dsw-alias-label-primary": FG,
     "--dsw-alias-label-primary-dimmed": FG_MUTED,
     "--dsw-alias-label-secondary": FG_MUTED,
@@ -187,14 +187,14 @@ ALIAS = {
     "--dsw-alias-markdown-placeholder": RAISED,
     "--dsw-alias-markdown-code-segment-selected": INACTIVE,
     "--dsw-alias-markdown-code-segment-unselected": RAISED,
-    # 滚动条与浮层
+    # Scrollbars and overlays
     "--dsw-alias-scrollbar-bg-l1": LINE_STRONG,
     "--dsw-alias-scrollbar-bg-l2": FG_FAINT,
     "--dsw-alias-scrollbar-hover-l1": FG_FAINT,
     "--dsw-alias-scrollbar-hover-l2": "#515a6b",
     "--dsw-alias-toast-bg": INACTIVE,
     "--dsw-alias-tooltip-bg": INACTIVE,
-    # 组件
+    # Component tokens
     "--dsw-specific-bubble": HOVER,
     "--dsw-specific-bubble-highlight": INACTIVE,
     "--dsw-specific-input-major": INPUT,
@@ -205,7 +205,7 @@ ALIAS = {
     "--dsw-specific-sidebar-nav-item-hover": HOVER,
     "--dsw-specific-sidebar-nav-item-active": INACTIVE,
     "--dsw-specific-sidebar-nav-item-active-accent": LINE_STRONG,
-    # 杂项
+    # Misc
     "--dsw-linear-gradient-think": "linear-gradient(180deg, {} 20.19%, rgba(35, 39, 46, 0) 100%)".format(EDITOR),
     "--scroll-color": "rgba(78, 86, 102, .6)",
     "--dsl-a-text-color": LINK,
@@ -276,28 +276,28 @@ def build_css():
     out.append("")
 
     out.append(SCOPE + " {")
-    out.append("  /* 原始色板：中性阶 */")
+    out.append("  /* raw palette: neutral ramp */")
     for step, value in RAMP.items():
         out.append("  --dsw-static-neutral-bluish-{}: {} !important;".format(step, value))
     out.append("")
-    out.append("  /* 原始色板：品牌蓝 */")
+    out.append("  /* raw palette: brand blues */")
     for step, value in DEEPSEEK_SCALE.items():
         out.append("  --dsw-static-deepseek-{}: {} !important;".format(step, value))
     out.append("")
-    out.append("  /* 原始色板：状态色 */")
+    out.append("  /* raw palette: status hues */")
     for name, value in STATIC_EXTRA.items():
         out.append("  {}: {} !important;".format(name, value))
     out.append("")
-    out.append("  /* 语义层 */")
+    out.append("  /* semantic layer */")
     for name, value in ALIAS.items():
         out.append("  {}: {} !important;".format(name, value))
     out.append("}")
     out.append("")
 
-    out.append("/* 深度思考块：答复之下的过程列")
-    out.append("   站点本来就给了图标、左侧竖线和 22px 缩进，缺的是文字层级：")
-    out.append("   答复 16px/28px 取 label-primary，思考 14px/24px 取 label-secondary，")
-    out.append("   换成 One Dark 的映射后这两档只差一点点，所以单独把思考压到注释灰。 */")
+    out.append("/* thinking block: a process column under the answer")
+    out.append("   The site already ships the icon, the left rule and the 22px indent; what it lacks is text hierarchy:")
+    out.append("   the answer is 16px/28px on label-primary, thinking is 14px/24px on label-secondary,")
+    out.append("   and after the One Dark mapping those two steps sit too close, so thinking drops to comment grey. */")
     out.append("{} .ds-think-content .ds-markdown {{\n  color: {};\n  line-height: 22px;\n}}".format(SCOPE, GRAY))
     out.append("")
     out.append("{} .ds-think-content .ds-markdown :is(h1, h2, h3, h4, h5, h6) {{\n  color: {};\n}}".format(SCOPE, FG_MUTED))
@@ -307,19 +307,19 @@ def build_css():
     out.append("{} .ds-think-content .ds-markdown :is(p, .ds-markdown-paragraph) {{\n  margin: 8px 0;\n}}".format(SCOPE))
     out.append("")
 
-    out.append("/* 代码块语法着色 */")
+    out.append("/* code block syntax */")
     for color, suffixes in PRISM.items():
         selectors = ",\n".join("{} {}".format(CODE, suffix) for suffix in suffixes)
         out.append(selectors + " {{\n  color: {};\n}}".format(color))
         out.append("")
 
-    out.append("/* 代码块基础文字与背景 */")
+    out.append("/* code block base text and background */")
     out.append("{0} code[class*=language-],\n{0} pre[class*=language-] {{\n  color: {1};\n  background: none;\n}}".format(CODE, FG))
     out.append("")
     out.append("{}.md-code-block {{\n  background: {};\n  border-color: {};\n}}".format(SCOPE, SIDEBAR, LINE_STRONG))
     out.append("")
 
-    out.append("/* 彩虹括号与行号 */")
+    out.append("/* rainbow brackets and line numbers */")
     for level, color in RAINBOW:
         out.append("{} .rainbow-braces .token.token.punctuation.{} {{\n  color: {};\n}}".format(CODE, level, color))
     out.append("")
@@ -327,7 +327,7 @@ def build_css():
     out.append("{0} .line-highlight,\n{0} .line-highlight:before {{\n  background: {1};\n}}".format(CODE, RAISED))
     out.append("")
 
-    out.append("/* 选中文本 */")
+    out.append("/* selection */")
     out.append("{} ::selection {{\n  background: {};\n}}".format(SCOPE, F["editor-selectionbackground"]))
     out.append("")
     return "\n".join(out)
@@ -349,9 +349,9 @@ def build_userscript(css):
   "use strict";
 
   var CONFIG = {
-    // 关掉整个皮肤设成false即可
+    // set to false to switch the whole skin off
     enabled: true,
-    // DeepSeek需要在暗色模式下才有对应token，亮色模式请先切到暗色
+    // these tokens only exist in dark mode; switch the site to dark first
     requireDarkAttribute: true
   };
 
@@ -362,7 +362,7 @@ def build_userscript(css):
   function inject() {
     if (document.getElementById("onedark-pro-darker")) return;
     if (CONFIG.requireDarkAttribute && !document.body.hasAttribute("data-ds-dark-theme")) {
-      // 亮色模式下不改动页面，等用户切到暗色再挂样式
+      // in light mode leave the page alone and wait for the dark theme attribute
       var wait = new MutationObserver(function () {
         if (document.body.hasAttribute("data-ds-dark-theme")) {
           wait.disconnect();

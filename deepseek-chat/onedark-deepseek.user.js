@@ -12,9 +12,9 @@
   "use strict";
 
   var CONFIG = {
-    // 关掉整个皮肤设成false即可
+    // set to false to switch the whole skin off
     enabled: true,
-    // DeepSeek需要在暗色模式下才有对应token，亮色模式请先切到暗色
+    // these tokens only exist in dark mode; switch the site to dark first
     requireDarkAttribute: true
   };
 
@@ -25,7 +25,7 @@
    Applied to DeepSeek's own design tokens, so newly rendered parts follow too. */
 
 body[data-ds-dark-theme] {
-  /* 原始色板：中性阶 */
+  /* raw palette: neutral ramp */
   --dsw-static-neutral-bluish-00: #ffffff !important;
   --dsw-static-neutral-bluish-50: #abb2bf !important;
   --dsw-static-neutral-bluish-60: #abb2bf !important;
@@ -46,7 +46,7 @@ body[data-ds-dark-theme] {
   --dsw-static-neutral-bluish-950: #23272e !important;
   --dsw-static-neutral-bluish-1000: #181a1f !important;
 
-  /* 原始色板：品牌蓝 */
+  /* raw palette: brand blues */
   --dsw-static-deepseek-50: #23272e !important;
   --dsw-static-deepseek-100: #2c313c !important;
   --dsw-static-deepseek-200: #323842 !important;
@@ -60,7 +60,7 @@ body[data-ds-dark-theme] {
   --dsw-static-deepseek-800: #2c313c !important;
   --dsw-static-deepseek-900: #2c313c !important;
 
-  /* 原始色板：状态色 */
+  /* raw palette: status hues */
   --dsw-static-red-400: #e06c75 !important;
   --dsw-static-red-500: #e06c75 !important;
   --dsw-static-red-600: #c24038 !important;
@@ -79,7 +79,7 @@ body[data-ds-dark-theme] {
   --dsw-static-blue-800: #2c313c !important;
   --dsw-static-blue-950: #23272e !important;
 
-  /* 语义层 */
+  /* semantic layer */
   --dsw-alias-bg-base: #23272e !important;
   --dsw-alias-bg-layer-1: #2c313c !important;
   --dsw-alias-bg-layer-2: #323842 !important;
@@ -156,10 +156,10 @@ body[data-ds-dark-theme] {
   --dsl-a-text-hover-color: #528bff !important;
 }
 
-/* 深度思考块：答复之下的过程列
-   站点本来就给了图标、左侧竖线和 22px 缩进，缺的是文字层级：
-   答复 16px/28px 取 label-primary，思考 14px/24px 取 label-secondary，
-   换成 One Dark 的映射后这两档只差一点点，所以单独把思考压到注释灰。 */
+/* thinking block: a process column under the answer
+   The site already ships the icon, the left rule and the 22px indent; what it lacks is text hierarchy:
+   the answer is 16px/28px on label-primary, thinking is 14px/24px on label-secondary,
+   and after the One Dark mapping those two steps sit too close, so thinking drops to comment grey. */
 body[data-ds-dark-theme] .ds-think-content .ds-markdown {
   color: #7f848e;
   line-height: 22px;
@@ -177,7 +177,7 @@ body[data-ds-dark-theme] .ds-think-content .ds-markdown :is(p, .ds-markdown-para
   margin: 8px 0;
 }
 
-/* 代码块语法着色 */
+/* code block syntax */
 body[data-ds-dark-theme] .md-code-block.md-code-block-dark .token.comment,
 body[data-ds-dark-theme] .md-code-block.md-code-block-dark .token.prolog,
 body[data-ds-dark-theme] .md-code-block.md-code-block-dark .token.doctype,
@@ -262,7 +262,7 @@ body[data-ds-dark-theme] .md-code-block.md-code-block-dark .token.unit {
   color: #d19a66;
 }
 
-/* 代码块基础文字与背景 */
+/* code block base text and background */
 body[data-ds-dark-theme] .md-code-block.md-code-block-dark code[class*=language-],
 body[data-ds-dark-theme] .md-code-block.md-code-block-dark pre[class*=language-] {
   color: #abb2bf;
@@ -274,7 +274,7 @@ body[data-ds-dark-theme].md-code-block {
   border-color: #3e4452;
 }
 
-/* 彩虹括号与行号 */
+/* rainbow brackets and line numbers */
 body[data-ds-dark-theme] .md-code-block.md-code-block-dark .rainbow-braces .token.token.punctuation.brace-level-1 {
   color: #d19a66;
 }
@@ -320,7 +320,7 @@ body[data-ds-dark-theme] .md-code-block.md-code-block-dark .line-highlight:befor
   background: #2c313c;
 }
 
-/* 选中文本 */
+/* selection */
 body[data-ds-dark-theme] ::selection {
   background: #3d4555;
 }
@@ -329,7 +329,7 @@ body[data-ds-dark-theme] ::selection {
   function inject() {
     if (document.getElementById("onedark-pro-darker")) return;
     if (CONFIG.requireDarkAttribute && !document.body.hasAttribute("data-ds-dark-theme")) {
-      // 亮色模式下不改动页面，等用户切到暗色再挂样式
+      // in light mode leave the page alone and wait for the dark theme attribute
       var wait = new MutationObserver(function () {
         if (document.body.hasAttribute("data-ds-dark-theme")) {
           wait.disconnect();

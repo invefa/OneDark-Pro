@@ -76,10 +76,10 @@ const PROBE = `(() => {
     rows.push([label, el.tagName.toLowerCase() + "." + String(el.className).split(" ").slice(0,2).join("."), cs.backgroundColor, cs.color]);
   };
   const byText = (t) => [...document.querySelectorAll("button,div")].find((e) => e.textContent.trim() === t);
-  add("登录按钮", byText("登录"));
-  add("发送验证码", byText("发送验证码"));
-  add("密码登录", byText("密码登录"));
-  add("输入框", document.querySelector("input"));
+  add("login button", byText("登录"));
+  add("send code", byText("发送验证码"));
+  add("password login", byText("密码登录"));
+  add("input field", document.querySelector("input"));
   const qr = document.querySelector("canvas,img[alt],div");
   const sheets = [...document.styleSheets].map((s) => (s.href || "inline").split("/").pop());
   const solid = [];
