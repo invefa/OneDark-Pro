@@ -12,9 +12,9 @@
 
 Stylus用户直接导入[onedark-deepseek.css](onedark-deepseek.css)，URL前缀填`https://chat.deepseek.com/`，不需要额外写选择器。
 
-亮色模式下皮肤不生效，脚本会挂在页面上等`data-ds-dark-theme`出现再注入。这个行为由脚本里的`CONFIG.requireDarkAttribute`控制，想要亮色也强制改可以把它设成`false`，但站点的亮色token映射关系没验证过，不建议。
+亮色模式下皮肤不生效：脚本先等`data-ds-dark-theme`出现再注入，由`CONFIG.requireDarkAttribute`控制。设成`false`会对亮色也生效，但亮色的token映射没验证过。
 
-不想装扩展只想看效果，把CSS内容塞进一个`<style>`再append到`document.head`即可，刷新就还原。
+不装扩展也可以先看效果：把CSS内容包成`<style>`挂到`document.head`，刷新即恢复。
 
 ## 二、做法
 
@@ -26,7 +26,7 @@ Stylus用户直接导入[onedark-deepseek.css](onedark-deepseek.css)，URL前缀
 | 语义层 | `--dsw-alias-*` | 背景层级、文字层级、边框、状态、Markdown |
 | 组件层 | `--dsw-specific-*` | 侧栏、气泡、菜单、选择器 |
 
-改这些变量的值，比逐个覆盖元素样式稳。会话里后渲染出来的气泡、右键菜单、代码块会自动跟着变，站点调整DOM结构时也不容易失效。代价是必须跟着站点的token名走。
+改这些变量的值比逐个覆盖元素样式稳：会话里后渲染的气泡、右键菜单、代码块都会跟着变，站点调整DOM时也不容易失效。代价是要跟着站点的token名走。
 
 代码块是例外：它用Prism的`.token.*`类，站点自带一套偏one-dark的配色（注释`#8da1b9`、标签`#6cc`、函数`#c699e3`），这里换成One Dark Pro自己的分配。
 
@@ -51,11 +51,11 @@ Stylus用户直接导入[onedark-deepseek.css](onedark-deepseek.css)，URL前缀
 | `--dsw-static-amber-500` | `#d19a66` | 数字橙兼警告 |
 | `--dsw-alias-markdown-code-block` | `#1e2227` | 代码块底 |
 
-中性阶`--dsw-static-neutral-bluish-*`从00到1000共19档，主题里只有9个中性值，所以多档合并到同一个值。合并后仍保持由亮到暗的方向，直接读这组变量的地方不会拿到反过来的颜色。
+中性阶`--dsw-static-neutral-bluish-*`从00到1000共19档，主题里只有9个中性值，多档合并到同一个值。合并后仍保持由亮到暗的方向，直接读这组变量的地方不会拿到相反的颜色。
 
 ## 四、验证
 
-用无头Edge加CDP把皮肤注入真实页面，读计算样式，不靠肉眼比对。
+用无头Edge加CDP把皮肤注入真实页面，读计算样式核对。
 
 | 探针 | 站点原值 | 应用后 |
 |---|---|---|
@@ -88,13 +88,13 @@ Stylus用户直接导入[onedark-deepseek.css](onedark-deepseek.css)，URL前缀
 | operator | `#e9ae7e` | `#c678dd` |
 | punctuation | `#e3eaf2` | `#abb2bf` |
 
-代码块渲染效果，左边是站点原样：
+代码块效果，前一张是站点原样：
 
 ![代码块应用前](images/03-code-before.png)
 
 ![代码块应用后](images/04-code-after.png)
 
-没有登录账号，聊天主界面没法在无头浏览器里走通。登录页和代码块都实测过，会话区用的`--dsw-alias-*`与`--dsw-specific-bubble`是同一套token，风险主要在没覆盖到的硬编码色上，见下一节。
+没有登录账号，聊天主界面没法在无头浏览器里走通。登录页与代码块都实测过。会话区用的是同一套`--dsw-alias-*`与`--dsw-specific-bubble`token，风险集中在硬编码色上，见第六节。
 
 ## 五、深度思考块
 
@@ -106,19 +106,19 @@ Stylus用户直接导入[onedark-deepseek.css](onedark-deepseek.css)，URL前缀
 | 思考正文 | `#cfd3d6` | `#9da5b4` | `#7f848e` |
 | 思考行高 | 24px | 24px | 22px |
 
-思考正文压到注释灰，行高收到22px，段落间距从12px收到8px，标题与加粗仍用正文级的两档颜色，便于跳读。答复侧不变。
+思考正文压到注释灰，行高22px，段落间距8px。标题与加粗仍用正文级的颜色，便于跳读。答复侧不变。
 
 ![思考块改前](images/05-think-before.png)
 
 ![思考块改后](images/06-think-after.png)
 
-两张图都是皮肤在前、规则在后的差别：前一张思考与答复几乎同色，后一张能一眼分出过程与结论。
+两张图只差这一组规则：前一张思考与答复接近同色，后一张过程与结论分开。
 
 ## 六、已知边界
 
-- 硬编码色不跟随。例如主按钮聚焦阴影写死成`#4d6bfe`，不在token里，皮肤管不到。这类值在站点样式表里只有个位数处，散落在阴影和少量组件内部。
-- 站点改版会带来token改名。皮肤按当前的token名写死，站点更新后如果某些位置回退原色，先抓`main.1e9681a4d3.css`看那几个`--dsw-*`还在不在。
-- 只做配色。字号、字体、圆角、间距一律不动，避免和站点的响应式布局打架。
+- 硬编码色不跟随，例如主按钮聚焦阴影写死成`#4d6bfe`。这类值在站点样式表里只有个位数处。
+- 站点改版可能改token名。皮肤按当前名写死，更新后若局部回退原色，先抓`main.*.css`核对`--dsw-*`。
+- 只做配色，字号、字体、圆角、间距不动，避免与站点的响应式布局冲突。
 
 ## 七、文件
 
@@ -145,7 +145,7 @@ python build\gen.py
 
 脚本只依赖`../onedark-pro.json`，改主题色时改那一份即可。
 
-`build/ds-main.css`是站点样式表的快照，体积大且属于第三方产物，没有入库。跑复现页与截图前先取一份，文件名里的哈希随站点更新变化，从页面源码的`<link rel="stylesheet">`里取当前值：
+`build/ds-main.css`是站点样式表的快照，属第三方产物，没有入库。跑复现页与截图前先取一份，文件名里的哈希随站点更新变化，从页面源码的`<link rel="stylesheet">`里取当前值：
 
 ```powershell
 Invoke-WebRequest -Uri "https://fe-static.deepseek.com/chat/static/main.1e9681a4d3.css" -OutFile build\ds-main.css
