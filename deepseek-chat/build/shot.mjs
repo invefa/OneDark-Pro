@@ -15,80 +15,80 @@ const outDir = process.argv[3] || import.meta.dirname;
 const css = fs.readFileSync(cssPath, "utf-8");
 
 const proc = spawn(EDGE, [
-  "--headless=new",
-  `--remote-debugging-port=${PORT}`,
-  `--user-data-dir=${PROFILE}`,
-  "--no-first-run",
-  "--no-default-browser-check",
-  "--disable-gpu",
-  "--hide-scrollbars",
-  "--window-size=1280,900",
-  "about:blank",
+    "--headless=new",
+    `--remote-debugging-port=${PORT}`,
+    `--user-data-dir=${PROFILE}`,
+    "--no-first-run",
+    "--no-default-browser-check",
+    "--disable-gpu",
+    "--hide-scrollbars",
+    "--window-size=1280,900",
+    "about:blank",
 ], { stdio: "ignore" });
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function jsonList() {
-  const res = await fetch(`http://127.0.0.1:${PORT}/json/list`);
-  return res.json();
+    const res = await fetch(`http://127.0.0.1:${PORT}/json/list`);
+    return res.json();
 }
 
 let page = null;
 for (let i = 0; i < 80; i += 1) {
-  try {
-    const list = await jsonList();
-    page = list.find((t) => t.type === "page");
-    if (page) break;
-  } catch {
-    // browser not up yet
-  }
-  await sleep(250);
+    try {
+        const list = await jsonList();
+        page = list.find((t) => t.type === "page");
+        if (page) break;
+    } catch {
+        // browser not up yet
+    }
+    await sleep(250);
 }
 if (!page) throw new Error("no page target");
 
 const ws = new WebSocket(page.webSocketDebuggerUrl);
 await new Promise((resolve, reject) => {
-  ws.addEventListener("open", resolve, { once: true });
-  ws.addEventListener("error", reject, { once: true });
+    ws.addEventListener("open", resolve, { once: true });
+    ws.addEventListener("error", reject, { once: true });
 });
 
 let seq = 0;
 const pending = new Map();
 const events = [];
 ws.addEventListener("message", (ev) => {
-  const msg = JSON.parse(ev.data);
-  if (msg.id && pending.has(msg.id)) {
-    const { resolve, reject } = pending.get(msg.id);
-    pending.delete(msg.id);
-    if (msg.error) reject(new Error(JSON.stringify(msg.error)));
-    else resolve(msg.result);
-  } else if (msg.method) {
-    events.push(msg.method);
-  }
+    const msg = JSON.parse(ev.data);
+    if (msg.id && pending.has(msg.id)) {
+        const { resolve, reject } = pending.get(msg.id);
+        pending.delete(msg.id);
+        if (msg.error) reject(new Error(JSON.stringify(msg.error)));
+        else resolve(msg.result);
+    } else if (msg.method) {
+        events.push(msg.method);
+    }
 });
 
 function send(method, params = {}) {
-  seq += 1;
-  const id = seq;
-  ws.send(JSON.stringify({ id, method, params }));
-  return new Promise((resolve, reject) => pending.set(id, { resolve, reject }));
+    seq += 1;
+    const id = seq;
+    ws.send(JSON.stringify({ id, method, params }));
+    return new Promise((resolve, reject) => pending.set(id, { resolve, reject }));
 }
 
 async function evaluate(expression) {
-  const res = await send("Runtime.evaluate", {
-    expression,
-    returnByValue: true,
-    awaitPromise: true,
-  });
-  if (res.exceptionDetails) throw new Error(JSON.stringify(res.exceptionDetails));
-  return res.result.value;
+    const res = await send("Runtime.evaluate", {
+        expression,
+        returnByValue: true,
+        awaitPromise: true,
+    });
+    if (res.exceptionDetails) throw new Error(JSON.stringify(res.exceptionDetails));
+    return res.result.value;
 }
 
 async function shot(name) {
-  const res = await send("Page.captureScreenshot", { format: "png" });
-  const file = path.join(outDir, name);
-  fs.writeFileSync(file, Buffer.from(res.data, "base64"));
-  return file;
+    const res = await send("Page.captureScreenshot", { format: "png" });
+    const file = path.join(outDir, name);
+    fs.writeFileSync(file, Buffer.from(res.data, "base64"));
+    return file;
 }
 
 const READ_COLORS = `(() => {

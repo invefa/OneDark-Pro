@@ -14,50 +14,50 @@ const css = fs.readFileSync(process.argv[2], "utf-8");
 const page = pathToFileURL(path.join(dir, "think-demo.html")).href;
 
 const proc = spawn(EDGE, [
-  "--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${PROFILE}`,
-  "--no-first-run", "--no-default-browser-check", "--disable-gpu", "--hide-scrollbars",
-  "--allow-file-access-from-files", "--window-size=900,620", "about:blank",
+    "--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${PROFILE}`,
+    "--no-first-run", "--no-default-browser-check", "--disable-gpu", "--hide-scrollbars",
+    "--allow-file-access-from-files", "--window-size=900,620", "about:blank",
 ], { stdio: "ignore" });
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let target = null;
 for (let i = 0; i < 80; i += 1) {
-  try {
-    const list = await (await fetch(`http://127.0.0.1:${PORT}/json/list`)).json();
-    target = list.find((t) => t.type === "page");
-    if (target) break;
-  } catch { /* not up yet */ }
-  await sleep(250);
+    try {
+        const list = await (await fetch(`http://127.0.0.1:${PORT}/json/list`)).json();
+        target = list.find((t) => t.type === "page");
+        if (target) break;
+    } catch { /* not up yet */ }
+    await sleep(250);
 }
 const ws = new WebSocket(target.webSocketDebuggerUrl);
 await new Promise((res, rej) => {
-  ws.addEventListener("open", res, { once: true });
-  ws.addEventListener("error", rej, { once: true });
+    ws.addEventListener("open", res, { once: true });
+    ws.addEventListener("error", rej, { once: true });
 });
 let seq = 0;
 const pending = new Map();
 const events = [];
 ws.addEventListener("message", (ev) => {
-  const m = JSON.parse(ev.data);
-  if (m.id && pending.has(m.id)) {
-    const { resolve, reject } = pending.get(m.id);
-    pending.delete(m.id);
-    if (m.error) reject(new Error(JSON.stringify(m.error))); else resolve(m.result);
-  } else if (m.method) events.push(m.method);
+    const m = JSON.parse(ev.data);
+    if (m.id && pending.has(m.id)) {
+        const { resolve, reject } = pending.get(m.id);
+        pending.delete(m.id);
+        if (m.error) reject(new Error(JSON.stringify(m.error))); else resolve(m.result);
+    } else if (m.method) events.push(m.method);
 });
 const send = (method, params = {}) => {
-  seq += 1;
-  ws.send(JSON.stringify({ id: seq, method, params }));
-  return new Promise((resolve, reject) => pending.set(seq, { resolve, reject }));
+    seq += 1;
+    ws.send(JSON.stringify({ id: seq, method, params }));
+    return new Promise((resolve, reject) => pending.set(seq, { resolve, reject }));
 };
 async function evaluate(expression) {
-  const r = await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true });
-  if (r.exceptionDetails) throw new Error(JSON.stringify(r.exceptionDetails).slice(0, 300));
-  return r.result.value;
+    const r = await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true });
+    if (r.exceptionDetails) throw new Error(JSON.stringify(r.exceptionDetails).slice(0, 300));
+    return r.result.value;
 }
 async function shot(name) {
-  const r = await send("Page.captureScreenshot", { format: "png" });
-  fs.writeFileSync(path.join(dir, name), Buffer.from(r.data, "base64"));
+    const r = await send("Page.captureScreenshot", { format: "png" });
+    fs.writeFileSync(path.join(dir, name), Buffer.from(r.data, "base64"));
 }
 
 await send("Page.enable");

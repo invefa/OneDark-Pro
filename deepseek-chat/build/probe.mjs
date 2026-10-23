@@ -12,51 +12,51 @@ const PROFILE = path.join(import.meta.dirname, "profile2");
 const css = fs.readFileSync(process.argv[2], "utf-8");
 
 const proc = spawn(EDGE, [
-  "--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${PROFILE}`,
-  "--no-first-run", "--no-default-browser-check", "--disable-gpu",
-  "--window-size=1280,900", "about:blank",
+    "--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${PROFILE}`,
+    "--no-first-run", "--no-default-browser-check", "--disable-gpu",
+    "--window-size=1280,900", "about:blank",
 ], { stdio: "ignore" });
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 let page = null;
 for (let i = 0; i < 80; i += 1) {
-  try {
-    const list = await (await fetch(`http://127.0.0.1:${PORT}/json/list`)).json();
-    page = list.find((t) => t.type === "page");
-    if (page) break;
-  } catch { /* not up */ }
-  await sleep(250);
+    try {
+        const list = await (await fetch(`http://127.0.0.1:${PORT}/json/list`)).json();
+        page = list.find((t) => t.type === "page");
+        if (page) break;
+    } catch { /* not up */ }
+    await sleep(250);
 }
 
 const ws = new WebSocket(page.webSocketDebuggerUrl);
 await new Promise((res, rej) => {
-  ws.addEventListener("open", res, { once: true });
-  ws.addEventListener("error", rej, { once: true });
+    ws.addEventListener("open", res, { once: true });
+    ws.addEventListener("error", rej, { once: true });
 });
 
 let seq = 0;
 const pending = new Map();
 const events = [];
 ws.addEventListener("message", (ev) => {
-  const m = JSON.parse(ev.data);
-  if (m.id && pending.has(m.id)) {
-    const { resolve, reject } = pending.get(m.id);
-    pending.delete(m.id);
-    if (m.error) reject(new Error(JSON.stringify(m.error))); else resolve(m.result);
-  } else if (m.method) events.push(m.method);
+    const m = JSON.parse(ev.data);
+    if (m.id && pending.has(m.id)) {
+        const { resolve, reject } = pending.get(m.id);
+        pending.delete(m.id);
+        if (m.error) reject(new Error(JSON.stringify(m.error))); else resolve(m.result);
+    } else if (m.method) events.push(m.method);
 });
 
 const send = (method, params = {}) => {
-  seq += 1;
-  ws.send(JSON.stringify({ id: seq, method, params }));
-  return new Promise((resolve, reject) => pending.set(seq, { resolve, reject }));
+    seq += 1;
+    ws.send(JSON.stringify({ id: seq, method, params }));
+    return new Promise((resolve, reject) => pending.set(seq, { resolve, reject }));
 };
 
 async function evaluate(expression) {
-  const r = await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true });
-  if (r.exceptionDetails) throw new Error(JSON.stringify(r.exceptionDetails));
-  return r.result.value;
+    const r = await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true });
+    if (r.exceptionDetails) throw new Error(JSON.stringify(r.exceptionDetails));
+    return r.result.value;
 }
 
 await send("Page.enable");
