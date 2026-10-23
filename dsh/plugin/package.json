@@ -1,8 +1,8 @@
 {
   "name": "dsh-reasoning-style",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
-  "description": "Give reasoning rows a subordinate process column so they read apart from the answer body.",
+  "description": "Apply the One Dark Pro Darker palette to the DSH web interface.",
   "type": "module",
   "main": "lib/index.js",
   "exports": {

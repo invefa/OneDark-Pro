@@ -272,6 +272,31 @@ SCOPE = "body[data-ds-dark-theme]"
 CODE = SCOPE + " .md-code-block.md-code-block-dark"
 
 
+def token_block(extra_alias=None):
+    """Emit the design-token override block shared by every DSH/DeepSeek skin."""
+    lines = [SCOPE + " {"]
+    lines.append("  /* raw palette: neutral ramp */")
+    for step, value in RAMP.items():
+        lines.append("  --dsw-static-neutral-bluish-{}: {} !important;".format(step, value))
+    lines.append("")
+    lines.append("  /* raw palette: brand blues */")
+    for step, value in DEEPSEEK_SCALE.items():
+        lines.append("  --dsw-static-deepseek-{}: {} !important;".format(step, value))
+    lines.append("")
+    lines.append("  /* raw palette: status hues */")
+    for name, value in STATIC_EXTRA.items():
+        lines.append("  {}: {} !important;".format(name, value))
+    lines.append("")
+    lines.append("  /* semantic layer */")
+    for name, value in ALIAS.items():
+        lines.append("  {}: {} !important;".format(name, value))
+    for name, value in (extra_alias or {}).items():
+        lines.append("  {}: {} !important;".format(name, value))
+    lines.append("}")
+    lines.append("")
+    return lines
+
+
 def build_css():
     out = []
     out.append("/* One Dark Pro Darker for chat.deepseek.com")
@@ -279,24 +304,7 @@ def build_css():
     out.append("   Applied to DeepSeek's own design tokens, so newly rendered parts follow too. */")
     out.append("")
 
-    out.append(SCOPE + " {")
-    out.append("  /* raw palette: neutral ramp */")
-    for step, value in RAMP.items():
-        out.append("  --dsw-static-neutral-bluish-{}: {} !important;".format(step, value))
-    out.append("")
-    out.append("  /* raw palette: brand blues */")
-    for step, value in DEEPSEEK_SCALE.items():
-        out.append("  --dsw-static-deepseek-{}: {} !important;".format(step, value))
-    out.append("")
-    out.append("  /* raw palette: status hues */")
-    for name, value in STATIC_EXTRA.items():
-        out.append("  {}: {} !important;".format(name, value))
-    out.append("")
-    out.append("  /* semantic layer */")
-    for name, value in ALIAS.items():
-        out.append("  {}: {} !important;".format(name, value))
-    out.append("}")
-    out.append("")
+    out.extend(token_block())
 
     out.append("/* thinking block: a process column under the answer")
     out.append("   The site already ships the icon, the left rule and the 22px indent, but it colours")

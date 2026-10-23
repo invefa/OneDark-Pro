@@ -22,8 +22,9 @@ const document = {
         return { tag, dataset: {}, textContent: "" };
     },
     querySelector(selector) {
-        const want = 'style[data-plugin-css="dsh-reasoning-style/reasoning.css"]';
-        return selector === want && styleTags.length > 0 ? styleTags[0] : null;
+        const wanted = /data-plugin-css="([^"]+)"/.exec(selector);
+        if (!wanted) return null;
+        return styleTags.find((tag) => tag.dataset.pluginCss === wanted[1]) || null;
     },
 };
 
