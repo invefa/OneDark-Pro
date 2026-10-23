@@ -1,6 +1,6 @@
 {
   "name": "dsh-reasoning-style",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Give reasoning rows a subordinate process column so they read apart from the answer body.",
   "type": "module",
@@ -12,9 +12,13 @@
     "./client": {
       "default": "./lib/client.js"
     },
+    "./cordis.patch.yml": "./cordis.patch.yml",
     "./package.json": "./package.json"
   },
   "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
     "client": {
       "inject": [],
       "platform": "web"

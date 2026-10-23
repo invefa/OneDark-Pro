@@ -44,7 +44,7 @@ DSH的答复与推理都没在打包好的样式表里，而是由各插件运�
 
 ## 四、安装
 
-界面产物在`app.asar`里，没有用户可写的样式表，不进打包产物的入口只有客户端插件。插件已按DSH的客户端协议写好（`window.__ModuleLoader__.load`注册，`apply()`注入一个`<style>`），在[plugin/](plugin/)下。
+界面产物在`app.asar`里，没有用户可写的样式表，不进打包产物的入口只有插件。插件在[plugin/](plugin/)下，按DSH的两层协议写的：包清单用`dsh.bundle.patch`指向`cordis.patch.yml`，由它`insert`一条插件记录；客户端入口用`window.__ModuleLoader__.load`注册，`apply()`注入一个`<style>`。
 
 安装：
 
