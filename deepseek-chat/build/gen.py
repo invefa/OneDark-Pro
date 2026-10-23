@@ -312,9 +312,8 @@ def build_css():
     out.append("   needs its own step down. */")
     out.append("{} .ds-think-content .ds-markdown {{\n  color: {};\n  line-height: 22px;\n}}".format(SCOPE, GRAY))
     out.append("")
-    out.append("{} .ds-think-content .ds-markdown :is(h1, h2, h3, h4, h5, h6) {{\n  color: {};\n}}".format(SCOPE, FG_MUTED))
-    out.append("")
-    out.append("{} .ds-think-content .ds-markdown :is(strong, b) {{\n  color: {};\n}}".format(SCOPE, FG_MUTED))
+    out.append("/* everything inside reasoning is capped at the body grey, so bold and\n   headings carry weight instead of brightness; code and links are excluded */")
+    out.append("{} .ds-think-content :not(pre):not(code):not(.token):not(a) {{\n  color: {} !important;\n}}".format(SCOPE, GRAY))
     out.append("")
     out.append("{} .ds-think-content .ds-markdown :is(p, .ds-markdown-paragraph) {{\n  margin: 8px 0;\n}}".format(SCOPE))
     out.append("")
@@ -349,7 +348,7 @@ def build_userscript(css):
     header = """// ==UserScript==
 // @name         One Dark Pro Darker for DeepSeek Chat
 // @namespace    local.onedarkpro.deepseek
-// @version      1.2.0
+// @version      1.3.0
 // @description  Apply the One Dark Pro Darker palette to chat.deepseek.com by remapping its design tokens.
 // @match        https://chat.deepseek.com/*
 // @updateURL    https://github.com/invefa/OneDark-Pro/raw/refs/heads/main/deepseek-chat/onedark-deepseek.user.js

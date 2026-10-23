@@ -143,12 +143,10 @@ body[data-ds-dark-theme] .ds-think-content .ds-markdown {
   line-height: 22px;
 }
 
-body[data-ds-dark-theme] .ds-think-content .ds-markdown :is(h1, h2, h3, h4, h5, h6) {
-  color: #9da5b4;
-}
-
-body[data-ds-dark-theme] .ds-think-content .ds-markdown :is(strong, b) {
-  color: #9da5b4;
+/* everything inside reasoning is capped at the body grey, so bold and
+   headings carry weight instead of brightness; code and links are excluded */
+body[data-ds-dark-theme] .ds-think-content :not(pre):not(code):not(.token):not(a) {
+  color: #7f848e !important;
 }
 
 body[data-ds-dark-theme] .ds-think-content .ds-markdown :is(p, .ds-markdown-paragraph) {

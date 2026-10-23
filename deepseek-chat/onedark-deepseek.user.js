@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         One Dark Pro Darker for DeepSeek Chat
 // @namespace    local.onedarkpro.deepseek
-// @version      1.2.0
+// @version      1.3.0
 // @description  Apply the One Dark Pro Darker palette to chat.deepseek.com by remapping its design tokens.
 // @match        https://chat.deepseek.com/*
 // @updateURL    https://github.com/invefa/OneDark-Pro/raw/refs/heads/main/deepseek-chat/onedark-deepseek.user.js
@@ -167,12 +167,10 @@ body[data-ds-dark-theme] .ds-think-content .ds-markdown {
   line-height: 22px;
 }
 
-body[data-ds-dark-theme] .ds-think-content .ds-markdown :is(h1, h2, h3, h4, h5, h6) {
-  color: #9da5b4;
-}
-
-body[data-ds-dark-theme] .ds-think-content .ds-markdown :is(strong, b) {
-  color: #9da5b4;
+/* everything inside reasoning is capped at the body grey, so bold and
+   headings carry weight instead of brightness; code and links are excluded */
+body[data-ds-dark-theme] .ds-think-content :not(pre):not(code):not(.token):not(a) {
+  color: #7f848e !important;
 }
 
 body[data-ds-dark-theme] .ds-think-content .ds-markdown :is(p, .ds-markdown-paragraph) {
