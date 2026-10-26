@@ -160,6 +160,7 @@ Darker只动了底色这一层，31个键整体下移一档。
 | [extract.py](build/extract.py) | 提取脚本，读主题文件后重新生成上面三个产物 |
 | [deepseek-chat/](deepseek-chat/README.md) | 把同一套色板套到chat.deepseek.com的油猴脚本 |
 | [dsh/](dsh/README.md) | 把同一套色板套到DSH聊天界面的客户端插件 |
+| [codex/](codex/README.md) | Codex桌面版的外观参数与合并脚本 |
 
 在CSS里引入即可：
 
