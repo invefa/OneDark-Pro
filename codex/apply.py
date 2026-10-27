@@ -27,7 +27,7 @@ SECTIONS = {
         "surface": '"#23272e"',
     },
     "[desktop.appearanceDarkChromeTheme.fonts]": {
-        "code": "'\"Cascadia Code\"'",
+        "code": "'\"Cascadia Code\", \"Microsoft YaHei Mono\", Consolas'",
     },
     "[desktop.appearanceDarkChromeTheme.semanticColors]": {
         "diffAdded": '"#98c379"',
