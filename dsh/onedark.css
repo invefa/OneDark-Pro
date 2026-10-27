@@ -163,8 +163,8 @@ body[data-ds-dark-theme] {
 
 /* code font: same stack the editor uses on this platform */
 body[data-ds-dark-theme] {
-  --ds-font-family-code: "Cascadia Code", Consolas, "Microsoft YaHei Mono", monospace;
-  --dsh-font-family-code: "Cascadia Code", Consolas, "Microsoft YaHei Mono", monospace;
+  --ds-font-family-code: "Cascadia Mono", Consolas, "Microsoft YaHei Mono", monospace;
+  --dsh-font-family-code: "Cascadia Mono", Consolas, "Microsoft YaHei Mono", monospace;
 }
 
 /* code block syntax: Shiki css-variables palette */

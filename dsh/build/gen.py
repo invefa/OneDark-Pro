@@ -26,7 +26,7 @@ RAISED = site.RAISED
 INACTIVE = site.INACTIVE
 LINK = site.LINK
 SCOPE = site.SCOPE
-CODE_FONT = '"Cascadia Code", Consolas, "Microsoft YaHei Mono", monospace'
+CODE_FONT = '"Cascadia Mono", Consolas, "Microsoft YaHei Mono", monospace'
 FLAT_SELECTION = site.F["editor-selectionbackground"]
 
 # Tokens the DSH frontend declares and the public site does not. Colours that are
