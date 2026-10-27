@@ -26,6 +26,7 @@ RAISED = site.RAISED
 INACTIVE = site.INACTIVE
 LINK = site.LINK
 SCOPE = site.SCOPE
+CODE_FONT = '"Cascadia Code", Consolas, "Microsoft YaHei Mono", monospace'
 FLAT_SELECTION = site.F["editor-selectionbackground"]
 
 # Tokens the DSH frontend declares and the public site does not. Colours that are
@@ -113,6 +114,10 @@ def build_css():
     out.append("   palette, so their token colours are set here as well. */")
     out.append("")
     out.extend(site.token_block(DSH_ALIAS))
+
+    out.append("/* code font: same stack the editor uses on this platform */")
+    out.append("{} {{\n  --ds-font-family-code: {};\n  --dsh-font-family-code: {};\n}}".format(SCOPE, CODE_FONT, CODE_FONT))
+    out.append("")
 
     out.append("/* code block syntax: Shiki css-variables palette */")
     out.append("{} {{".format(SCOPE))

@@ -161,6 +161,12 @@ body[data-ds-dark-theme] {
   --dsw-alias-file-diff-deleted-marker: #e06c75 !important;
 }
 
+/* code font: same stack the editor uses on this platform */
+body[data-ds-dark-theme] {
+  --ds-font-family-code: "Cascadia Code", Consolas, "Microsoft YaHei Mono", monospace;
+  --dsh-font-family-code: "Cascadia Code", Consolas, "Microsoft YaHei Mono", monospace;
+}
+
 /* code block syntax: Shiki css-variables palette */
 body[data-ds-dark-theme] {
   --shiki-foreground: #abb2bf !important;
