@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>One Dark Pro Darker for Typora</title>
+<link rel="stylesheet" href="../onedark-pro-darker.css">
+<style>
+    html, body { margin: 0; }
+    #write { margin: 0 auto; }
+</style>
+</head>
+<body>
+<div id="write">
+    <h1>One Dark Pro Darker</h1>
+    <p>把同一套色板搬到Typora。正文与代码都用<strong>Cascadia Mono</strong>，中文回退到<code>Microsoft YaHei Mono</code>，行高1.72，正文宽度880px。</p>
+    <h2>一、代码块</h2>
+    <p>粗体用<strong>更亮的一档灰</strong>，斜体保持原样，链接用<em>蓝色</em>：<a href="#">editor.example</a>。</p>
+    <pre class="md-fences md-end-block"><div class="CodeMirror"><div class="CodeMirror-lines"><div class="CodeMirror-code"><pre class=" CodeMirror-line cm-s-inner"><span class="cm-comment">// One Dark Pro Darker</span>
+<span class="cm-keyword">pub</span> <span class="cm-keyword">struct</span> <span class="cm-type">WorldBounds</span> {
+    <span class="cm-keyword">pub</span> <span class="cm-property">min_y</span>: <span class="cm-builtin">i64</span>,
+    <span class="cm-keyword">pub</span> <span class="cm-property">max_y</span>: <span class="cm-builtin">i64</span>,
+}
+
+<span class="cm-keyword">impl</span> <span class="cm-type">WorldBounds</span> {
+    <span class="cm-keyword">pub</span> <span class="cm-keyword">fn</span> <span class="cm-def">new</span>(<span class="cm-variable">min_y</span>: <span class="cm-builtin">i64</span>, <span class="cm-variable">max_y</span>: <span class="cm-builtin">i64</span>) -&gt; <span class="cm-variable-2">Result</span> {
+        <span class="cm-keyword">if</span> <span class="cm-variable">min_y</span> <span class="cm-operator">&gt;=</span> <span class="cm-variable">max_y</span> {
+            <span class="cm-keyword">return</span> <span class="cm-variable-2">Err</span>(<span class="cm-string">"bounds"</span>);
+        }
+        <span class="cm-variable-2">Ok</span>(<span class="cm-variable">Self</span> { <span class="cm-variable">min_y</span>, <span class="cm-variable">max_y</span> })
+    }
+}</pre></div></div></div></pre>
+    <h2>二、表格与引用</h2>
+    <blockquote><p>层级靠线宽、间距和字号承担，颜色只用于区分语义。</p></blockquote>
+    <table>
+        <thead><tr><th>层</th><th>底色</th><th>用途</th></tr></thead>
+        <tbody>
+            <tr><td>编辑区</td><td><code>#23272e</code></td><td>正文背景</td></tr>
+            <tr><td>行内代码</td><td><code>#2c313c</code></td><td>强调片段</td></tr>
+            <tr><td>代码块</td><td><code>#1d1f23</code></td><td>围栏代码</td></tr>
+        </tbody>
+    </table>
+    <ul>
+        <li>任务清单：<input type="checkbox" checked> 配色</li>
+        <li>任务清单：<input type="checkbox"> 字形</li>
+    </ul>
+    <hr>
+    <p>结尾段落用于检查行距与段间距。</p>
+</div>
+</body>
+</html>
