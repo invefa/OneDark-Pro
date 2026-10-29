@@ -266,7 +266,7 @@ table {{
 }}
 
 th, td {{
-    border: 1px solid var(--line-soft);
+    border: 1px solid var(--line);
     padding: 6px 12px;
     text-align: left;
 }}
@@ -274,7 +274,7 @@ th, td {{
 th {{
     color: var(--fg-strong);
     font-weight: 600;
-    border-bottom-color: var(--line);
+    border-bottom-color: var(--fg-faint);
 }}
 
 img {{
