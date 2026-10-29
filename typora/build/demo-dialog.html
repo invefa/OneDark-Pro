@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>One Dark Pro Darker - dialog</title>
+<link rel="stylesheet" href="../onedark-pro-darker.css">
+<style>
+    html, body { margin: 0; }
+    #write { margin: 0 auto; }
+    .modal { position: fixed; inset: 0; }
+    .modal-backdrop { position: absolute; inset: 0; }
+    .modal-dialog { position: relative; width: 520px; margin: 18% auto 0; }
+    .modal-content { padding: 18px 20px; border-radius: 4px; }
+    .modal-header { border-bottom: 1px solid var(--line-soft); padding-bottom: 10px; }
+    .modal-body { padding: 14px 0 18px; }
+    .modal-footer { display: flex; justify-content: flex-end; gap: 8px; }
+    .btn { padding: 5px 14px; border-radius: 3px; border: 1px solid var(--line-soft); background: var(--bg-inactive); color: var(--fg); }
+    .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+</style>
+</head>
+<body>
+<div id="write">
+    <h1>标准玩法模块</h1>
+    <table>
+        <thead><tr><th>模块</th><th>职责</th></tr></thead>
+        <tbody>
+            <tr><td>inventory</td><td>物品堆叠、容量、端口与受控转移</td></tr>
+            <tr><td>crafting</td><td>配方描述与原子加工结算</td></tr>
+        </tbody>
+    </table>
+    <p>库存模块已实现有界槽位、物品目录、查询与原子转移，说明见 inventory/README.md。</p>
+</div>
+<div class="modal" data-tag="common">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog">
+        <div class="modal-content" id="common-dialog">
+            <div class="modal-header"><h3 class="modal-title">是否保存更改？</h3></div>
+            <div class="modal-body">如果不保存，更改将会丢失。</div>
+            <div class="modal-footer">
+                <button class="btn btn-primary">保存</button>
+                <button class="btn">放弃更改</button>
+                <button class="btn">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

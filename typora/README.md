@@ -6,6 +6,8 @@
 
 ![菜单面板](images/02-menu.png)
 
+![保存提示](images/03-dialog.png)
+
 ## 一、安装
 
 把[onedark-pro-darker.css](onedark-pro-darker.css)放进Typora的用户主题目录：
@@ -31,6 +33,8 @@
 | 行内代码底 | `#2c313c` | 抬高一层的灰 |
 | 围栏代码底 | `#1d1f23` | 比正文区暗，形成内凹 |
 | 分隔线与表格线 | `#3e4452` / `#181a1f` | |
+
+代码高亮的规则挂在`.cm-s-inner`下并带`!important`，Typora自己的默认样式会盖掉声明顺序靠后的规则。源码模式的`.cm-s-typora-default`另有一组映射。
 
 代码高亮用VS Code主题里的语法色：关键字紫`#c678dd`、字符串绿`#98c379`、数字与属性橙`#d19a66`、函数蓝`#61afef`、类型黄`#e5c07b`、变量红`#e06c75`、内建cyan`#56b6c2`、注释灰`#7f848e`。
 
@@ -61,6 +65,9 @@ Typora的菜单面板、偏好设置、右键菜单、弹窗不吃`--bg-color`�
 | `.long-btn`、`#recent-file-panel-action-btn` | 面板上的按钮 |
 | `.modal-content`、`.dropdown-menu` | 插入表格弹窗与右键菜单 |
 | `.ty-preferences` | 偏好设置窗口 |
+| `.modal-backdrop`、`.modal-content` | 保存提示等弹窗的遮罩与面板 |
+
+弹窗默认用白色遮罩盖在页面上，深色主题下会透出底层文字。这里把遮罩换成半透明黑，面板换成`#2c313c`并加边框。
 
 ## 五、边界
 
@@ -76,5 +83,7 @@ Typora的菜单面板、偏好设置、右键菜单、弹窗不吃`--bg-color`�
 | [build/gen.py](build/gen.py) | 读取色板并生成主题 |
 | [build/demo.html](build/demo.html) | 正文与代码的预览页 |
 | [build/demo-menu.html](build/demo-menu.html) | 菜单面板的预览页 |
+| [build/demo-dialog.html](build/demo-dialog.html) | 弹窗的预览页 |
 | [images/01-preview.png](images/01-preview.png) | 正文预览截图 |
 | [images/02-menu.png](images/02-menu.png) | 菜单预览截图 |
+| [images/03-dialog.png](images/03-dialog.png) | 弹窗预览截图 |

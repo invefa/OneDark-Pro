@@ -215,30 +215,47 @@ pre:not(.CodeMirror-line) {{
     border-left: 1px solid var(--cursor);
 }}
 
-.md-fences .cm-s-inner .cm-comment {{ color: {c_comment}; }}
-.md-fences .cm-s-inner .cm-quote {{ color: {c_comment}; }}
-.md-fences .cm-s-inner .cm-keyword {{ color: {c_keyword}; }}
-.md-fences .cm-s-inner .cm-atom {{ color: {c_keyword}; }}
-.md-fences .cm-s-inner .cm-bool {{ color: {c_numeric}; }}
-.md-fences .cm-s-inner .cm-string,
-.md-fences .cm-s-inner .cm-string-2 {{ color: {c_string}; }}
-.md-fences .cm-s-inner .cm-number {{ color: {c_numeric}; }}
-.md-fences .cm-s-inner .cm-def,
-.md-fences .cm-s-inner .cm-variable-2 {{ color: {c_function}; }}
-.md-fences .cm-s-inner .cm-builtin {{ color: {c_builtin}; }}
-.md-fences .cm-s-inner .cm-type {{ color: {c_type}; }}
-.md-fences .cm-s-inner .cm-variable {{ color: {c_variable}; }}
-.md-fences .cm-s-inner .cm-variable-3 {{ color: {c_type}; }}
-.md-fences .cm-s-inner .cm-property {{ color: {c_function}; }}
-.md-fences .cm-s-inner .cm-attribute {{ color: {c_attribute}; }}
-.md-fences .cm-s-inner .cm-tag {{ color: {c_tag}; }}
-.md-fences .cm-s-inner .cm-meta {{ color: {c_keyword_op}; }}
-.md-fences .cm-s-inner .cm-operator {{ color: {c_operator}; }}
-.md-fences .cm-s-inner .cm-link {{ color: var(--link); }}
-.md-fences .cm-s-inner .cm-url {{ color: {c_string}; }}
-.md-fences .cm-s-inner .cm-error {{ color: {c_error}; }}
-.md-fences .cm-s-inner .cm-header {{ color: {c_md_heading}; font-weight: 600; }}
-.md-fences .cm-s-inner .cm-formatting {{ color: {c_md_quote}; }}
+.cm-s-inner .cm-comment,
+.cm-s-inner.cm-comment {{ color: {c_comment} !important; }}
+.cm-s-inner .cm-quote {{ color: {c_comment} !important; }}
+.cm-s-inner .cm-keyword {{ color: {c_keyword} !important; }}
+.cm-s-inner .cm-atom {{ color: {c_keyword} !important; }}
+.cm-s-inner .cm-meta,
+.cm-s-inner .cm-qualifier {{ color: {c_keyword_op} !important; }}
+.cm-s-inner .cm-bool {{ color: {c_numeric} !important; }}
+.cm-s-inner .cm-string,
+.cm-s-inner .cm-string-2 {{ color: {c_string} !important; }}
+.cm-s-inner .cm-number {{ color: {c_numeric} !important; }}
+.cm-s-inner .cm-def,
+.cm-s-inner.cm-def,
+.cm-s-inner .cm-header {{ color: {c_function} !important; }}
+.cm-s-inner .cm-builtin {{ color: {c_builtin} !important; }}
+.cm-s-inner .cm-type {{ color: {c_type} !important; }}
+.cm-s-inner .cm-variable {{ color: {c_variable} !important; }}
+.cm-s-inner .cm-variable-2 {{ color: {c_type} !important; }}
+.cm-s-inner .cm-variable-3 {{ color: {c_type} !important; }}
+.cm-s-inner .cm-property {{ color: {c_function} !important; }}
+.cm-s-inner .cm-attribute {{ color: {c_attribute} !important; }}
+.cm-s-inner .cm-tag {{ color: {c_tag} !important; }}
+.cm-s-inner .cm-operator {{ color: {c_operator} !important; }}
+.cm-s-inner .cm-bracket {{ color: {c_operator} !important; }}
+.cm-s-inner .cm-link {{ color: var(--link) !important; }}
+.cm-s-inner .cm-url {{ color: {c_string} !important; }}
+.cm-s-inner .cm-error {{ color: {c_error} !important; }}
+.cm-s-inner .cm-formatting {{ color: {c_md_quote} !important; }}
+
+.cm-s-typora-default .cm-header,
+.cm-s-typora-default .cm-property {{ color: {c_function} !important; }}
+.cm-s-typora-default .cm-keyword {{ color: {c_keyword} !important; }}
+.cm-s-typora-default .cm-string {{ color: {c_string} !important; }}
+.cm-s-typora-default .cm-number {{ color: {c_numeric} !important; }}
+.cm-s-typora-default .cm-comment,
+.cm-s-typora-default .cm-code {{ color: {c_comment} !important; }}
+.cm-s-typora-default .cm-tag {{ color: {c_tag} !important; }}
+.cm-s-typora-default .cm-attribute {{ color: {c_attribute} !important; }}
+.cm-s-typora-default .cm-link {{ color: var(--link) !important; }}
+.cm-s-typora-default .cm-strong,
+.cm-s-typora-default .cm-em {{ color: {c_type} !important; }}
 
 table {{
     border-collapse: collapse;
@@ -515,6 +532,37 @@ figcaption, .md-image > .md-meta {{
 
 .theme-preview-div:hover {{
     border-color: var(--accent);
+}}
+
+
+/* Typora keeps a white backdrop and a default light dialog, so the
+   unsaved-changes prompt shows the document through it. */
+.modal-backdrop {{
+    background-color: rgba(0, 0, 0, 0.55) !important;
+    opacity: 1 !important;
+}}
+
+.modal-content {{
+    background-color: var(--bg-raised) !important;
+    border: 1px solid var(--line) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55) !important;
+}}
+
+.modal-header,
+.modal-body,
+.modal-footer {{
+    background: transparent;
+    color: var(--fg);
+    border-color: var(--line-soft);
+}}
+
+.modal-title {{
+    color: var(--fg-strong);
+}}
+
+#common-dialog .modal-body,
+#error-dialog-message {{
+    color: var(--fg-muted);
 }}
 
 @media print {{
