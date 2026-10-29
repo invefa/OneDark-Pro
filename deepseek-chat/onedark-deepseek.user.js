@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         One Dark Pro Darker for DeepSeek Chat
 // @namespace    local.onedarkpro.deepseek
-// @version      1.3.0
+// @version      1.4.0
 // @description  Apply the One Dark Pro Darker palette to chat.deepseek.com by remapping its design tokens.
 // @match        https://chat.deepseek.com/*
 // @updateURL    https://github.com/invefa/OneDark-Pro/raw/refs/heads/main/deepseek-chat/onedark-deepseek.user.js
@@ -90,9 +90,9 @@ body[data-ds-dark-theme] {
   --dsw-alias-bg-multi-select: #323842 !important;
   --dsw-alias-bg-module-platform: #323842 !important;
   --dsw-alias-bg-skeleton: #2c313a !important;
-  --dsw-alias-border-l1: #2c313c !important;
+  --dsw-alias-border-l1: #323842 !important;
   --dsw-alias-border-l2: #3e4452 !important;
-  --dsw-alias-border-l2-darkmode-thin: #2c313c !important;
+  --dsw-alias-border-l2-darkmode-thin: #323842 !important;
   --dsw-alias-border-l3: #495162 !important;
   --dsw-alias-border-l4: #515a6b !important;
   --dsw-alias-border-inverted: #2c313c !important;

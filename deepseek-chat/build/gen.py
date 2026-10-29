@@ -137,9 +137,9 @@ ALIAS = {
     "--dsw-alias-bg-module-platform": INACTIVE,
     "--dsw-alias-bg-skeleton": HOVER,
     # Lines
-    "--dsw-alias-border-l1": RAISED,
+    "--dsw-alias-border-l1": INACTIVE,
     "--dsw-alias-border-l2": LINE_STRONG,
-    "--dsw-alias-border-l2-darkmode-thin": RAISED,
+    "--dsw-alias-border-l2-darkmode-thin": INACTIVE,
     "--dsw-alias-border-l3": FG_FAINT,
     "--dsw-alias-border-l4": "#515a6b",
     "--dsw-alias-border-inverted": RAISED,
@@ -348,7 +348,7 @@ def build_userscript(css):
     header = """// ==UserScript==
 // @name         One Dark Pro Darker for DeepSeek Chat
 // @namespace    local.onedarkpro.deepseek
-// @version      1.3.0
+// @version      1.4.0
 // @description  Apply the One Dark Pro Darker palette to chat.deepseek.com by remapping its design tokens.
 // @match        https://chat.deepseek.com/*
 // @updateURL    https://github.com/invefa/OneDark-Pro/raw/refs/heads/main/deepseek-chat/onedark-deepseek.user.js
