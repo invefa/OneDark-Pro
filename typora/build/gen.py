@@ -27,7 +27,9 @@ TEMPLATE = """/* One Dark Pro Darker for Typora
     --bg-inactive: {bg_inactive};
     --bg-quote: {bg_quote};
     --line: {line_strong};
-    --line-soft: {line_soft};
+    /* Two line weights only. The palette line-soft (#181a1f) reads as black on
+       this background, so the lighter separator steps up one surface tone. */
+    --line-soft: {bg_inactive};
     --fg: {fg};
     --fg-strong: {fg_strong};
     --fg-ui: {fg_ui};

@@ -12,7 +12,9 @@
     --bg-inactive: #323842;
     --bg-quote: #2e3440;
     --line: #3e4452;
-    --line-soft: #181a1f;
+    /* Two line weights only. The palette line-soft (#181a1f) reads as black on
+       this background, so the lighter separator steps up one surface tone. */
+    --line-soft: #323842;
     --fg: #abb2bf;
     --fg-strong: #dcdcdc;
     --fg-ui: #d7dae0;
