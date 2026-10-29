@@ -1,8 +1,10 @@
 # Typora主题
 
-一份One Dark Pro Darker的Typora主题，正文与代码都用Cascadia Mono。样式由[build/gen.py](build/gen.py)从根目录的[onedark-pro.json](../onedark-pro.json)生成，色值只有一个来源。
+一份One Dark Pro Darker的Typora主题。正文用比例字体，代码用Cascadia Mono，中英混排各自回退到等宽或黑体。样式由[build/gen.py](build/gen.py)从根目录的[onedark-pro.json](../onedark-pro.json)生成，色值只有一个来源。
 
-![预览](images/01-preview.png)
+![正文与代码](images/01-preview.png)
+
+![菜单面板](images/02-menu.png)
 
 ## 一、安装
 
@@ -21,7 +23,7 @@
 | 位置 | 取值 | 说明 |
 |---|---|---|
 | 编辑区底 | `#23272e` | Darker的编辑器背景 |
-| 侧栏底 | `#1e2227` | 比正文区暗一档 |
+| 侧栏与菜单底 | `#1e2227` | 比正文区暗一档 |
 | 正文 | `#abb2bf` | |
 | 标题与加粗 | `#dcdcdc` | 比正文亮一档 |
 | 引用与次要文字 | `#9da5b4` | |
@@ -37,24 +39,42 @@
 ## 三、字体
 
 ```css
---font: "Cascadia Mono", "Microsoft YaHei Mono", Consolas, monospace;
+--font-prose: "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei", system-ui, sans-serif;
+--monospace: "Cascadia Mono", "Microsoft YaHei Mono", Consolas, monospace;
 ```
 
-用Cascadia Mono而不是Cascadia Code，后者带编程连字，`=>`、`!=`会连成图形式样，容易和符号混淆。中文回退到`Microsoft YaHei Mono`，与西文同属等宽，混排时不会跳字体。
+正文用比例字体，长段中文读起来不累。代码与行内代码用Cascadia Mono，中文回退到`Microsoft YaHei Mono`，与西文同属等宽，混排时不跳字体。
 
-正文也想用比例字体的话，把`--font`改成字体栈中比例字体在前、`--monospace`仍指向Cascadia Mono即可，代码块与行内代码不受影响。
+用Cascadia Mono而不是Cascadia Code，后者带编程连字，`=>`、`!=`会连成图形式样，容易和符号混淆。
 
-## 四、边界
+想让正文也用等宽，把`--font-prose`改成与`--monospace`相同的栈即可，代码部分不受影响。
+
+## 四、外壳
+
+Typora的菜单面板、偏好设置、右键菜单、弹窗不吃`--bg-color`，它们各自带浅色底与背景图案。主题里对这些面单独覆盖：
+
+| 选择器 | 覆盖内容 |
+|---|---|
+| `.megamenu-content` | 菜单右侧面板，强制去掉浅色底与背景图案 |
+| `.megamenu-menu`、`.megamenu-menu-list` | 左侧菜单及其悬停、选中态 |
+| `#recent-file-panel`、`#recent-document-table` | 最近文件表格与查找框 |
+| `.long-btn`、`#recent-file-panel-action-btn` | 面板上的按钮 |
+| `.modal-content`、`.dropdown-menu` | 插入表格弹窗与右键菜单 |
+| `.ty-preferences` | 偏好设置窗口 |
+
+## 五、边界
 
 - 只改配色与字体，不动Typora的布局与交互。
-- 窗口级元素（侧栏、标题栏、滚动条、搜索框）通过Typora自己的变量定制，覆盖不到的少数控件保持默认外观。
 - 导出与打印走独立的亮色样式，避免深底打印耗墨。
+- Typora内部还有少数控件由平台渲染，未逐一覆盖；遇到仍然发白的界面，把元素截图给我补规则。
 
-## 五、文件
+## 六、文件
 
 | 文件 | 内容 |
 |---|---|
 | [onedark-pro-darker.css](onedark-pro-darker.css) | 生成的主题，直接复制到Typora |
 | [build/gen.py](build/gen.py) | 读取色板并生成主题 |
-| [build/demo.html](build/demo.html) | 预览用的样例页面 |
-| [images/01-preview.png](images/01-preview.png) | 预览截图 |
+| [build/demo.html](build/demo.html) | 正文与代码的预览页 |
+| [build/demo-menu.html](build/demo-menu.html) | 菜单面板的预览页 |
+| [images/01-preview.png](images/01-preview.png) | 正文预览截图 |
+| [images/02-menu.png](images/02-menu.png) | 菜单预览截图 |

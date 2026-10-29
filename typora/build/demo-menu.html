@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>One Dark Pro Darker - menu</title>
+<link rel="stylesheet" href="../onedark-pro-darker.css">
+<style>
+    html, body { margin: 0; }
+    .stage { display: flex; height: 100vh; }
+    .megamenu-menu { width: 250px; padding: 12px 0; }
+    .megamenu-menu-list { list-style: none; margin: 0; padding: 0; }
+    .megamenu-menu-list li a { display: block; padding: 10px 28px; text-decoration: none; }
+    .megamenu-content { flex: 1; padding: 28px 48px; }
+</style>
+</head>
+<body>
+<div class="stage">
+    <div class="megamenu-menu">
+        <ul class="megamenu-menu-list">
+            <li><a href="#">新建</a></li>
+            <li><a href="#" class="active">打开</a></li>
+            <li><a href="#">已保存</a></li>
+            <li><a href="#">另存为</a></li>
+            <li><a href="#">导出</a></li>
+            <li><a href="#">打印</a></li>
+            <li><a href="#">主题</a></li>
+            <li><a href="#">偏好设置</a></li>
+        </ul>
+    </div>
+    <div class="megamenu-content">
+        <button class="long-btn">Open...</button>
+        <h2 style="margin-top:28px">导入</h2>
+        <button class="long-btn">导入...</button>
+        <p style="color:var(--fg-dim)">docx / wiki / rst / org / ...</p>
+        <h2 style="margin-top:28px">最近使用的文件</h2>
+        <div id="recent-file-panel">
+            <input id="search" placeholder="查找...">
+            <table id="recent-document-table">
+                <thead><tr><th>文件名</th><th>路径</th></tr></thead>
+                <tbody>
+                    <tr><td>README.md</td><td>D:\Projects\invefa\Torse\Torse\</td></tr>
+                    <tr><td>MODELS.md</td><td>D:\Projects\invefa\Torse\Torse\crates\content\</td></tr>
+                    <tr><td>EXECUTION.md</td><td>D:\Projects\invefa\Torse\Torse\crates\codec\</td></tr>
+                </tbody>
+            </table>
+            <div id="recent-file-panel-action-btn">...</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

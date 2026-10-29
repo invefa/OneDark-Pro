@@ -161,7 +161,7 @@ Darker只动了底色这一层，31个键整体下移一档。
 | [deepseek-chat/](deepseek-chat/README.md) | 把同一套色板套到chat.deepseek.com的油猴脚本 |
 | [dsh/](dsh/README.md) | 把同一套色板套到DSH聊天界面的客户端插件 |
 | [codex/](codex/README.md) | Codex桌面版的外观参数与合并脚本 |
-| [typora/](typora/README.md) | Typora主题，正文与代码统一Cascadia Mono |
+| [typora/](typora/README.md) | Typora主题，正文比例字体、代码Cascadia Mono |
 
 在CSS里引入即可：
 

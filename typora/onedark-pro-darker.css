@@ -25,7 +25,8 @@
     --error: #c24038;
     --warning: #d19a66;
 
-    --font: "Cascadia Mono", "Microsoft YaHei Mono", Consolas, monospace;
+    --font-prose: "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei", system-ui, sans-serif;
+    --monospace: "Cascadia Mono", "Microsoft YaHei Mono", Consolas, monospace;
 
     --text-color: var(--fg);
     --bg-color: var(--bg);
@@ -46,7 +47,6 @@
     --window-border: 1px solid var(--line);
     --rawblock-edit-panel-bd: var(--line);
     --code-block-bg-color: var(--bg-code);
-    --monospace: var(--font);
     --mermaid-theme: dark;
     --sequence-theme: dark;
 }
@@ -54,7 +54,7 @@
 html, body {
     background-color: var(--bg);
     color: var(--fg);
-    font-family: var(--font);
+    font-family: var(--font-prose);
     font-size: 15px;
     line-height: 1.72;
     -webkit-font-smoothing: antialiased;
@@ -160,7 +160,7 @@ li.md-task-list-item > input {
 }
 
 code {
-    font-family: var(--font);
+    font-family: var(--monospace);
     font-size: 0.92em;
     color: var(--fg-strong);
     background: var(--bg-raise);
@@ -169,8 +169,9 @@ code {
     padding: 0.08em 0.35em;
 }
 
-.md-fences, pre {
-    font-family: var(--font);
+.md-fences,
+pre:not(.CodeMirror-line) {
+    font-family: var(--monospace);
     font-size: 0.9rem;
     line-height: 1.62;
     color: var(--fg);
@@ -317,6 +318,188 @@ figcaption, .md-image > .md-meta {
 
 ::-webkit-scrollbar-track {
     background: transparent;
+}
+
+
+/* ---------------------------------------------------------------
+   Shell: megamenu, dialogs, preferences, context menu.
+   These surfaces keep their own light backgrounds, so the palette
+   variables alone are not enough; each one is overridden explicitly.
+   --------------------------------------------------------------- */
+
+.megamenu-content,
+.megamenu-opened header {
+    background: var(--bg) !important;
+    background-image: none !important;
+    color: var(--fg);
+}
+
+.megamenu-menu {
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--line-soft);
+    box-shadow: none;
+}
+
+.megamenu-menu-header {
+    border-color: var(--line-soft);
+}
+
+.megamenu-menu-header #megamenu-menu-header-title {
+    color: var(--fg-ui);
+}
+
+.megamenu-menu-header:hover {
+    background-color: var(--bg-hover);
+}
+
+.megamenu-menu-header:hover #megamenu-menu-header-title {
+    color: var(--fg-strong);
+}
+
+.megamenu-menu-list li a {
+    color: var(--fg-muted);
+}
+
+.megamenu-menu-list li a:hover,
+.megamenu-menu-list li a.active {
+    background: var(--bg-hover);
+    color: var(--fg-strong);
+}
+
+#recent-file-panel {
+    padding: 12px;
+    color: var(--fg);
+}
+
+#recent-document-table {
+    background: var(--bg);
+    border: 1px solid var(--line-soft);
+    box-shadow: none;
+}
+
+#recent-file-panel thead tr {
+    background-color: var(--bg-sidebar);
+    color: var(--fg-muted);
+}
+
+#recent-file-panel tbody tr,
+#recent-file-panel tbody tr:nth-child(2n),
+#recent-file-panel tbody tr:nth-child(2n + 1) {
+    background-color: transparent;
+    color: var(--fg);
+}
+
+#recent-file-panel tbody tr:hover {
+    background-color: var(--bg-hover);
+}
+
+.long-btn {
+    background-color: var(--bg-code);
+    border: 1px solid var(--line-soft);
+    color: var(--fg);
+    box-shadow: none;
+    border-radius: 3px;
+}
+
+.long-btn:hover {
+    background-color: var(--bg-hover);
+    color: var(--fg-strong);
+}
+
+#recent-file-panel-action-btn {
+    background: var(--bg-code);
+    border: 1px solid var(--line-soft);
+    box-shadow: none;
+    color: var(--fg-muted);
+}
+
+#recent-file-panel-action-btn:hover {
+    background-color: var(--bg-hover);
+    color: var(--fg-strong);
+}
+
+#search {
+    background: var(--bg-code);
+    border: 1px solid var(--line-soft);
+    color: var(--fg);
+}
+
+.dropdown-menu:not(.megamenu-menu-list) {
+    background-color: var(--bg-raised);
+    color: var(--fg);
+    border: 1px solid var(--line);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+.dropdown-menu .divider {
+    border-color: var(--line-soft);
+}
+
+.dropdown-menu > li > a {
+    color: var(--fg);
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    background-color: var(--bg-hover);
+    color: var(--fg-strong);
+}
+
+.modal-content {
+    background: var(--bg-raised);
+    color: var(--fg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content .form-control,
+.modal-content .form-control:focus {
+    background: var(--bg-code);
+    border: 1px solid var(--line-soft);
+    color: var(--fg);
+    box-shadow: none;
+}
+
+.modal-content .btn-default,
+.ty-preferences button.btn-default {
+    background-color: var(--bg-inactive);
+    border: 1px solid var(--line-soft);
+    color: var(--fg);
+    border-radius: 3px;
+    box-shadow: none;
+}
+
+.modal-content .btn-primary {
+    background-color: var(--accent);
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+}
+
+.ty-preferences .window-content,
+.ty-preferences .window-content .pane-content,
+.ty-preferences {
+    background: var(--bg);
+    color: var(--fg);
+}
+
+.ty-preferences .nav-group-item {
+    color: var(--fg-muted);
+}
+
+.ty-preferences .nav-group-item.active {
+    background: var(--bg-hover);
+    color: var(--fg-strong);
+}
+
+.typora-quick-open-item:hover {
+    background-color: var(--bg-hover);
+    color: var(--fg-strong);
+}
+
+.theme-preview-div:hover {
+    border-color: var(--accent);
 }
 
 @media print {
