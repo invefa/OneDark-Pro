@@ -555,14 +555,17 @@ figcaption, .md-image > .md-meta {
     color: var(--fg-muted);
 }
 
-/* Inside a fence CodeMirror paints the selection itself; the browser's native
-   highlight is a second band with a different box. Keep the painted one and
-   drop the native layer so a single rectangle stays visible. */
+/* A fence selection is painted twice by CodeMirror: a block div for the whole
+   line box and per-token spans for the glyphs. Only the span layer tracks the
+   text, so the block layer and the browser highlight are both dropped. */
 .md-fences .CodeMirror ::selection {
     background: transparent !important;
 }
 
-.md-fences .CodeMirror .CodeMirror-selected,
+.md-fences .CodeMirror .CodeMirror-selected {
+    background: transparent !important;
+}
+
 .md-fences .CodeMirror .CodeMirror-selectedtext {
     background: var(--select-text-bg-color) !important;
 }
