@@ -198,8 +198,11 @@ pre:not(.CodeMirror-line) {
     color: var(--fg-faint);
 }
 
-.md-fences .CodeMirror-cursor {
-    border-left: 1px solid var(--cursor);
+/* Typora paints the CodeMirror caret black by default; the fence and the
+   source-mode editor each carry their own rule, so both are overridden. */
+.md-fences .CodeMirror div.CodeMirror-cursor,
+.CodeMirror.cm-s-typora-default div.CodeMirror-cursor {
+    border-left: 2px solid var(--cursor) !important;
 }
 
 .cm-s-inner .cm-comment,
