@@ -736,6 +736,13 @@ footer,
 
 /* The three window buttons carry a light bootstrap background; forcing it
    transparent by id keeps the default box and only changes the colours. */
+/* Typora draws the bar 24px tall but gives the buttons 28px, so a coloured
+   bar ends above them. Shrinking the box to the bar height keeps the glyph
+   position (padding is unchanged) and makes both end on the same line. */
+#top-titlebar .toolbar-icon.btn {{
+    height: 24px;
+}}
+
 #w-minimize,
 #w-maximize,
 #w-restore,
