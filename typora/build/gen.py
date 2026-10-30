@@ -358,7 +358,6 @@ figcaption, .md-image > .md-meta {{
     background: transparent;
 }}
 
-
 /* ---------------------------------------------------------------
    Shell: megamenu, dialogs, preferences, context menu.
    These surfaces keep their own light backgrounds, so the palette
@@ -540,7 +539,6 @@ figcaption, .md-image > .md-meta {{
     border-color: var(--accent);
 }}
 
-
 /* Typora keeps a white backdrop and a default light dialog, so the
    unsaved-changes prompt shows the document through it. */
 .modal-backdrop {{
@@ -583,7 +581,6 @@ figcaption, .md-image > .md-meta {{
 .CodeMirror-selectedtext {{
     background: var(--select-text-bg-color) !important;
 }}
-
 
 /* ---------------------------------------------------------------
    Editor shell surfaces that carry their own light backgrounds.
@@ -727,49 +724,15 @@ footer,
     color: var(--fg-strong);
 }}
 
-/* Window controls keep their own light chrome; the close button keeps the
-   red hover that Windows users expect. */
+/* The three window buttons keep Typora's own colours; only their box height
+   is aligned with the 24px bar so the coloured bar ends on the same line. */
 #top-titlebar {{
     background: var(--bg-sidebar);
     color: var(--fg-muted);
 }}
 
-/* The three window buttons carry a light bootstrap background; forcing it
-   transparent by id keeps the default box and only changes the colours. */
-/* Typora draws the bar 24px tall but gives the buttons 28px, so a coloured
-   bar ends above them. Shrinking the box to the bar height keeps the glyph
-   position (padding is unchanged) and makes both end on the same line. */
 #top-titlebar .toolbar-icon.btn {{
     height: 24px;
-}}
-
-#w-minimize,
-#w-maximize,
-#w-restore,
-#w-close {{
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    color: var(--fg-muted) !important;
-}}
-
-#w-minimize:hover,
-#w-maximize:hover,
-#w-restore:hover {{
-    background: var(--bg-hover) !important;
-    color: var(--fg-strong) !important;
-}}
-
-#top-titlebar #w-close:hover {{
-    background: #e81123 !important;
-    color: #ffffff !important;
-}}
-
-#top-titlebar #w-minimize:hover,
-#top-titlebar #w-maximize:hover,
-#top-titlebar #w-restore:hover {{
-    background: var(--bg-hover) !important;
-    color: var(--fg-strong) !important;
 }}
 
 @media print {{
