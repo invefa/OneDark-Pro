@@ -79,6 +79,7 @@ Typora的菜单面板、偏好设置、右键菜单、弹窗不吃`--bg-color`�
 | `.ty-tooltip` | 悬停提示 |
 | `.CodeMirror-activeline-background`、`.CodeMirror-matchingbracket` | 活动行与括号匹配 |
 | `#typora-source` | 源码视图 |
+| `#top-titlebar`、`#w-close` | 窗口按钮，关闭键保留红色悬停 |
 
 弹窗默认用白色遮罩盖在页面上，深色主题下会透出底层文字。这里把遮罩换成半透明黑，面板换成`#2c313c`并加边框。
 

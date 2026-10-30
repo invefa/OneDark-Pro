@@ -688,10 +688,6 @@ footer,
     box-shadow: none;
 }
 
-.CodeMirror .CodeMirror-activeline-background {
-    background: rgba(171, 178, 191, 0.035) !important;
-}
-
 .CodeMirror .CodeMirror-matchingbracket {
     color: var(--accent) !important;
     border-bottom: 1px solid var(--accent);
@@ -714,6 +710,42 @@ footer,
 #toggle-sourceview-btn:hover,
 #outline-btn:hover {
     color: var(--fg-strong);
+}
+
+/* Window controls keep their own light chrome; the close button keeps the
+   red hover that Windows users expect. */
+#top-titlebar {
+    background: var(--bg-sidebar);
+    color: var(--fg-muted);
+    border-bottom: 1px solid var(--line-soft);
+}
+
+#top-titlebar .toolbar-icon.btn,
+#top-titlebar .btn {
+    background: transparent;
+    color: var(--fg-muted);
+}
+
+#top-titlebar .toolbar-icon.btn:hover,
+#top-titlebar .btn:hover {
+    background: var(--bg-hover);
+    color: var(--fg-strong);
+}
+
+#top-titlebar #w-close:hover {
+    background: #e81123 !important;
+    color: #ffffff !important;
+}
+
+#top-titlebar #w-minimize:hover,
+#top-titlebar #w-maximize:hover,
+#top-titlebar #w-restore:hover {
+    background: var(--bg-hover) !important;
+    color: var(--fg-strong) !important;
+}
+
+.typora-maxmized #w-restore {
+    height: 24px;
 }
 
 @media print {
