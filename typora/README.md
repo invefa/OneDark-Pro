@@ -70,7 +70,7 @@ Typora的菜单面板、偏好设置、右键菜单、弹窗不吃`--bg-color`�
 | `.ty-preferences` | 偏好设置窗口 |
 | `.modal-backdrop`、`.modal-content` | 保存提示等弹窗的遮罩与面板 |
 | `.CodeMirror div.CodeMirror-cursor` | 代码块光标，Typora默认画成黑色，改为强调蓝 |
-| `.CodeMirror-selected`、`.CodeMirror-selectedtext` | 代码块选中底色，只保留浏览器原生高亮 |
+| `.CodeMirror-selected` | 代码块选中底色，保留CodeMirror的矩形、关闭浏览器原生高亮 |
 
 弹窗默认用白色遮罩盖在页面上，深色主题下会透出底层文字。这里把遮罩换成半透明黑，面板换成`#2c313c`并加边框。
 
