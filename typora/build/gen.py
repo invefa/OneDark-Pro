@@ -735,6 +735,30 @@ footer,
     height: 24px;
 }}
 
+/* Typora's default buttons are light grey, which glares on a dark bar. Keep
+   the boxes flat and dark; the close button keeps the Windows red hover. */
+#w-minimize,
+#w-maximize,
+#w-restore,
+#w-close {{
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--fg-muted) !important;
+}}
+
+#w-minimize:hover,
+#w-maximize:hover,
+#w-restore:hover {{
+    background: var(--bg-hover) !important;
+    color: var(--fg-strong) !important;
+}}
+
+#top-titlebar #w-close:hover {{
+    background: #e81123 !important;
+    color: #ffffff !important;
+}}
+
 @media print {{
     html, body, #write {{
         background: #ffffff;
