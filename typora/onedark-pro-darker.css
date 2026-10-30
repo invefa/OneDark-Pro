@@ -198,6 +198,15 @@ pre:not(.CodeMirror-line) {
     color: var(--fg-faint);
 }
 
+/* A fence carries two selection layers: CodeMirror draws its own band and the
+   browser paints ::selection over the glyphs. The CodeMirror band spans the
+   whole line box and starts one character before the text at the line head,
+   so it is the one to remove; the native highlight follows the glyphs. */
+.md-fences .CodeMirror-selected,
+.md-fences .CodeMirror-selectedtext {
+    background: transparent !important;
+}
+
 /* Typora paints the CodeMirror caret black by default; the fence and the
    source-mode editor each carry their own rule, so both are overridden. */
 .md-fences .CodeMirror div.CodeMirror-cursor,
