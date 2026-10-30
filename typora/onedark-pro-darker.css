@@ -717,19 +717,25 @@ footer,
 #top-titlebar {
     background: var(--bg-sidebar);
     color: var(--fg-muted);
-    border-bottom: 1px solid var(--line-soft);
 }
 
-#top-titlebar .toolbar-icon.btn,
-#top-titlebar .btn {
-    background: transparent;
-    color: var(--fg-muted);
+/* The three window buttons carry a light bootstrap background; forcing it
+   transparent by id keeps the default box and only changes the colours. */
+#w-minimize,
+#w-maximize,
+#w-restore,
+#w-close {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--fg-muted) !important;
 }
 
-#top-titlebar .toolbar-icon.btn:hover,
-#top-titlebar .btn:hover {
-    background: var(--bg-hover);
-    color: var(--fg-strong);
+#w-minimize:hover,
+#w-maximize:hover,
+#w-restore:hover {
+    background: var(--bg-hover) !important;
+    color: var(--fg-strong) !important;
 }
 
 #top-titlebar #w-close:hover {
@@ -742,10 +748,6 @@ footer,
 #top-titlebar #w-restore:hover {
     background: var(--bg-hover) !important;
     color: var(--fg-strong) !important;
-}
-
-.typora-maxmized #w-restore {
-    height: 24px;
 }
 
 @media print {
