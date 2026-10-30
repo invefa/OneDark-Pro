@@ -724,15 +724,13 @@ footer,
     color: var(--fg-strong);
 }}
 
-/* The three window buttons keep Typora's own colours; only their box height
-   is aligned with the 24px bar so the coloured bar ends on the same line. */
+/* Typora draws the bar 24px tall but the window buttons 28px tall. The bar
+   is raised to the button height instead of shrinking the buttons: the two
+   then share one bottom edge without touching Typora's own control sizing. */
 #top-titlebar {{
+    height: 28px;
     background: var(--bg-sidebar);
     color: var(--fg-muted);
-}}
-
-#top-titlebar .toolbar-icon.btn {{
-    height: 24px;
 }}
 
 /* Typora's default buttons are light grey, which glares on a dark bar. Keep
