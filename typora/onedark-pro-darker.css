@@ -556,17 +556,17 @@ figcaption, .md-image > .md-meta {
     color: var(--fg-muted);
 }
 
-/* Selection is scoped to the CodeMirror classes, not to .md-fences: at run
-   time the fence wrapper is not the editor's parent, so a fence-scoped rule
-   never matches and Typora keeps its default light-blue band. Both layers get
-   the same tone so their overlap reads as a single rectangle. */
-.CodeMirror-selected,
-.CodeMirror-selectedtext {
-    background: var(--select-text-bg-color) !important;
+/* A fence carries two CodeMirror selection layers at once: an absolutely
+   positioned div covering the line box, and per-token spans hugging the
+   glyphs. The div is taller and starts before the text, so it reads as a
+   second rectangle; only the span layer keeps the colour. Both selectors are
+   unscoped because the fence wrapper is not the editor's ancestor at runtime. */
+.CodeMirror-selected {
+    background: transparent !important;
 }
 
-.CodeMirror-selected {
-    box-shadow: none;
+.CodeMirror-selectedtext {
+    background: var(--select-text-bg-color) !important;
 }
 
 @media print {
