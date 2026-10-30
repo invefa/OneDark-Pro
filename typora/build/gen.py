@@ -200,23 +200,23 @@ pre:not(.CodeMirror-line) {{
     margin: 1.1em 0;
 }}
 
-.md-fences .CodeMirror {{
+.CodeMirror {{
     background: transparent;
     color: var(--fg);
 }}
 
-.md-fences .CodeMirror-gutters {{
+.CodeMirror-gutters {{
     background: transparent;
     border-right: 1px solid var(--line-soft);
 }}
 
-.md-fences .CodeMirror-linenumber {{
+.CodeMirror-linenumber {{
     color: var(--fg-faint);
 }}
 
 /* Typora paints the CodeMirror caret black by default; the fence and the
    source-mode editor each carry their own rule, so both are overridden. */
-.md-fences .CodeMirror div.CodeMirror-cursor,
+.CodeMirror div.CodeMirror-cursor,
 .CodeMirror.cm-s-typora-default div.CodeMirror-cursor {{
     border-left: 2px solid var(--cursor) !important;
 }}
@@ -582,6 +582,153 @@ figcaption, .md-image > .md-meta {{
 
 .CodeMirror-selectedtext {{
     background: var(--select-text-bg-color) !important;
+}}
+
+
+/* ---------------------------------------------------------------
+   Editor shell surfaces that carry their own light backgrounds.
+   --------------------------------------------------------------- */
+
+#file-library,
+#file-library-tree,
+#file-library-list,
+.ty-search-item {{
+    background: var(--bg-sidebar);
+    color: var(--fg-muted);
+}}
+
+.file-node-content:hover,
+.file-list-item:hover,
+.ty-search-item-line:hover {{
+    background: var(--bg-hover);
+    color: var(--fg-strong);
+}}
+
+.file-list-item.active,
+.file-node-content.active {{
+    background: var(--bg-hover);
+    color: var(--fg-strong);
+}}
+
+.sidebar-tabs,
+#ty-sidebar-search-tabs {{
+    border-bottom: 1px solid var(--line-soft);
+}}
+
+.sidebar-tab,
+.sidebar-tabs a {{
+    color: var(--fg-muted);
+}}
+
+.sidebar-tab.active,
+.sidebar-tabs a.active {{
+    color: var(--fg-strong);
+    border-bottom-color: var(--accent);
+}}
+
+#outline-content .outline-item {{
+    color: var(--fg-muted);
+}}
+
+#outline-content .outline-item:hover {{
+    background: var(--bg-hover);
+    color: var(--fg-strong);
+}}
+
+#outline-content .outline-active {{
+    color: var(--fg-strong);
+}}
+
+#md-searchpanel {{
+    background: var(--bg-code);
+    border-bottom: 1px solid var(--line-soft);
+    box-shadow: none;
+    color: var(--fg);
+}}
+
+#md-searchpanel input {{
+    background: var(--bg);
+    border: 1px solid var(--line-soft);
+    color: var(--fg);
+}}
+
+#md-searchpanel .btn {{
+    color: var(--fg-muted);
+}}
+
+#md-searchpanel .btn:hover {{
+    color: var(--fg-strong);
+}}
+
+.md-search-hit,
+.cm-search-hit {{
+    background: rgba(229, 192, 123, 0.26) !important;
+    color: inherit !important;
+}}
+
+footer,
+#footer-word-count {{
+    background: transparent;
+    color: var(--fg-dim);
+}}
+
+#footer-word-count-info {{
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    color: var(--fg);
+}}
+
+#typora-quick-open {{
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+}}
+
+#typora-quick-open-input {{
+    background: var(--bg-code);
+    border: 1px solid var(--line-soft);
+    color: var(--fg);
+}}
+
+.typora-quick-open-item:hover,
+.typora-quick-open-item.active {{
+    background: var(--bg-hover);
+    color: var(--fg-strong);
+}}
+
+.ty-tooltip {{
+    background: var(--bg-raised);
+    color: var(--fg);
+    border: 1px solid var(--line);
+    box-shadow: none;
+}}
+
+.CodeMirror .CodeMirror-activeline-background {{
+    background: rgba(171, 178, 191, 0.035) !important;
+}}
+
+.CodeMirror .CodeMirror-matchingbracket {{
+    color: var(--accent) !important;
+    border-bottom: 1px solid var(--accent);
+}}
+
+.CodeMirror .CodeMirror-matchingbracket::selection {{
+    background: transparent;
+}}
+
+#typora-source .CodeMirror {{
+    background: var(--bg);
+    color: var(--fg);
+}}
+
+#toggle-sourceview-btn,
+#outline-btn {{
+    color: var(--fg-muted);
+}}
+
+#toggle-sourceview-btn:hover,
+#outline-btn:hover {{
+    color: var(--fg-strong);
 }}
 
 @media print {{

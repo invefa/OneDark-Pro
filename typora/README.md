@@ -71,8 +71,18 @@ Typora的菜单面板、偏好设置、右键菜单、弹窗不吃`--bg-color`�
 | `.modal-backdrop`、`.modal-content` | 保存提示等弹窗的遮罩与面板 |
 | `.CodeMirror div.CodeMirror-cursor` | 代码块光标，Typora默认画成黑色，改为强调蓝 |
 | `.CodeMirror-selected`、`.CodeMirror-selectedtext` | 代码块选中。块层与逐字层会同时存在，只保留逐字层 |
+| `#file-library`、`.file-list-item` | 侧栏文件树与悬停、选中态 |
+| `#outline-content` | 大纲面板 |
+| `#md-searchpanel`、`.md-search-hit` | 查找面板与命中高亮 |
+| `#footer-word-count` | 底部字数栏 |
+| `#typora-quick-open` | 快速打开 |
+| `.ty-tooltip` | 悬停提示 |
+| `.CodeMirror-activeline-background`、`.CodeMirror-matchingbracket` | 活动行与括号匹配 |
+| `#typora-source` | 源码视图 |
 
 弹窗默认用白色遮罩盖在页面上，深色主题下会透出底层文字。这里把遮罩换成半透明黑，面板换成`#2c313c`并加边框。
+
+代码块里的规则统一挂在`.CodeMirror`相关的类上，不带`.md-fences`前缀。围栏容器在运行时不是编辑器的父级，带前缀的选择器不会命中，这一点在选中层的问题上验证过。
 
 ## 五、边界
 
