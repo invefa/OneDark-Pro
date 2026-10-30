@@ -724,11 +724,9 @@ footer,
     color: var(--fg-strong);
 }}
 
-/* Typora draws the bar 24px tall but the window buttons 28px tall. The bar
-   is raised to the button height instead of shrinking the buttons: the two
-   then share one bottom edge without touching Typora's own control sizing. */
+/* Bar height and the window buttons keep Typora's own sizing; only the
+   colours are set here. */
 #top-titlebar {{
-    height: 28px;
     background: var(--bg-sidebar);
     color: var(--fg-muted);
 }}
