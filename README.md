@@ -162,6 +162,7 @@ Darker只动了底色这一层，31个键整体下移一档。
 | [dsh/](dsh/README.md) | 把同一套色板套到DSH聊天界面的客户端插件 |
 | [codex/](codex/README.md) | Codex桌面版的外观参数与合并脚本 |
 | [typora/](typora/README.md) | Typora主题，正文比例字体、代码Cascadia Mono |
+| [opencode/](opencode/README.md) | OpenCode主题，Darker色板的自定义主题JSON |
 
 在CSS里引入即可：
 
