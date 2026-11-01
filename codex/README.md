@@ -43,7 +43,7 @@ python codex\apply.py
 
 - 代码块主题是应用内置的，只有id可选，没有自定义入口。`appearanceDarkCodeThemeId`当前是`one`，具体对应哪套主题由应用自己校验，填错会被忽略。要换在设置的APPEARANCE页里选。
 - 只配了深色外观。`[desktop.appearanceLightChromeTheme]`与`appearanceLightCodeThemeId`没动。
-- 其余应用内部的硬编码色不在这些键的管辖范围内，改不动。
+- 其余应用内部的硬编码色不在这些键的管辖范围内，改不动。文档预览里的行内代码底色就是其一：样式表里写死成`color-mix(in oklab, #fff 3%, transparent)`，不读surface、ink或contrast，配置层没有对应键。
 - 中英混排能否列对齐取决于字体本身。`Microsoft YaHei Mono`的汉字宽度是数字的1.82倍，不是严格的2倍；VSCode里能对齐是因为Monaco编辑器按两列处理CJK，普通网页文本没有这一步。用`Cascadia Mono`而不是`Cascadia Code`，后者带编程连字（`=>`、`!=`），容易和符号混淆。
 
 ## 四、文件
