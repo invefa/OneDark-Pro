@@ -508,6 +508,14 @@ figcaption, .md-image > .md-meta {{
     box-shadow: none;
 }}
 
+/* Typora zeroes the footer button border only while it is not hovered, so a
+   hover adds a 1px border and the dialog grows by 2px. Keep one width in both
+   states so the box never changes size. */
+.modal-footer .btn-default,
+.modal-content .btn-default {{
+    border: 1px solid var(--line-soft) !important;
+}}
+
 .modal-content .btn-primary {{
     background-color: var(--accent);
     color: #ffffff;
