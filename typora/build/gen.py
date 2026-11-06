@@ -1,6 +1,7 @@
 """Generate the Typora theme from the shared palette JSON."""
 
 import json
+import re
 import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -351,7 +352,7 @@ figcaption, .md-image > .md-meta {{
 }}
 
 ::-webkit-scrollbar-thumb:hover {{
-    background: var(--line-strong);
+    background: var(--line);
 }}
 
 ::-webkit-scrollbar-track {{
@@ -462,7 +463,7 @@ figcaption, .md-image > .md-meta {{
 }}
 
 .dropdown-menu:not(.megamenu-menu-list) {{
-    background-color: var(--bg-raised);
+    background-color: var(--bg-raise);
     color: var(--fg);
     border: 1px solid var(--line);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
@@ -483,7 +484,7 @@ figcaption, .md-image > .md-meta {{
 }}
 
 .modal-content {{
-    background: var(--bg-raised);
+    background: var(--bg-raise);
     color: var(--fg);
     border: 1px solid var(--line);
     border-radius: 4px;
@@ -547,7 +548,7 @@ figcaption, .md-image > .md-meta {{
 }}
 
 .modal-content {{
-    background-color: var(--bg-raised) !important;
+    background-color: var(--bg-raise) !important;
     border: 1px solid var(--line) !important;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55) !important;
 }}
@@ -670,13 +671,13 @@ footer,
 }}
 
 #footer-word-count-info {{
-    background: var(--bg-raised);
+    background: var(--bg-raise);
     border: 1px solid var(--line);
     color: var(--fg);
 }}
 
 #typora-quick-open {{
-    background: var(--bg-raised);
+    background: var(--bg-raise);
     border: 1px solid var(--line);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
 }}
@@ -694,7 +695,7 @@ footer,
 }}
 
 .ty-tooltip {{
-    background: var(--bg-raised);
+    background: var(--bg-raise);
     color: var(--fg);
     border: 1px solid var(--line);
     box-shadow: none;
@@ -832,4 +833,12 @@ css = TEMPLATE.format(
 
 with open(OUT, "w", encoding="utf-8", newline="\n") as fh:
     fh.write(css)
+# Guard: a var() that is never defined becomes invalid at computed-value time,
+# which silently turns the property into its initial value (transparent menus).
+_defined = set(re.findall(r"(--[a-z0-9-]+)\s*:", css))
+_used = set(re.findall(r"var\((--[a-z0-9-]+)", css))
+_undefined = sorted(_used - _defined)
+if _undefined:
+    raise SystemExit("undefined css variables: " + ", ".join(_undefined))
+
 print("wrote", OUT, len(css.encode("utf-8")), "bytes")
