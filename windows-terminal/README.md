@@ -28,7 +28,7 @@ python windows-terminal\apply.py
 |---|---|---|
 | `background` | `#23272E` | 编辑器底 |
 | `foreground` | `#ABB2BF` | 正文 |
-| `cursorColor` | `#528BFF` | 光标，与VS Code一致 |
+| `cursorColor` | `#ABB2BF` | 光标与正文字同色，不抢视线 |
 | `selectionBackground` | `#3E4452` | 选中底色用分隔线灰，不用亮色块 |
 | `black` / `white` | `#3F4451` / `#D7DAE0` | |
 | `red`/`green`/`yellow`/`blue` | `#E05561`/`#8CC265`/`#D18F52`/`#4AA5F0` | 取自主题的终端色，不是编辑器语法色 |
