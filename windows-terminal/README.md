@@ -50,9 +50,9 @@ python windows-terminal\apply.py
 
 ### 语法色变体
 
-仓库里另有一份`One Dark Pro Darker Syntax`，十六个槽位全部取编辑器语法色，用来和默认的混合方案对比。
+`One Dark Pro Darker Syntax`反过来组合：常规八色取编辑器语法色，亮色八色取默认方案的常规色（终端色）。终端色更饱和，放在亮色位负责强调，常规位则保持编辑器里的语义色。
 
-| 槽位 | 终端色方案 | 语法色方案 |
+| 槽位 | 默认方案 | 语法色方案 |
 |---|---|---|
 | red | `#E05561` | `#E06C75` |
 | green | `#8CC265` | `#98C379` |
@@ -60,8 +60,10 @@ python windows-terminal\apply.py
 | blue | `#4AA5F0` | `#61AFEF` |
 | purple | `#C162DE` | `#C678DD` |
 | cyan | `#42B3C2` | `#56B6C2` |
-| white | `#D7DAE0` | `#ABB2BF` |
-| brightBlack | `#4F5666` | `#7F848E` |
+| white | `#ABB2BF` | `#ABB2BF` |
+| brightRed | `#E06C75` | `#E05561` |
+| brightBlue | `#61AFEF` | `#4AA5F0` |
+| brightWhite | `#C2CAD9` | `#D7DAE0` |
 
 切换方式：`设置 - 配色方案`里选另一个，或者把`profiles.defaults.colorScheme`改成`"One Dark Pro Darker Syntax"`。`apply.py`只负责把两个方案写进去，不改变当前选中的是哪个。
 

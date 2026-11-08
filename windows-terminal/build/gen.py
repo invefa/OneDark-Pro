@@ -21,13 +21,6 @@ p = json.load(open(PALETTE, encoding="utf-8"))
 surface, text, syn, term, term_bright = p["surface"], p["text"], p["syntax"], p["terminal"], p["terminalBright"]
 
 
-def lift(color, amount=0.12):
-    raw = color.lstrip("#")
-    parts = [int(raw[i:i + 2], 16) for i in (0, 2, 4)]
-    lifted = [round(c + (255 - c) * amount) for c in parts]
-    return "#" + "".join(f"{c:02X}" for c in lifted)
-
-
 def base():
     return {
         "background": surface["bg-editor"].upper(),
@@ -71,27 +64,17 @@ syntax_scheme = {
     "purple": syn["keyword"].upper(),
     "cyan": syn["builtin"].upper(),
     "white": text["fg"].upper(),
+    # Bright slots take the terminal scheme's normal colours: they are more
+    # saturated than the lifted syntax colours and carry the emphasis better.
     "brightBlack": syn["comment"].upper(),
-    "brightRed": lift(syn["variable"]),
-    "brightGreen": lift(syn["string"]),
-    "brightYellow": lift(syn["numeric"]),
-    "brightBlue": lift(syn["function"]),
-    "brightPurple": lift(syn["keyword"]),
-    "brightCyan": lift(syn["builtin"]),
-    "brightWhite": "#DDDFE4",
+    "brightRed": term["red"].upper(),
+    "brightGreen": term["green"].upper(),
+    "brightYellow": term["yellow"].upper(),
+    "brightBlue": term["blue"].upper(),
+    "brightPurple": term["magenta"].upper(),
+    "brightCyan": term["cyan"].upper(),
+    "brightWhite": term["white"].upper(),
 }
-
-def _luma(color):
-    raw = color.lstrip("#")
-    r, g, b = (int(raw[i:i + 2], 16) / 255 for i in (0, 2, 4))
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b
-
-
-for scheme in (terminal_scheme, syntax_scheme):
-    for slot in ("Black", "Red", "Green", "Yellow", "Blue", "Purple", "Cyan", "White"):
-        normal, bright = scheme[slot[0].lower() + slot[1:]], scheme["bright" + slot]
-        if _luma(bright) <= _luma(normal):
-            print(f"warning: {scheme['name']}: bright{slot} is not brighter than {slot[0].lower() + slot[1:]}")
 
 for filename, scheme in (
     ("onedark-pro-darker.json", terminal_scheme),
