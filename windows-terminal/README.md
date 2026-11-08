@@ -44,7 +44,7 @@ python windows-terminal\apply.py
 | `background` | `#23272E` |
 | `foreground` | `#ABB2BF` |
 | `cursorColor` | `#ABB2BF` |
-| `selectionBackground` | `#3E4452` |
+| `selectionBackground` | `#C2CAD9` | 旧One Dark方案的浅色块，语法色方案仍用`#3E4452` |
 
 生成脚本会校验每一对亮色确实比常规色亮，不满足就打警告，避免出现“亮色比常规色还暗”的倒挂。
 
