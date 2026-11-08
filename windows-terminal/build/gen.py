@@ -5,9 +5,9 @@ Two schemes are emitted:
   onedark-pro-darker.json          the theme's terminal palette (terminal.ansi*)
   onedark-pro-darker-syntax.json   the editor syntax colours, for comparison
 
-The terminal palette is the default; the syntax variant exists because editor
-colours are tuned for sparse highlighting and read pale on a full screen of
-output, so it is useful to switch between them and judge.
+The default scheme takes the vivid terminal colours for the normal slots and
+the editor syntax colours for the bright slots. The syntax variant keeps all
+sixteen slots on syntax colours, for comparison.
 """
 
 import json
@@ -47,15 +47,17 @@ terminal_scheme = {
     "blue": term["blue"].upper(),
     "purple": term["magenta"].upper(),
     "cyan": term["cyan"].upper(),
-    "white": term["white"].upper(),
-    "brightBlack": term_bright["bright-black"].upper(),
-    "brightRed": term_bright["bright-red"].upper(),
-    "brightGreen": term_bright["bright-green"].upper(),
-    "brightYellow": term_bright["bright-yellow"].upper(),
-    "brightBlue": term_bright["bright-blue"].upper(),
-    "brightPurple": term_bright["bright-magenta"].upper(),
-    "brightCyan": term_bright["bright-cyan"].upper(),
-    "brightWhite": term_bright["bright-white"].upper(),
+    "white": text["fg"].upper(),
+    # Bright slots carry the editor syntax colours: the terminal set made the
+    # bright half look washed out next to the normal half.
+    "brightBlack": syn["comment"].upper(),
+    "brightRed": syn["variable"].upper(),
+    "brightGreen": syn["string"].upper(),
+    "brightYellow": syn["numeric"].upper(),
+    "brightBlue": syn["function"].upper(),
+    "brightPurple": syn["keyword"].upper(),
+    "brightCyan": syn["builtin"].upper(),
+    "brightWhite": "#C2CAD9",
 }
 
 syntax_scheme = {
@@ -78,6 +80,18 @@ syntax_scheme = {
     "brightCyan": lift(syn["builtin"]),
     "brightWhite": "#DDDFE4",
 }
+
+def _luma(color):
+    raw = color.lstrip("#")
+    r, g, b = (int(raw[i:i + 2], 16) / 255 for i in (0, 2, 4))
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+
+for scheme in (terminal_scheme, syntax_scheme):
+    for slot in ("Black", "Red", "Green", "Yellow", "Blue", "Purple", "Cyan", "White"):
+        normal, bright = scheme[slot[0].lower() + slot[1:]], scheme["bright" + slot]
+        if _luma(bright) <= _luma(normal):
+            print(f"warning: {scheme['name']}: bright{slot} is not brighter than {slot[0].lower() + slot[1:]}")
 
 for filename, scheme in (
     ("onedark-pro-darker.json", terminal_scheme),

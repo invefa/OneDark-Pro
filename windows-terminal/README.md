@@ -24,22 +24,33 @@ python windows-terminal\apply.py
 
 ## 二、参数
 
-| 键 | 值 | 说明 |
-|---|---|---|
-| `background` | `#23272E` | 编辑器底 |
-| `foreground` | `#ABB2BF` | 正文 |
-| `cursorColor` | `#ABB2BF` | 与正文字同色 |
-| `selectionBackground` | `#3E4452` | 分隔线灰，不用亮色块 |
-| `black` / `white` | `#3F4451` / `#D7DAE0` | |
-| `red` / `green` / `yellow` / `blue` | `#E05561` / `#8CC265` / `#D18F52` / `#4AA5F0` | 主题的终端色 |
-| `purple` / `cyan` | `#C162DE` / `#42B3C2` | |
-| `bright*` | 同系提亮 | `brightBlack` 为 `#4F5666` |
+默认方案`One Dark Pro Darker`把两套颜色合起来用：常规八色取主题的终端色（更鲜艳），亮色八色取编辑器语法色。
 
-终端色与语法色在One Dark Pro里是两套。终端那套（`#8CC265`、`#42B3C2`）比编辑器的语法色（`#98C379`、`#56B6C2`）暗一档，这是作者为整屏命令行输出做的调整；换成语法色后满屏输出会偏粉彩、发白，所以这里用终端色。
+| 常规 | 值 | 亮色 | 值 |
+|---|---|---|---|
+| black | `#3F4451` | brightBlack | `#7F848E` |
+| red | `#E05561` | brightRed | `#E06C75` |
+| green | `#8CC265` | brightGreen | `#98C379` |
+| yellow | `#D18F52` | brightYellow | `#D19A66` |
+| blue | `#4AA5F0` | brightBlue | `#61AFEF` |
+| purple | `#C162DE` | brightPurple | `#C678DD` |
+| cyan | `#42B3C2` | brightCyan | `#56B6C2` |
+| white | `#ABB2BF` | brightWhite | `#C2CAD9` |
+
+另有三项：
+
+| 键 | 值 |
+|---|---|
+| `background` | `#23272E` |
+| `foreground` | `#ABB2BF` |
+| `cursorColor` | `#ABB2BF` |
+| `selectionBackground` | `#3E4452` |
+
+生成脚本会校验每一对亮色确实比常规色亮，不满足就打警告，避免出现“亮色比常规色还暗”的倒挂。
 
 ### 语法色变体
 
-仓库里另有一份`One Dark Pro Darker Syntax`，十六个槽位取自编辑器语法色，用来和终端色那套对比。
+仓库里另有一份`One Dark Pro Darker Syntax`，十六个槽位全部取编辑器语法色，用来和默认的混合方案对比。
 
 | 槽位 | 终端色方案 | 语法色方案 |
 |---|---|---|
