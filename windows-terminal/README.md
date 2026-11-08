@@ -29,20 +29,13 @@ python windows-terminal\apply.py
 | `background` | `#23272E` | 编辑器底 |
 | `foreground` | `#ABB2BF` | 正文 |
 | `cursorColor` | `#ABB2BF` | 与正文字同色 |
-| `selectionBackground` | `#3E4452` | 分隔线灰 |
-| `black` / `white` | `#3F4451` / `#D7DAE0` | 中性色，取自主题终端色 |
-| `red` | `#E06C75` | 语法变量色 |
-| `green` | `#98C379` | 语法字符串色 |
-| `yellow` | `#E5C07B` | 语法类型色 |
-| `blue` | `#61AFEF` | 语法函数色 |
-| `purple` | `#C678DD` | 语法关键字色 |
-| `cyan` | `#56B6C2` | 语法内建色 |
-| `brightBlack` | `#7F848E` | 注释灰，对应SGR 90 |
-| `bright*` 其余 | 同色相提亮15% | |
+| `selectionBackground` | `#3E4452` | 分隔线灰，不用亮色块 |
+| `black` / `white` | `#3F4451` / `#D7DAE0` | |
+| `red` / `green` / `yellow` / `blue` | `#E05561` / `#8CC265` / `#D18F52` / `#4AA5F0` | 主题的终端色 |
+| `purple` / `cyan` | `#C162DE` / `#42B3C2` | |
+| `bright*` | 同系提亮 | `brightBlack` 为 `#4F5666` |
 
-ANSI 槽位用语法色，不用主题里的终端色（`#8CC265`、`#42B3C2` 那一组）。主题作者给终端另配了一套偏暗的颜色，命令行工具按色号取色时会比编辑器里的同语义颜色暗一档。
-
-`brightBlack` 对应 SGR `90`，clerk 用它画行号与辅助说明。这里填注释灰 `#7F848E`，与编辑器注释一致。
+终端色与语法色在One Dark Pro里是两套。终端那套（`#8CC265`、`#42B3C2`）比编辑器的语法色（`#98C379`、`#56B6C2`）暗一档，这是作者为整屏命令行输出做的调整；换成语法色后满屏输出会偏粉彩、发白，所以这里用终端色。
 
 ## 三、边界
 

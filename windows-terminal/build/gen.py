@@ -1,8 +1,8 @@
 """Generate the Windows Terminal scheme from the shared palette JSON.
 
-The ANSI slots use the editor syntax colours rather than the palette's terminal
-variant, so CLI output matches what the editor shows. Bright variants are the
-same hues lifted towards white; bright black carries the comment grey.
+The ANSI slots use the palette's terminal variant. One Dark Pro keeps a
+separate, slightly darker set for terminals; the editor syntax colours are
+pastel by comparison and read washed out in a full screen of output.
 """
 
 import json
@@ -30,20 +30,20 @@ scheme = {
     "cursorColor": text["fg"].upper(),
     "selectionBackground": surface["line-strong"].upper(),
     "black": term["black"].upper(),
-    "red": syn["variable"].upper(),
-    "green": syn["string"].upper(),
-    "yellow": syn["type"].upper(),
-    "blue": syn["function"].upper(),
-    "purple": syn["keyword"].upper(),
-    "cyan": syn["builtin"].upper(),
+    "red": term["red"].upper(),
+    "green": term["green"].upper(),
+    "yellow": term["yellow"].upper(),
+    "blue": term["blue"].upper(),
+    "purple": term["magenta"].upper(),
+    "cyan": term["cyan"].upper(),
     "white": term["white"].upper(),
-    "brightBlack": syn["comment"].upper(),
-    "brightRed": lift(syn["variable"]),
-    "brightGreen": lift(syn["string"]),
-    "brightYellow": lift(syn["type"]),
-    "brightBlue": lift(syn["function"]),
-    "brightPurple": lift(syn["keyword"]),
-    "brightCyan": lift(syn["builtin"]),
+    "brightBlack": term_bright["bright-black"].upper(),
+    "brightRed": term_bright["bright-red"].upper(),
+    "brightGreen": term_bright["bright-green"].upper(),
+    "brightYellow": term_bright["bright-yellow"].upper(),
+    "brightBlue": term_bright["bright-blue"].upper(),
+    "brightPurple": term_bright["bright-magenta"].upper(),
+    "brightCyan": term_bright["bright-cyan"].upper(),
     "brightWhite": term_bright["bright-white"].upper(),
 }
 
