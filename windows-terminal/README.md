@@ -4,9 +4,9 @@ One Dark Pro Darker的终端配色。装的是Windows Terminal的方案（scheme
 
 ## 一、安装
 
-方案文件是[onedark-pro-darker.json](onedark-pro-darker.json)。两种装法：
+方案文件有两份：终端色那份是默认，语法色那份作为对照。两种装法：
 
-脚本合并（推荐，自动备份）：
+脚本合并（推荐，两个方案一起写入并自动备份）：
 
 ```powershell
 python windows-terminal\apply.py
@@ -37,6 +37,25 @@ python windows-terminal\apply.py
 
 终端色与语法色在One Dark Pro里是两套。终端那套（`#8CC265`、`#42B3C2`）比编辑器的语法色（`#98C379`、`#56B6C2`）暗一档，这是作者为整屏命令行输出做的调整；换成语法色后满屏输出会偏粉彩、发白，所以这里用终端色。
 
+### 语法色变体
+
+仓库里另有一份`One Dark Pro Darker Syntax`，十六个槽位取自编辑器语法色，用来和终端色那套对比。
+
+| 槽位 | 终端色方案 | 语法色方案 |
+|---|---|---|
+| red | `#E05561` | `#E06C75` |
+| green | `#8CC265` | `#98C379` |
+| yellow | `#D18F52` | `#D19A66` |
+| blue | `#4AA5F0` | `#61AFEF` |
+| purple | `#C162DE` | `#C678DD` |
+| cyan | `#42B3C2` | `#56B6C2` |
+| white | `#D7DAE0` | `#ABB2BF` |
+| brightBlack | `#4F5666` | `#7F848E` |
+
+切换方式：`设置 - 配色方案`里选另一个，或者把`profiles.defaults.colorScheme`改成`"One Dark Pro Darker Syntax"`。`apply.py`只负责把两个方案写进去，不改变当前选中的是哪个。
+
+终端色与语法色不应混用：语法色是按稀疏高亮调的，整屏输出会发白；终端色按满屏文字调的，单独看比编辑器暗一档。要两者完全一致只能让程序输出真彩色，绕过终端方案。
+
 ## 三、边界
 
 - 只改配色。字体、字号、透明度、光标形状仍由`profiles.defaults`决定。
@@ -48,6 +67,7 @@ python windows-terminal\apply.py
 
 | 文件 | 内容 |
 |---|---|
-| [onedark-pro-darker.json](onedark-pro-darker.json) | 方案对象，可直接贴进settings.json |
+| [onedark-pro-darker.json](onedark-pro-darker.json) | 终端色方案 |
+| [onedark-pro-darker-syntax.json](onedark-pro-darker-syntax.json) | 语法色方案 |
 | [apply.py](apply.py) | 合并脚本，改前备份，重复执行不重复写 |
 | [build/gen.py](build/gen.py) | 读取色板生成方案 |

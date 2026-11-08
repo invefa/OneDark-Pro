@@ -1,0 +1,23 @@
+{
+    "name": "One Dark Pro Darker Syntax",
+    "background": "#23272E",
+    "foreground": "#ABB2BF",
+    "cursorColor": "#ABB2BF",
+    "selectionBackground": "#3E4452",
+    "black": "#3F4451",
+    "red": "#E06C75",
+    "green": "#98C379",
+    "yellow": "#D19A66",
+    "blue": "#61AFEF",
+    "purple": "#C678DD",
+    "cyan": "#56B6C2",
+    "white": "#ABB2BF",
+    "brightBlack": "#7F848E",
+    "brightRed": "#E47E86",
+    "brightGreen": "#A4CA89",
+    "brightYellow": "#D7A678",
+    "brightBlue": "#74B9F1",
+    "brightPurple": "#CD88E1",
+    "brightCyan": "#6ABFC9",
+    "brightWhite": "#DDDFE4"
+}

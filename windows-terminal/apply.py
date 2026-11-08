@@ -21,8 +21,12 @@ DEFAULT = os.path.join(
 NAME = "One Dark Pro Darker"
 OLD_NAMES = ("One Dark Pro",)
 
-SCHEME_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "onedark-pro-darker.json")
-SCHEME = json.load(open(SCHEME_FILE, encoding="utf-8"))
+HERE = os.path.dirname(os.path.abspath(__file__))
+SCHEMES = [
+    json.load(open(os.path.join(HERE, name), encoding="utf-8"))
+    for name in sorted(os.listdir(HERE))
+    if name.startswith("onedark-pro-darker") and name.endswith(".json")
+]
 
 
 def strip_jsonc(text):
@@ -74,8 +78,9 @@ def main():
     except json.JSONDecodeError:
         data = json.loads(strip_jsonc(raw))
 
-    schemes = [s for s in data.get("schemes") or [] if s.get("name") != NAME]
-    schemes.append(SCHEME)
+    names = {scheme["name"] for scheme in SCHEMES}
+    schemes = [s for s in data.get("schemes") or [] if s.get("name") not in names]
+    schemes.extend(SCHEMES)
     data["schemes"] = schemes
 
     def rewrite(node):
