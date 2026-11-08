@@ -33,7 +33,7 @@ def base():
         "background": surface["bg-editor"].upper(),
         "foreground": text["fg"].upper(),
         "cursorColor": text["fg"].upper(),
-        "selectionBackground": surface["line-strong"].upper(),
+        "selectionBackground": "#C2CAD9",
     }
 
 
@@ -59,11 +59,6 @@ terminal_scheme = {
     "brightCyan": syn["builtin"].upper(),
     "brightWhite": "#C2CAD9",
 }
-
-# Selection in the old One Dark scheme was a light block that reads as a
-# reversal of the page; Windows Terminal keeps the glyph colour, so the value
-# is taken from that scheme rather than from the line grey.
-terminal_scheme["selectionBackground"] = "#C2CAD9"
 
 syntax_scheme = {
     "name": "One Dark Pro Darker Syntax",
