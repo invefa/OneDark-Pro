@@ -161,6 +161,19 @@ body[data-ds-dark-theme] {
   --dsw-alias-file-diff-deleted-marker: #e06c75 !important;
 }
 
+/* Native controls (the language select and its popup) follow the
+   browser colour-scheme, which the app never declares, so they render
+   light. Declaring dark keeps the popup in the theme. */
+body[data-ds-dark-theme] {
+  color-scheme: dark;
+}
+
+body[data-ds-dark-theme] select,
+body[data-ds-dark-theme] option {
+  color: var(--dsw-alias-label-primary);
+  background-color: var(--dsw-alias-bg-base);
+}
+
 /* code font: same stack the editor uses on this platform */
 body[data-ds-dark-theme] {
   --ds-font-family-code: "Cascadia Mono", Consolas, "Microsoft YaHei Mono", monospace;

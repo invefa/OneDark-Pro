@@ -115,6 +115,14 @@ def build_css():
     out.append("")
     out.extend(site.token_block(DSH_ALIAS))
 
+    out.append("/* Native controls (the language select and its popup) follow the")
+    out.append("   browser colour-scheme, which the app never declares, so they render")
+    out.append("   light. Declaring dark keeps the popup in the theme. */")
+    out.append("{} {{\n  color-scheme: dark;\n}}".format(SCOPE))
+    out.append("")
+    out.append("{} select,\n{} option {{\n  color: var(--dsw-alias-label-primary);\n  background-color: var(--dsw-alias-bg-base);\n}}".format(SCOPE, SCOPE))
+    out.append("")
+
     out.append("/* code font: same stack the editor uses on this platform */")
     out.append("{} {{\n  --ds-font-family-code: {};\n  --dsh-font-family-code: {};\n}}".format(SCOPE, CODE_FONT, CODE_FONT))
     out.append("")
