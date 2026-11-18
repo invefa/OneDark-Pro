@@ -99,10 +99,10 @@ body[data-ds-dark-theme] {
   --dsw-alias-button-contrast-fill: #abb2bf !important;
   --dsw-alias-label-primary: #abb2bf !important;
   --dsw-alias-label-primary-dimmed: #9da5b4 !important;
-  --dsw-alias-label-secondary: #abb2bf !important;
-  --dsw-alias-label-tertiary: #abb2bf !important;
+  --dsw-alias-label-secondary: #9da5b4 !important;
+  --dsw-alias-label-tertiary: #8b939f !important;
   --dsw-alias-label-caption: #9da5b4 !important;
-  --dsw-alias-label-dimmed: #495162 !important;
+  --dsw-alias-label-dimmed: #7f848e !important;
   --dsw-alias-label-primary-foreground: #ffffff !important;
   --dsw-alias-label-primary-inverted: #23272e !important;
   --dsw-alias-markdown-code-block: #1e2227 !important;

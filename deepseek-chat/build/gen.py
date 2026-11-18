@@ -47,6 +47,7 @@ FG_UI = T["fg-ui"]
 FG_MUTED = T["fg-muted"]
 FG_DIM = T["fg-dim"]
 FG_FAINT = T["fg-faint"]
+FG_SOFT = "#8b939f"
 
 ACCENT = A["accent"]
 CURSOR = A["cursor"]
@@ -170,16 +171,15 @@ ALIAS = {
     "--dsw-alias-button-tool-bar-fill-invisible": "rgba(24, 26, 31, .36)",
     "--dsw-alias-button-contrast-fill": FG,
     # Text
-    # One Dark Pro keeps almost every UI text on #abb2bf and drops to #9da5b4
-    # only for status-like copy, so the site's four text levels collapse onto
-    # three: primary, secondary and tertiary all read as body text, while
-    # caption and dimmed carry the muted roles.
+    # Four readable text levels. Body stays on #abb2bf; secondary drops to the
+    # muted grey, tertiary to a mid grey that keeps 4.5:1 on the editor
+    # background, and dimmed to the comment grey so it is quiet but legible.
     "--dsw-alias-label-primary": FG,
     "--dsw-alias-label-primary-dimmed": FG_MUTED,
-    "--dsw-alias-label-secondary": FG,
-    "--dsw-alias-label-tertiary": FG,
+    "--dsw-alias-label-secondary": FG_MUTED,
+    "--dsw-alias-label-tertiary": FG_SOFT,
     "--dsw-alias-label-caption": FG_MUTED,
-    "--dsw-alias-label-dimmed": FG_FAINT,
+    "--dsw-alias-label-dimmed": GRAY,
     "--dsw-alias-label-primary-foreground": WHITE,
     "--dsw-alias-label-primary-inverted": EDITOR,
     # Markdown
