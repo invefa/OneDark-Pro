@@ -120,7 +120,10 @@ def build_css():
     out.append("   light. Declaring dark keeps the popup in the theme. */")
     out.append("{} {{\n  color-scheme: dark;\n}}".format(SCOPE))
     out.append("")
-    out.append("{} select,\n{} option {{\n  color: var(--dsw-alias-label-primary);\n  background-color: var(--dsw-alias-bg-base);\n}}".format(SCOPE, SCOPE))
+    out.append("{} select,\n{} option {{\n  color: var(--dsw-alias-label-primary);\n  background-color: var(--dsw-alias-bg-base);\n  color-scheme: dark;\n}}".format(SCOPE, SCOPE))
+    out.append("")
+    out.append("/* The plugin fields are native selects; without an explicit border they\n   inherit the light default from the browser. */")
+    out.append("{} select[class] {{\n  border: 1px solid var(--dsw-alias-border-l2);\n  border-radius: 3px;\n}}".format(SCOPE))
     out.append("")
 
     out.append("/* code font: same stack the editor uses on this platform */")

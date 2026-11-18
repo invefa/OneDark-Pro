@@ -172,6 +172,14 @@ body[data-ds-dark-theme] select,
 body[data-ds-dark-theme] option {
   color: var(--dsw-alias-label-primary);
   background-color: var(--dsw-alias-bg-base);
+  color-scheme: dark;
+}
+
+/* The plugin fields are native selects; without an explicit border they
+   inherit the light default from the browser. */
+body[data-ds-dark-theme] select[class] {
+  border: 1px solid var(--dsw-alias-border-l2);
+  border-radius: 3px;
 }
 
 /* code font: same stack the editor uses on this platform */
