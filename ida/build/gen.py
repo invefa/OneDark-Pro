@@ -260,11 +260,16 @@ def main():
     # dark is embedded rather than imported: an @importtheme by name does not
     # resolve between the user and install theme directories, and the interface
     # then falls back to the light default.
+    # drop the graph canvas colours from the embedded copy so only our block
+    # defines them
+    embedded = re.sub(
+        r"(?m)^\s*qproperty-graph-bg-(?:top|bottom)\s*:\s*[^;]+;\n", "", text
+    )
     listing = (
         header
         + "/* Listing variant: the shipped dark stylesheet verbatim, plus the\n"
         + "   One Dark disassembly block appended last so it wins. */\n\n"
-        + text
+        + embedded
         + "\n\n"
         + fixed_block
         + "\n"
