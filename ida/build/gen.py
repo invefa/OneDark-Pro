@@ -203,24 +203,22 @@ def main():
         fh.write(header + body)
     print("wrote", out, len(body), "chars")
 
-    # Listing-only variant: the interface keeps the shipped default look and
-    # only the disassembly view is recoloured.
+    # Listing-only variant: the shipped dark theme keeps the interface, only
+    # the disassembly view takes the One Dark colours.
     block = re.search(r"CustomIDAMemo\s*\{.*?\n\}", body, re.S)
     if not block:
         print("CustomIDAMemo block not found")
         return 1
     listing = (
         header
-        + "/* Listing-only variant: default chrome, recoloured disassembly. */\n\n"
-        + '@importtheme "_base";\n\n'
-        # the block carries ${dark_highlight_color}, defined by the dark theme
-        + "@def dark_highlight_color rgba(44, 49, 60, 0.86);\n\n"
+        + "/* Listing variant: the shipped dark theme covers the interface, the\n"
+        + "   disassembly view takes the One Dark colours. */\n\n"
+        + '@importtheme "dark";\n\n'
         + block.group(0)
         + "\n"
     )
-    refs = set(re.findall(r"\$\{([a-z0-9_]+)\}", listing))
-    defined = set(re.findall(r"@def\s+([a-z0-9_]+)", listing))
-    missing = sorted(refs - defined)
+    dark_defs = set(re.findall(r"@def\s+([a-z0-9_]+)", text))
+    missing = sorted(set(re.findall(r"\$\{([a-z0-9_]+)\}", listing)) - dark_defs)
     if missing:
         print("undefined variables:", missing)
         return 1
@@ -229,6 +227,7 @@ def main():
     with open(out2, "w", encoding="utf-8", newline="\n") as fh:
         fh.write(listing)
     print("wrote", out2, len(listing), "chars")
+    return 0
     return 0
 
 
