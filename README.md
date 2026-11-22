@@ -164,6 +164,7 @@ Darker只动了底色这一层，31个键整体下移一档。
 | [typora/](typora/README.md) | Typora主题，正文比例字体、代码Cascadia Mono |
 | [opencode/](opencode/README.md) | OpenCode主题，Darker色板的自定义主题JSON |
 | [windows-terminal/](windows-terminal/README.md) | Windows Terminal配色方案与合并脚本 |
+| [ida/](ida/README.md) | IDA Pro 9主题，界面与反汇编视图统一配色 |
 
 在CSS里引入即可：
 
