@@ -13,7 +13,7 @@ CustomIDAMemo
     qproperty-line-fg-regular-comment: #7f848e;
     qproperty-line-fg-repeatable-comment: #6b717d;
     qproperty-line-fg-automatic-comment: #6b717d;
-    qproperty-line-fg-insn: white;
+    qproperty-line-fg-insn: #abb2bf;
     qproperty-line-fg-dummy-data-name: #e5c07b;
     qproperty-line-fg-regular-data-name: #e5c07b;
     qproperty-line-fg-demangled-name: #e5c07b;
@@ -82,5 +82,5 @@ CustomIDAMemo
     qproperty-line-bg-bpt-enabled: #e06c75;
     qproperty-line-bg-bpt-disabled: #98c379;
     qproperty-line-bg-bpt-unavailable: #e06c75;
-    qproperty-bookmark-star-outline: white;
+    qproperty-bookmark-star-outline: #abb2bf;
 }

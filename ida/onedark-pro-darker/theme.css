@@ -50,11 +50,11 @@ DockWidget > QWidget > QAbstractButton
 chooser_widget_t,
 standalone_dirtree_widget_t
 {
-    qproperty-highlight-bg-default: red;
-    qproperty-highlight-bg-selected: pink;
+    qproperty-highlight-bg-default: #e06c75;
+    qproperty-highlight-bg-selected: #c678dd;
 
-    qproperty-cut-text-color-default : darkgrey;
-    qproperty-cut-text-color-selected : grey;
+    qproperty-cut-text-color-default : #6b717d;
+    qproperty-cut-text-color-selected : #6b717d;
 }
 
 log_widget_t
@@ -81,7 +81,7 @@ text_area_t QWidget
 text_area_t text_area_margin_widget_t
 {
     color: lightgrey;
-    qproperty-header-color: gainsboro;
+    qproperty-header-color: #dcdcdc;
 }
 
 QWidget
@@ -377,7 +377,7 @@ QTipLabel
 
 QWidget[field_validity=false]
 {
-    border-color: red;
+    border-color: #e06c75;
     border-width : 1.2px;
     border-style:inset;
 }
@@ -414,7 +414,7 @@ CustomIDAMemo
     qproperty-line-fg-regular-comment: #7f848e;
     qproperty-line-fg-repeatable-comment: #6b717d;
     qproperty-line-fg-automatic-comment: #6b717d;
-    qproperty-line-fg-insn: white;
+    qproperty-line-fg-insn: #abb2bf;
     qproperty-line-fg-dummy-data-name: #e5c07b;
     qproperty-line-fg-regular-data-name: #e5c07b;
     qproperty-line-fg-demangled-name: #e5c07b;
@@ -483,7 +483,7 @@ CustomIDAMemo
     qproperty-line-bg-bpt-enabled: #e06c75;
     qproperty-line-bg-bpt-disabled: #98c379;
     qproperty-line-bg-bpt-unavailable: #e06c75;
-    qproperty-bookmark-star-outline: white;
+    qproperty-bookmark-star-outline: #abb2bf;
 }
 
 CustomIDAMemo[debugging="true"]
@@ -499,7 +499,7 @@ CustomIDAMemo[hints="true"]
 TCpuRegs
 {
     background-color: #2c313c;
-    qproperty-register-defined: white;
+    qproperty-register-defined: #abb2bf;
     qproperty-register-changed: #e5c07b;
     qproperty-register-edited: #d19a66;
     qproperty-register-unavailable: #6b717d;
@@ -537,7 +537,7 @@ navband_t
     qproperty-hl-extern: #c678dd;
     qproperty-hl-lumina-function: #98c379;
 
-    qproperty-hl-outline : cyan;
+    qproperty-hl-outline : #56b6c2;
 
     qproperty-error: #e06c75;
     qproperty-gap: #3e4452;

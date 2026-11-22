@@ -176,6 +176,26 @@ LISTING_FIXES = {
 }
 
 
+NAMED = {
+    "white": PALETTE["fg"],
+    "gainsboro": PALETTE["strong"],
+    "grey": PALETTE["dim"],
+    "darkgrey": PALETTE["dim"],
+    "silver": PALETTE["muted"],
+    "red": PALETTE["red"],
+    "pink": PALETTE["purple"],
+    "cyan": PALETTE["cyan"],
+    "yellow": PALETTE["yellow"],
+    "maroon": PALETTE["red"],
+}
+
+
+def remap_named(theme_css):
+    """Qt colour names survive a hex-only pass; map them as well."""
+    pattern = r"(:\s*)(" + "|".join(NAMED) + r")(\s*;)"
+    return re.sub(pattern, lambda m: m.group(1) + NAMED[m.group(2)] + m.group(3), theme_css)
+
+
 def fix_listing(block):
     """The dark theme's listing background is a step darker than the editor."""
     for name, value in LISTING_FIXES.items():
@@ -211,7 +231,7 @@ def main():
         "This theme is based on the 'idaskins-dark' theme found\n  at <https://github.com/zyantific/IDASkins.git>",
         "One Dark Pro Darker. Rewritten from the shipped dark theme;\n  the selector structure comes from IDASkins.",
     )
-    body = remap(text)
+    body = remap_named(remap(text))
     raw_block = re.search(r"CustomIDAMemo\s*\{.*?\n\}", body, re.S)
     if not raw_block:
         print("CustomIDAMemo block not found")
