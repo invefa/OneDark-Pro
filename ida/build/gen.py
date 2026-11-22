@@ -170,8 +170,9 @@ def remap(theme_css):
 
 LISTING_FIXES = {
     "line-bg-default": "#23272e",
-    "graph-bg-top": "#23272e",
-    "graph-bg-bottom": "#23272e",
+    # the canvas sits one step below the node surface so the two stay distinct
+    "graph-bg-top": PALETTE["panel"],
+    "graph-bg-bottom": PALETTE["panel"],
     "graph-node-title-normal": "#dcdcdc",
     "line-bg-selected": "#3e4452",
     "line-bg-highlight": "rgba(44, 49, 60, 0.86)",
