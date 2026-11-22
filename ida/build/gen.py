@@ -198,6 +198,9 @@ def remap_named(theme_css):
 
 def fix_listing(block):
     """The dark theme's listing background is a step darker than the editor."""
+    if "background-color" not in block:
+        block = block.replace("{\n", "{\n    background-color: " + PALETTE["bg"] + ";\n", 1)
+
     for name, value in LISTING_FIXES.items():
         block = re.sub(
             r"(qproperty-" + name + r"\s*:\s*)[^;]+;",

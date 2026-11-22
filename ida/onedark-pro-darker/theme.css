@@ -408,6 +408,7 @@ CLIWidget > QGroupBox
 
 CustomIDAMemo
 {
+    background-color: #23272e;
     border: none;
 
     qproperty-line-fg-default: #abb2bf;
