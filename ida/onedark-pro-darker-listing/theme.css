@@ -4,6 +4,8 @@
 
 @importtheme "_base";
 
+@def dark_highlight_color rgba(44, 49, 60, 0.86);
+
 CustomIDAMemo
 {
     border: none;

@@ -213,9 +213,17 @@ def main():
         header
         + "/* Listing-only variant: default chrome, recoloured disassembly. */\n\n"
         + '@importtheme "_base";\n\n'
+        # the block carries ${dark_highlight_color}, defined by the dark theme
+        + "@def dark_highlight_color rgba(44, 49, 60, 0.86);\n\n"
         + block.group(0)
         + "\n"
     )
+    refs = set(re.findall(r"\$\{([a-z0-9_]+)\}", listing))
+    defined = set(re.findall(r"@def\s+([a-z0-9_]+)", listing))
+    missing = sorted(refs - defined)
+    if missing:
+        print("undefined variables:", missing)
+        return 1
     out2 = os.path.join(root, "onedark-pro-darker-listing", "theme.css")
     os.makedirs(os.path.dirname(out2), exist_ok=True)
     with open(out2, "w", encoding="utf-8", newline="\n") as fh:
