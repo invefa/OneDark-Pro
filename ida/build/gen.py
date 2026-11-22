@@ -175,7 +175,12 @@ LISTING_FIXES = {
     "graph-bg-bottom": PALETTE["panel"],
     "graph-node-title-normal": "#dcdcdc",
     "line-bg-selected": "#3e4452",
-    "line-bg-highlight": "rgba(44, 49, 60, 0.86)",
+    # the cursor line needs to read at a glance without washing out the text
+    "line-bg-highlight": "rgba(62, 68, 82, 0.95)",
+    # breakpoint bands are dark tints: a saturated fill hides the code
+    "line-bg-bpt-enabled": "#4a2b30",
+    "line-bg-bpt-disabled": "#2b3a2f",
+    "line-bg-bpt-unavailable": "#3a3226",
     "caret": "#528bff",
 }
 

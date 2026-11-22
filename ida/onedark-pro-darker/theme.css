@@ -480,10 +480,10 @@ CustomIDAMemo
     qproperty-graph-node-frame-selected: #d19a66;
     qproperty-line-fg-patched-bytes: #6b717d;
     qproperty-line-fg-unsaved-changes: #e06c75;
-    qproperty-line-bg-highlight: rgba(44, 49, 60, 0.86);
-    qproperty-line-bg-bpt-enabled: #e06c75;
-    qproperty-line-bg-bpt-disabled: #98c379;
-    qproperty-line-bg-bpt-unavailable: #e06c75;
+    qproperty-line-bg-highlight: rgba(62, 68, 82, 0.95);
+    qproperty-line-bg-bpt-enabled: #4a2b30;
+    qproperty-line-bg-bpt-disabled: #2b3a2f;
+    qproperty-line-bg-bpt-unavailable: #3a3226;
     qproperty-bookmark-star-outline: #abb2bf;
 }
 
