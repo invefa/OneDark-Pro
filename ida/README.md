@@ -29,7 +29,7 @@ IDA 9的颜色分两层，都存在这个主题文件里：
 | `onedark-pro-darker` | 界面与反汇编视图 | 整套深色，界面与编辑器一致 |
 | `onedark-pro-darker-listing` | 只改反汇编视图 | 界面沿用IDA自带的`dark`主题，只有代码区换成One Dark配色 |
 
-两个文件夹都放进主题目录，在`Options - Colors - Theme`里切换。第二个版本`@importtheme "dark"`继承IDA自带深色界面，只覆盖`CustomIDAMemo`的列表配色，所以界面是IDA原本的深灰，不至于和代码区割裂。
+两个文件夹都放进主题目录，在`Options - Colors - Theme`里切换。第二个版本把IDA自带的`dark`主题整份嵌进来，末尾追加我们的`CustomIDAMemo`块覆盖列表配色。没有用`@importtheme "dark"`，因为按名字引用跨不过用户主题目录与安装目录，界面会退回浅色默认。
 
 ## 三、颜色对应
 

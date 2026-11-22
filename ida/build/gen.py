@@ -251,19 +251,18 @@ def main():
     # Listing-only variant: the shipped dark theme keeps the interface, only
     # the disassembly view takes the One Dark colours.
     block = type("M", (), {"group": staticmethod(lambda _i: fixed_block)})()
+    # dark is embedded rather than imported: an @importtheme by name does not
+    # resolve between the user and install theme directories, and the interface
+    # then falls back to the light default.
     listing = (
         header
-        + "/* Listing variant: the shipped dark theme covers the interface, the\n"
-        + "   disassembly view takes the One Dark colours. */\n\n"
-        + '@importtheme "dark";\n\n'
-        + block.group(0)
+        + "/* Listing variant: the shipped dark stylesheet verbatim, plus the\n"
+        + "   One Dark disassembly block appended last so it wins. */\n\n"
+        + text
+        + "\n\n"
+        + fixed_block
         + "\n"
     )
-    dark_defs = set(re.findall(r"@def\s+([a-z0-9_]+)", text))
-    missing = sorted(set(re.findall(r"\$\{([a-z0-9_]+)\}", listing)) - dark_defs)
-    if missing:
-        print("undefined variables:", missing)
-        return 1
     out2 = os.path.join(root, "onedark-pro-darker-listing", "theme.css")
     os.makedirs(os.path.dirname(out2), exist_ok=True)
     with open(out2, "w", encoding="utf-8", newline="\n") as fh:
