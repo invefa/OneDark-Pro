@@ -138,9 +138,8 @@ body[data-ds-dark-theme] table {
 }
 
 /* A table's max-width is ignored while it is display: table, so the column box
-   is what keeps it inside the text column: full width, always scrollable. */
+   is what keeps it inside the text column: always scrollable, never wider. */
 body[data-ds-dark-theme] .md-table-wide {
-    width: 100%;
     max-width: 100%;
     overflow-x: auto;
 }
@@ -163,31 +162,51 @@ body[data-ds-dark-theme] table th {
 }
 """
 
-# Table width and cell wrapping are separate choices: the width decides how far
-# the table box reaches, the flow decides whether a long cell wraps or runs on.
+# Table width and cell wrapping are separate choices. The column box owns the
+# boundary: it is always scrollable and never wider than the text column, so a
+# table can never paint outside it. The width choice decides whether that box
+# spans the column or shrinks to the content; the flow choice decides whether
+# the table inside fills the box (so long cells wrap) or takes its own width.
 TABLE_SIZES = {
     "full": """
-body[data-ds-dark-theme] table {
+body[data-ds-dark-theme] .md-table-wide {
     width: 100%;
-    max-width: 100%;
-    table-layout: auto;
+}
+
+/* a short table still fills the column */
+body[data-ds-dark-theme] table {
+    min-width: 100%;
 }
 """,
     "content": """
+body[data-ds-dark-theme] .md-table-wide {
+    width: fit-content;
+    max-width: 100%;
+}
+
 body[data-ds-dark-theme] table {
-    width: max-content;
+    min-width: 0;
 }
 """,
 }
 
 TABLE_FLOWS = {
     "wrap": """
+body[data-ds-dark-theme] table {
+    width: 100%;
+    table-layout: auto;
+}
+
 body[data-ds-dark-theme] table :is(th, td) {
     white-space: normal;
     overflow-wrap: anywhere;
 }
 """,
     "scroll": """
+body[data-ds-dark-theme] table {
+    width: max-content;
+}
+
 body[data-ds-dark-theme] table :is(th, td) {
     white-space: nowrap;
 }
