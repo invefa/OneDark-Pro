@@ -63,8 +63,8 @@ DSH_ALIAS = {
     # line colour there, which reads heavy as a fill.
     "--dsw-alias-bg-layer-1": "#24272d",
     "--dsw-alias-bg-layer-2": "#262a31",
-    "--dsw-alias-bg-layer-3": "#262a31",
-    "--dsw-alias-bg-layer-4": "#2a2e35",
+    "--dsw-alias-bg-layer-3": "#2a2e35",
+    "--dsw-alias-bg-layer-4": "#2e323a",
     "--dsw-alias-bg-overlay": "#262a31",
     "--dsw-alias-bg-multi-select": "#2a2e35",
     "--dsw-alias-bg-module-platform": "#23272e",
@@ -148,10 +148,14 @@ body[data-ds-dark-theme] table th {
     font-weight: 600;
 }
 
-/* Counted inside tbody so the first data row stays clear: the header is a
-   row of its own, and counting from the table made that first row striped. */
-body[data-ds-dark-theme] table tbody tr:nth-child(2n) {
+/* Counted inside tbody and starting on the first row, so the first data row
+   is tinted and reads apart from the header. */
+body[data-ds-dark-theme] table tbody tr:nth-child(odd) {
     background: #262a31;
+}
+
+body[data-ds-dark-theme] table tbody tr:nth-child(even) {
+    background: transparent;
 }
 """
 

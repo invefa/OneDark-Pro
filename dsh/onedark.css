@@ -145,8 +145,8 @@ body[data-ds-dark-theme] {
   --dsw-alias-border-inverted2: #343943 !important;
   --dsw-alias-bg-layer-1: #24272d !important;
   --dsw-alias-bg-layer-2: #262a31 !important;
-  --dsw-alias-bg-layer-3: #262a31 !important;
-  --dsw-alias-bg-layer-4: #2a2e35 !important;
+  --dsw-alias-bg-layer-3: #2a2e35 !important;
+  --dsw-alias-bg-layer-4: #2e323a !important;
   --dsw-alias-bg-overlay: #262a31 !important;
   --dsw-alias-bg-multi-select: #2a2e35 !important;
   --dsw-alias-bg-module-platform: #23272e !important;
@@ -273,10 +273,14 @@ body[data-ds-dark-theme] table th {
     font-weight: 600;
 }
 
-/* Counted inside tbody so the first data row stays clear: the header is a
-   row of its own, and counting from the table made that first row striped. */
-body[data-ds-dark-theme] table tbody tr:nth-child(2n) {
+/* Counted inside tbody and starting on the first row, so the first data row
+   is tinted and reads apart from the header. */
+body[data-ds-dark-theme] table tbody tr:nth-child(odd) {
     background: #262a31;
+}
+
+body[data-ds-dark-theme] table tbody tr:nth-child(even) {
+    background: transparent;
 }
 
 /* reasoning row: a process column under the answer */
