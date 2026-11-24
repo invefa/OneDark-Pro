@@ -82,19 +82,33 @@ DSH_ALIAS = {
 # Table cells carry 10px 16px of padding from the frontend, which reads loose for
 # data rows. The class name is a build hash of @deepseek-ai/dsh-client-ui-chat.
 TABLE = """
-/* Tables follow GitHub markdown: a full cell border, a bold header with no
-   fill, and a fill on every other row. Values are ported from the dark
-   github-markdown stylesheet, with the border pulled in to this surface.
-   Selectors are plain elements because the frontend classes are build hashes. */
+/* Tables follow GitHub markdown: full cell borders, a bold header with no
+   fill, a fill on every other row, column widths from the content, and
+   tabular figures so number columns line up. The border and stripe tones are
+   pulled in from GitHub's own values to suit this darker surface.
+   Selectors are plain elements because the frontend classes are build hashes;
+   the first/last cell rules are restated because the frontend zeroes the
+   outer padding at a higher specificity. */
 body[data-ds-dark-theme] table {
     border-collapse: collapse;
     border-spacing: 0;
+    width: max-content;
+    max-width: 100%;
+    font-variant-numeric: tabular-nums;
 }
 
 body[data-ds-dark-theme] table :is(th, td) {
     padding: 5px 12px;
-    border: 1px solid #3a4049;
+    border: 1px solid #343943;
     min-width: 0;
+}
+
+body[data-ds-dark-theme] table :is(th:first-child, td:first-child) {
+    padding-left: 12px;
+}
+
+body[data-ds-dark-theme] table :is(th:last-child, td:last-child) {
+    padding-right: 12px;
 }
 
 body[data-ds-dark-theme] table th {
@@ -102,7 +116,7 @@ body[data-ds-dark-theme] table th {
 }
 
 body[data-ds-dark-theme] table tr:nth-child(2n) {
-    background: #2a2e35;
+    background: #262a31;
 }
 """
 
