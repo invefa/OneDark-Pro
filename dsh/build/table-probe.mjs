@@ -58,7 +58,8 @@ await sleep(800);
 
 const expr = `(() => {
     const table = document.querySelector("table");
-    const cell = document.querySelector("td:nth-child(2)");
+    const tables = [...document.querySelectorAll("table")];
+    const cell = document.querySelectorAll("table")[1] ? document.querySelectorAll("table")[1].querySelector("td") : null;
     const wrap = document.querySelector("._tableScroll_13jw0_199");
     const pick = (el, props) => {
         if (!el) return null;
@@ -70,7 +71,11 @@ const expr = `(() => {
         return out;
     };
     return {
-        table: pick(table, ["display", "width", "max-width", "overflow-x", "table-layout"]),
+        tables: tables.map((el) => pick(el, ["width", "max-width"])),
+        lastCell: pick(cell, ["white-space", "width"]),
+        onlyChild: cell ? cell.matches(":only-child") : null,
+        siblings: cell && cell.parentElement ? cell.parentElement.children.length : null,
+        ruleHit: cell ? cell.matches("body[data-ds-dark-theme] table :is(th, td):only-child") : null,
         wrap: pick(wrap, ["display", "width", "max-width", "overflow-x"]),
         cell: pick(cell, ["width", "white-space", "word-break", "overflow-wrap", "padding"]),
     };

@@ -122,8 +122,13 @@ body[data-ds-dark-theme] table :is(th, td) {
     white-space: nowrap;
 }
 
-/* A one-column table carries prose, not data, so it wraps instead of being
-   clipped by the nowrap above. */
+/* A one-column table carries prose, not data: it wraps and takes the column
+   width instead of running past it on a single line. */
+body[data-ds-dark-theme] table:has(:is(th, td):only-child) {
+    width: 100%;
+    max-width: 100%;
+}
+
 body[data-ds-dark-theme] table :is(th, td):only-child {
     white-space: normal;
 }
