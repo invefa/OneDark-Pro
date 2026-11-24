@@ -84,11 +84,10 @@ DSH_ALIAS = {
 # the control reads as plain text. The class names are build hashes, hence the
 # attribute and suffix selectors.
 CHOOSERS = """
-body[data-ds-dark-theme] button[class*="selector"],
+body[data-ds-dark-theme] [class*="selector"],
 body[data-ds-dark-theme] [role="dialog"] button[aria-haspopup] {
     border: 1px solid #343943;
     border-radius: var(--dsw-radius-md, 6px);
-    padding: 0 10px;
 }
 """
 
@@ -104,19 +103,18 @@ TABLE = """
    the first/last cell rules are restated because the frontend zeroes the
    outer padding at a higher specificity. */
 body[data-ds-dark-theme] table {
-    display: block;
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: max-content;
-    max-width: 100%;
-    overflow-x: auto;
     font-variant-numeric: tabular-nums;
+}
+
+/* The frontend hides the horizontal scrollbar until hover, which leaves a wide
+   table looking cut off. Keep the scroller available. */
+body[data-ds-dark-theme] .md-table-wide {
+    overflow-x: auto;
 }
 
 body[data-ds-dark-theme] table :is(th, td) {
     padding: 5px 12px;
     border: 1px solid #343943;
-    min-width: 0;
     white-space: nowrap;
 }
 
