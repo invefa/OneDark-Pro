@@ -214,10 +214,40 @@ body[data-ds-dark-theme] {
   --shiki-token-changed: #e5c07b !important;
 }
 
+/* Settings rows end in a bare button with aria-haspopup: no fill, no border, so
+   the control reads as plain text. The class names are build hashes, hence the
+   attribute and suffix selectors. */
 body[data-ds-dark-theme] [class*="selector"],
 body[data-ds-dark-theme] [role="dialog"] button[aria-haspopup] {
     border: 1px solid #343943;
     border-radius: var(--dsw-radius-md, 6px);
+}
+
+/* The palette section builds its chooser from the app's own Menu primitive; the
+   trigger only needs the surface the app gives its own selectors. */
+body[data-ds-dark-theme] .dsh-od-chooser {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    height: 36px;
+    padding: 0 14px;
+    border: 1px solid #343943;
+    border-radius: 6px;
+    background: var(--dsw-alias-bg-module-platform);
+    color: var(--dsw-alias-label-primary);
+    font: inherit;
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+body[data-ds-dark-theme] .dsh-od-chooser:hover {
+    background: var(--dsw-alias-interactive-bg-hover);
+}
+
+body[data-ds-dark-theme] .dsh-od-chevron {
+    flex: none;
+    color: var(--dsw-alias-label-tertiary);
 }
 
 /* reasoning row: a process column under the answer */

@@ -32,6 +32,15 @@ const window = {
     },
 };
 
+const primitives = {
+    Menu: function Menu(props) {
+        return { type: Menu, props };
+    },
+    IconChevronDownOutlineRegular: function Chevron(props) {
+        return { type: "svg", props: { ...props, children: [] } };
+    },
+};
+
 const React = {
     createElement: (type, props, ...children) => {
         const merged = { ...(props || {}), children: children.length === 1 ? children[0] : children };
@@ -43,6 +52,7 @@ const React = {
 };
 const requireStub = (name) => {
     if (name === "react") return React;
+    if (name === "@deepseek-ai/dsh-client-ui-primitives") return primitives;
     throw new Error("unexpected module: " + name);
 };
 
@@ -118,14 +128,20 @@ const walk = (node, out = []) => {
 
 const tree = sectionComponent();
 const nodes = walk(tree);
-const selects = nodes.filter((n) => n.type === "select");
-if (selects.length !== 2) throw new Error("expected two choosers, got " + selects.length);
-if (selects[0].props.value !== "grid") throw new Error("border chooser default is wrong");
-if (selects[1].props.value !== "after") throw new Error("stripe chooser default is wrong");
-const borderOptions = (selects[0].props.children || []).map((o) => o.props.value);
-const stripeOptions = (selects[1].props.children || []).map((o) => o.props.value);
-if (borderOptions.join() !== "grid,rows,none") throw new Error("border options: " + borderOptions.join());
-if (stripeOptions.join() !== "after,first,none") throw new Error("stripe options: " + stripeOptions.join());
+const menus = nodes.filter((n) => n.type === primitives.Menu);
+if (menus.length !== 2) throw new Error("expected two app menus, got " + menus.length);
+if (menus[0].props.selectedId !== "grid") throw new Error("border chooser default is wrong");
+if (menus[1].props.selectedId !== "after") throw new Error("stripe chooser default is wrong");
+const borderIds = menus[0].props.items.map((i) => i.id).join();
+const stripeIds = menus[1].props.items.map((i) => i.id).join();
+if (borderIds !== "grid,rows,none") throw new Error("border options: " + borderIds);
+if (stripeIds !== "after,first,none") throw new Error("stripe options: " + stripeIds);
+const triggers = menus.map((m) => m.props.anchor);
+if (triggers.some((t2) => !t2 || t2.type !== "button")) {
+    throw new Error("each menu needs a button anchor");
+}
+if (triggers[0].props.className !== "dsh-od-chooser") throw new Error("anchor class is wrong");
+if (triggers[0].props["aria-haspopup"] !== "menu") throw new Error("trigger is not a menu trigger");
 const swatches = nodes.filter((n) => n.type === "span").length;
 if (swatches < 12) throw new Error("palette swatches missing, got " + swatches);
 

@@ -27,6 +27,16 @@ window.__ModuleLoader__.load({
 
         var React = require("react");
         var h = React.createElement;
+        var primitives = null;
+        try {
+            primitives = require("@deepseek-ai/dsh-client-ui-primitives");
+        } catch (error) {
+            primitives = null;
+        }
+        var Menu = primitives && primitives.Menu ? primitives.Menu : null;
+        var Chevron = primitives && primitives.IconChevronDownOutlineRegular
+            ? primitives.IconChevronDownOutlineRegular
+            : null;
 
         var CSS = ${JSON.stringify(css)};
         var TAG_ID = ${JSON.stringify(TAG)};
@@ -134,31 +144,9 @@ window.__ModuleLoader__.load({
             ensureStyle("onedark-table", TABLE_TAG_ID, tableCss(state));
         }
 
-        // Matches the app's own chooser: 36px tall, hairline border, surface
-        // fill, chevron on the right, hover lightens the fill.
-        var CHEVRON = ${JSON.stringify("url(\"" + "data:image/svg+xml;charset=utf-8," + encodeURIComponent(
-            "<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'>" +
-            "<path d='M3 4.5 6 7.5 9 4.5' fill='none' stroke='#9da5b4' stroke-width='1.4' " +
-            "stroke-linecap='round' stroke-linejoin='round'/></svg>",
-        ) + "\"")};
-        var SELECT = {
-            appearance: "none",
-            WebkitAppearance: "none",
-            height: "36px",
-            minWidth: "148px",
-            padding: "0 32px 0 14px",
-            border: "1px solid var(--dsw-alias-border-l2)",
-            borderRadius: "6px",
-            background: "var(--dsw-alias-bg-module-platform)",
-            backgroundImage: CHEVRON,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "right 12px center",
-            color: "var(--dsw-alias-label-primary)",
-            font: "inherit",
-            fontSize: "14px",
-            lineHeight: "20px",
-            cursor: "pointer",
-        };
+        // The app exposes its own Menu primitive; the trigger borrows the
+        // surface the app gives its selectors. A native select keeps the row
+        // usable if that primitive is missing.
         var ROW = {
             display: "flex",
             alignItems: "center",
@@ -171,30 +159,73 @@ window.__ModuleLoader__.load({
         var TITLE = { fontSize: "14px", lineHeight: "20px", color: "var(--dsw-alias-label-primary)" };
         var DESC = { fontSize: "12px", lineHeight: "18px", color: "var(--dsw-alias-label-tertiary)" };
 
-        function paint(event, hot) {
-            var el = event.currentTarget;
-            el.style.background = hot
-                ? "var(--dsw-alias-interactive-bg-hover)"
-                : "var(--dsw-alias-bg-module-platform)";
-            el.style.backgroundImage = CHEVRON;
-            el.style.backgroundRepeat = "no-repeat";
-            el.style.backgroundPosition = "right 12px center";
+        var SELECT = {
+            height: "36px",
+            minWidth: "148px",
+            padding: "0 10px 0 14px",
+            border: "1px solid var(--dsw-alias-border-l2)",
+            borderRadius: "6px",
+            background: "var(--dsw-alias-bg-module-platform)",
+            color: "var(--dsw-alias-label-primary)",
+            font: "inherit",
+            fontSize: "14px",
+            lineHeight: "20px",
+            cursor: "pointer",
+        };
+
+        function labelOf(options, value) {
+            for (var i = 0; i < options.length; i += 1) {
+                if (options[i][0] === value) return options[i][1];
+            }
+            return value;
         }
 
         function Chooser(props) {
-            return h(
-                "select",
-                {
-                    value: props.value,
-                    onChange: props.onChange,
-                    style: SELECT,
-                    onMouseEnter: (event) => paint(event, true),
-                    onMouseLeave: (event) => paint(event, false),
-                },
-                props.options.map(function (option) {
-                    return h("option", { key: option[0], value: option[0] }, option[1]);
+            var state = React.useState(false);
+            var open = state[0];
+            var setOpen = state[1];
+            var current = labelOf(props.options, props.value);
+
+            if (Menu === null) {
+                return h(
+                    "select",
+                    {
+                        value: props.value,
+                        style: SELECT,
+                        onChange: function (event) { props.onChange(event.target.value); },
+                    },
+                    props.options.map(function (option) {
+                        return h("option", { key: option[0], value: option[0] }, option[1]);
+                    }),
+                );
+            }
+
+            return h(Menu, {
+                open: open,
+                onClose: function () { setOpen(false); },
+                items: props.options.map(function (option) {
+                    return { id: option[0], label: option[1] };
                 }),
-            );
+                selectedId: props.value,
+                onSelect: function (id) {
+                    setOpen(false);
+                    if (id !== props.value) props.onChange(id);
+                },
+                align: "end",
+                portal: true,
+                anchor: h(
+                    "button",
+                    {
+                        type: "button",
+                        className: "dsh-od-chooser",
+                        "aria-haspopup": "menu",
+                        "aria-expanded": open,
+                        onClick: function () { setOpen(!open); },
+                    },
+                    current,
+                    Chevron === null ? null : h(Chevron, { className: "dsh-od-chevron" }),
+                ),
+            });
         }
 
         function SettingRow(props) {
@@ -217,9 +248,9 @@ window.__ModuleLoader__.load({
             var setTable = tableState[1];
 
             function pick(axis, key) {
-                return function (event) {
+                return function (value) {
                     var next = Object.assign({}, table);
-                    next[axis] = event.target.value;
+                    next[axis] = value;
                     setTable(next);
                     writeSetting(axis === "border" ? BORDER_KEY : STRIPE_KEY, next[axis]);
                     applyTable(next);
