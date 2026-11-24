@@ -220,22 +220,27 @@ body[data-ds-dark-theme] {
   --shiki-token-changed: #e5c07b !important;
 }
 
-/* Tables follow GitHub: a rule under every row, no vertical lines, a bold
-   header with no fill. Selectors are plain elements on purpose, since the
-   frontend class names are build hashes that change between releases. */
+/* Tables follow GitHub markdown: a full cell border, a bold header with no
+   fill, and a fill on every other row. Values are ported from the dark
+   github-markdown stylesheet, with the border pulled in to this surface.
+   Selectors are plain elements because the frontend classes are build hashes. */
+body[data-ds-dark-theme] table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
 body[data-ds-dark-theme] table :is(th, td) {
     padding: 5px 12px;
-    border-bottom: 1px solid #3e4452;
+    border: 1px solid #3a4049;
     min-width: 0;
 }
 
 body[data-ds-dark-theme] table th {
     font-weight: 600;
-    border-bottom-color: #4a505c;
 }
 
-body[data-ds-dark-theme] table tbody tr:hover {
-    background: #262a31;
+body[data-ds-dark-theme] table tr:nth-child(2n) {
+    background: #2a2e35;
 }
 
 /* reasoning row: a process column under the answer */
