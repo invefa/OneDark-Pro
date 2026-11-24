@@ -134,28 +134,13 @@ TABLE_BASE = """
    first/last cell rules are restated because the frontend zeroes the outer
    padding at a higher specificity. */
 body[data-ds-dark-theme] table {
-    width: max-content;
     max-width: none;
     font-variant-numeric: tabular-nums;
 }
 
-body[data-ds-dark-theme] .md-table-wide {
-    overflow-x: auto;
-}
-
 body[data-ds-dark-theme] table :is(th, td) {
     padding: 5px 12px;
-    white-space: nowrap;
     max-width: none;
-}
-
-body[data-ds-dark-theme] table:has(:is(th, td):only-child) {
-    width: 100%;
-    max-width: 100%;
-}
-
-body[data-ds-dark-theme] table :is(th, td):only-child {
-    white-space: normal;
 }
 
 body[data-ds-dark-theme] table :is(th:first-child, td:first-child) {
@@ -170,6 +155,45 @@ body[data-ds-dark-theme] table th {
     font-weight: 600;
 }
 """
+
+# How a table that is wider than the column behaves: wrap folds the long cells
+# onto more lines and keeps the table inside the column; scroll keeps every cell
+# on one line and lets the table run past it, with a horizontal scroller.
+TABLE_FLOWS = {
+    "wrap": """
+body[data-ds-dark-theme] table {
+    width: 100%;
+    table-layout: auto;
+}
+
+body[data-ds-dark-theme] table :is(th, td) {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+""",
+    "scroll": """
+body[data-ds-dark-theme] table {
+    width: max-content;
+}
+
+body[data-ds-dark-theme] .md-table-wide {
+    overflow-x: auto;
+}
+
+body[data-ds-dark-theme] table :is(th, td) {
+    white-space: nowrap;
+}
+
+body[data-ds-dark-theme] table:has(:is(th, td):only-child) {
+    width: 100%;
+    max-width: 100%;
+}
+
+body[data-ds-dark-theme] table :is(th, td):only-child {
+    white-space: normal;
+}
+""",
+}
 
 TABLE_BORDERS = {
     "grid": """
@@ -218,6 +242,7 @@ TABLE_PARTS = {
     "base": TABLE_BASE,
     "borders": TABLE_BORDERS,
     "stripes": TABLE_STRIPES,
+    "flows": TABLE_FLOWS,
 }
 
 

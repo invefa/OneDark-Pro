@@ -100,6 +100,12 @@ if (sheet.textContent.includes("table tbody tr:nth-child(odd)")) {
 if (!table.textContent.includes("border: 1px solid #343943")) {
     throw new Error("default border axis is missing");
 }
+if (!table.textContent.includes("white-space: normal")) {
+    throw new Error("default flow must fold long cells");
+}
+if (table.textContent.includes("white-space: nowrap")) {
+    throw new Error("default flow must not scroll");
+}
 const oddBlock = /nth-child\(odd\)\s*\{([^}]*)\}/.exec(table.textContent);
 const evenBlock = /nth-child\(even\)\s*\{([^}]*)\}/.exec(table.textContent);
 if (!oddBlock || !oddBlock[1].includes("transparent")) {
@@ -129,9 +135,10 @@ const walk = (node, out = []) => {
 const tree = sectionComponent();
 const nodes = walk(tree);
 const menus = nodes.filter((n) => n.type === primitives.Menu);
-if (menus.length !== 2) throw new Error("expected two app menus, got " + menus.length);
+if (menus.length !== 3) throw new Error("expected three app menus, got " + menus.length);
 if (menus[0].props.selectedId !== "grid") throw new Error("border chooser default is wrong");
 if (menus[1].props.selectedId !== "after") throw new Error("stripe chooser default is wrong");
+if (menus[2].props.selectedId !== "wrap") throw new Error("flow chooser default is wrong");
 const borderIds = menus[0].props.items.map((i) => i.id).join();
 const stripeIds = menus[1].props.items.map((i) => i.id).join();
 if (borderIds !== "grid,rows,none") throw new Error("border options: " + borderIds);
@@ -141,6 +148,8 @@ if (triggers.some((t2) => !t2 || t2.type !== "button")) {
     throw new Error("each menu needs a button anchor");
 }
 if (triggers[0].props.className !== "dsh-od-chooser") throw new Error("anchor class is wrong");
+const flowIds = menus[2].props.items.map((i) => i.id).join();
+if (flowIds !== "wrap,scroll") throw new Error("flow options: " + flowIds);
 if (triggers[0].props["aria-haspopup"] !== "menu") throw new Error("trigger is not a menu trigger");
 const swatches = nodes.filter((n) => n.type === "span").length;
 if (swatches < 12) throw new Error("palette swatches missing, got " + swatches);
@@ -150,6 +159,7 @@ store.set("onedark.tableStyle", "zebra");
 exportsObj.apply(ctx);
 if (store.get("onedark.tableBorder") !== "none") throw new Error("legacy border did not migrate");
 if (store.get("onedark.tableStripe") !== "first") throw new Error("legacy stripe did not migrate");
+if (store.get("onedark.tableFlow") !== "wrap") throw new Error("legacy flow did not migrate");
 if (store.has("onedark.tableStyle")) throw new Error("legacy key was not cleared");
 
 console.log("ok: 2 stylesheets, 2 choosers, 12 swatches, legacy mode migrates");

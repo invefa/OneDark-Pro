@@ -38,7 +38,9 @@ token分三层，皮肤改的是这三层的值：
 
 `表格交替`：表头后交替（第一行与表头同色，第二行起上色）、从首行交替、不交替。
 
-两个选择分别存在`localStorage`的`onedark.tableBorder`与`onedark.tableStripe`，刷新后保留。旧版的五选一键`onedark.tableStyle`在插件加载时自动折算到这两个维度并删除。样式表本身只留颜色，表格样式按选择在运行时拼进独立样式标签。
+`表格超宽`：折行（默认，内容比正文宽时在单元格里换行，表格不超出正文宽度）、横向滚动（每格保持一行，表格超出后由外层横向滚动）。
+
+三个选择分别存在`localStorage`的`onedark.tableBorder`、`onedark.tableStripe`与`onedark.tableFlow`，刷新后保留。旧版的五选一键`onedark.tableStyle`在插件加载时自动折算到这两个维度并删除。样式表本身只留颜色，表格样式按选择在运行时拼进独立样式标签。
 
 前端类名是构建哈希，换版本就变，因此表格规则改用元素选择器，不再写死类名。
 
