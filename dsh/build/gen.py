@@ -51,13 +51,13 @@ DSH_ALIAS = {
     # One faint weight for every separator. The frontend draws 24 of them, so
     # the tone has to sit near the surface: visible as an edge, never as a line
     # competing with the text. Structure comes from the layer steps below.
-    "--dsw-alias-border-l1": "#2b2f37",
-    "--dsw-alias-border-l2": "#2b2f37",
-    "--dsw-alias-border-l2-darkmode-thin": "#2b2f37",
-    "--dsw-alias-border-l3": "#2b2f37",
-    "--dsw-alias-border-l4": "#2b2f37",
-    "--dsw-alias-border-inverted": "#2b2f37",
-    "--dsw-alias-border-inverted2": "#2b2f37",
+    "--dsw-alias-border-l1": "#343943",
+    "--dsw-alias-border-l2": "#343943",
+    "--dsw-alias-border-l2-darkmode-thin": "#343943",
+    "--dsw-alias-border-l3": "#343943",
+    "--dsw-alias-border-l4": "#343943",
+    "--dsw-alias-border-inverted": "#343943",
+    "--dsw-alias-border-inverted2": "#343943",
     # Four even steps instead of the site's jumps: layer 3 lands on a full
     # line colour there, which reads heavy as a fill.
     "--dsw-alias-bg-layer-1": "#262a31",
