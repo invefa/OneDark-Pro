@@ -28,6 +28,8 @@ token分三层，皮肤改的是这三层的值：
 
 代码字体单独设了一层。DSH的代码块读`--ds-font-family-code`，这个变量由主题插件按设置注入，默认是系统等宽。皮肤把它固定成`Cascadia Mono, Consolas, Microsoft YaHei Mono, monospace`，与Codex一致；用Mono而不是`Cascadia Code`，后者带编程连字。混排列对齐取决于字体本身的汉字宽度，这套栈实测不是严格2倍。想改字体就改`build/gen.py`里的`CODE_FONT`。
 
+分隔线整体去掉。One Dark这套色板配分隔线会显得廉价，界面的层次改由四档底色承担：`bg-layer-1`到`bg-layer-4`依次是`#262a31`、`#2a2e35`、`#2e323a`、`#32363e`，每档递进约四个色阶。边框令牌全部置为`transparent`，只有输入框、下拉、代码块、表格这些需要成框的地方另给`#2f343d`。
+
 原生控件单独声明了一层。DSH没有设置`color-scheme`，语言选择这类`<select>`的下拉列表由浏览器按浅色渲染，与主题无关。皮肤在`body[data-ds-dark-theme]`上声明`color-scheme: dark`，并给`select`与`option`直接指定前景与底色。
 
 推理块单独处理。DSH用正文色渲染推理行，展开后与答复同色，只能靠字号和22px缩进区分，所以给它加一条左侧细线、压一档灰、收紧行距。推理正文不总包在`<p>`里，选择器用`._3GBCTG_thinkBody :not(pre):not(code):not(a):not(.md-code-block)`，除代码与链接外全部压暗，不依赖段落标签。

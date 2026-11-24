@@ -48,13 +48,25 @@ DSH_ALIAS = {
     "--dsw-alias-tooltip-key-bg": RAISED,
     "--dsw-alias-turn-trigger-bg": RAISED,
     "--dsw-alias-turn-trigger-bg-hover": INACTIVE,
-    # Borders sit one step below the site skin values: there the separators read
-    # brighter than the surfaces around them, which looks cheap next to Codex.
-    "--dsw-alias-border-l1": "#24272c",
-    "--dsw-alias-border-l2": "#292d34",
-    "--dsw-alias-border-l2-darkmode-thin": "#24272c",
-    "--dsw-alias-border-l3": "#303540",
-    "--dsw-alias-border-l4": "#3a3f4b",
+    # The palette reads cheap with separators, so they go away entirely and
+    # the surfaces below carry the structure. Containers that still need an
+    # edge get one from the borderless block instead of a token.
+    "--dsw-alias-border-l1": "transparent",
+    "--dsw-alias-border-l2": "transparent",
+    "--dsw-alias-border-l2-darkmode-thin": "transparent",
+    "--dsw-alias-border-l3": "transparent",
+    "--dsw-alias-border-l4": "transparent",
+    "--dsw-alias-border-inverted": "transparent",
+    "--dsw-alias-border-inverted2": "transparent",
+    # Four even steps instead of the site's jumps: layer 3 lands on a full
+    # line colour there, which reads heavy as a fill.
+    "--dsw-alias-bg-layer-1": "#262a31",
+    "--dsw-alias-bg-layer-2": "#2a2e35",
+    "--dsw-alias-bg-layer-3": "#2e323a",
+    "--dsw-alias-bg-layer-4": "#32363e",
+    "--dsw-alias-bg-overlay": "#2e323a",
+    "--dsw-alias-bg-multi-select": "#30353e",
+    "--dsw-alias-bg-module-platform": "#262a31",
     "--dsw-alias-state-idle-primary": FG_MUTED,
     "--dsw-alias-brand-primary-new-colorprimary-new-color": ACCENT,
     "--dsw-alias-code-diff-added": "rgba(152, 195, 121, .14)",
@@ -66,6 +78,18 @@ DSH_ALIAS = {
     "--dsw-alias-file-diff-deleted-gutter": "rgba(224, 108, 117, .22)",
     "--dsw-alias-file-diff-deleted-marker": RED,
 }
+
+# Separators are removed through the border tokens; these are the containers
+# that still need an edge to read as a box.
+EDGES = """
+body[data-ds-dark-theme] :is(input, textarea),
+body[data-ds-dark-theme] select[class],
+body[data-ds-dark-theme] :is(pre, .md-code-block),
+body[data-ds-dark-theme] ._tableScroll_1ypvv_192 :is(th, td) {
+    border-color: #2f343d !important;
+}
+"""
+
 
 # Table cells carry 10px 16px of padding from the frontend, which reads loose for
 # data rows. The class name is a build hash of @deepseek-ai/dsh-client-ui-chat.
@@ -81,7 +105,7 @@ body[data-ds-dark-theme] ._tableScroll_1ypvv_192 :is(th, td) {
 REASONING = """
 /* reasoning row: a process column under the answer */
 ._3GBCTG_thinkBody {
-    border-left: 1px solid var(--dsw-alias-border-l3);
+    border-left: 1px solid #2f343d;
     padding-bottom: 14px;
 }
 
@@ -153,6 +177,8 @@ def build_css():
     out.append("}")
     out.append("")
     out.append(TABLE.strip())
+    out.append("")
+    out.append(EDGES.strip())
     out.append("")
     out.append(REASONING.strip())
     out.append("")
