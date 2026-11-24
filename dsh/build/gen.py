@@ -60,12 +60,12 @@ DSH_ALIAS = {
     "--dsw-alias-border-inverted2": "#343943",
     # Four even steps instead of the site's jumps: layer 3 lands on a full
     # line colour there, which reads heavy as a fill.
-    "--dsw-alias-bg-layer-1": "#262a31",
-    "--dsw-alias-bg-layer-2": "#2a2e35",
-    "--dsw-alias-bg-layer-3": "#2a2e35",
-    "--dsw-alias-bg-layer-4": "#32363e",
-    "--dsw-alias-bg-overlay": "#2a2e35",
-    "--dsw-alias-bg-multi-select": "#30353e",
+    "--dsw-alias-bg-layer-1": "#24272d",
+    "--dsw-alias-bg-layer-2": "#262a31",
+    "--dsw-alias-bg-layer-3": "#262a31",
+    "--dsw-alias-bg-layer-4": "#2a2e35",
+    "--dsw-alias-bg-overlay": "#262a31",
+    "--dsw-alias-bg-multi-select": "#2a2e35",
     "--dsw-alias-bg-module-platform": "#23272e",
     "--dsw-alias-state-idle-primary": FG_MUTED,
     "--dsw-alias-brand-primary-new-colorprimary-new-color": ACCENT,
