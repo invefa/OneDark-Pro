@@ -134,7 +134,6 @@ TABLE_BASE = """
    first/last cell rules are restated because the frontend zeroes the outer
    padding at a higher specificity. */
 body[data-ds-dark-theme] table {
-    max-width: none;
     font-variant-numeric: tabular-nums;
 }
 
@@ -163,6 +162,7 @@ TABLE_FLOWS = {
     "wrap": """
 body[data-ds-dark-theme] table {
     width: 100%;
+    max-width: 100%;
     table-layout: auto;
 }
 
@@ -174,6 +174,7 @@ body[data-ds-dark-theme] table :is(th, td) {
     "scroll": """
 body[data-ds-dark-theme] table {
     width: max-content;
+    max-width: none;
 }
 
 body[data-ds-dark-theme] .md-table-wide {
