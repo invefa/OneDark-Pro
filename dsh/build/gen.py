@@ -82,8 +82,27 @@ DSH_ALIAS = {
 # Table cells carry 10px 16px of padding from the frontend, which reads loose for
 # data rows. The class name is a build hash of @deepseek-ai/dsh-client-ui-chat.
 TABLE = """
+/* Tables: a faint header fill with one heavier edge, then alternating rows
+   instead of rules. The frontend pins min-width:100px per cell, which leaves
+   short tables padded out with dead space, so that is released too. */
 body[data-ds-dark-theme] ._tableScroll_1ypvv_192 :is(th, td) {
     padding: 4px 10px;
+    border-bottom: none;
+    min-width: 0;
+}
+
+body[data-ds-dark-theme] ._tableScroll_1ypvv_192 th {
+    background: #2a2e35;
+    border-bottom: 1px solid #3e4452;
+    font-weight: 600;
+}
+
+body[data-ds-dark-theme] ._tableScroll_1ypvv_192 tbody tr:nth-child(even) {
+    background: #262a31;
+}
+
+body[data-ds-dark-theme] ._tableScroll_1ypvv_192 tbody tr:hover {
+    background: #2e323a;
 }
 """
 

@@ -220,8 +220,27 @@ body[data-ds-dark-theme] {
   --shiki-token-changed: #e5c07b !important;
 }
 
+/* Tables: a faint header fill with one heavier edge, then alternating rows
+   instead of rules. The frontend pins min-width:100px per cell, which leaves
+   short tables padded out with dead space, so that is released too. */
 body[data-ds-dark-theme] ._tableScroll_1ypvv_192 :is(th, td) {
     padding: 4px 10px;
+    border-bottom: none;
+    min-width: 0;
+}
+
+body[data-ds-dark-theme] ._tableScroll_1ypvv_192 th {
+    background: #2a2e35;
+    border-bottom: 1px solid #3e4452;
+    font-weight: 600;
+}
+
+body[data-ds-dark-theme] ._tableScroll_1ypvv_192 tbody tr:nth-child(even) {
+    background: #262a31;
+}
+
+body[data-ds-dark-theme] ._tableScroll_1ypvv_192 tbody tr:hover {
+    background: #2e323a;
 }
 
 /* reasoning row: a process column under the answer */
