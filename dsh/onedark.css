@@ -241,6 +241,10 @@ body[data-ds-dark-theme] [role="dialog"] button[aria-haspopup] {
    the first/last cell rules are restated because the frontend zeroes the
    outer padding at a higher specificity. */
 body[data-ds-dark-theme] table {
+    /* the frontend stretches tables to the column width; take the content
+       width instead, and let the scroller below handle the overflow */
+    width: max-content;
+    max-width: none;
     font-variant-numeric: tabular-nums;
 }
 
