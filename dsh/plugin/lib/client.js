@@ -11,17 +11,88 @@ window.__ModuleLoader__.load({
 
         var CSS = "/* One Dark Pro Darker for the DSH web interface\n   Token mapping shared with the DeepSeek web skin; the extra tokens below are\n   declared by the DSH frontend only. Code blocks read the Shiki css-variables\n   palette, so their token colours are set here as well. */\n\nbody[data-ds-dark-theme] {\n  /* raw palette: neutral ramp */\n  --dsw-static-neutral-bluish-00: #ffffff !important;\n  --dsw-static-neutral-bluish-50: #abb2bf !important;\n  --dsw-static-neutral-bluish-60: #abb2bf !important;\n  --dsw-static-neutral-bluish-75: #9da5b4 !important;\n  --dsw-static-neutral-bluish-100: #9da5b4 !important;\n  --dsw-static-neutral-bluish-150: #9da5b4 !important;\n  --dsw-static-neutral-bluish-200: #9da5b4 !important;\n  --dsw-static-neutral-bluish-300: #9da5b4 !important;\n  --dsw-static-neutral-bluish-400: #7f848e !important;\n  --dsw-static-neutral-bluish-500: #7f848e !important;\n  --dsw-static-neutral-bluish-600: #6b717d !important;\n  --dsw-static-neutral-bluish-700: #495162 !important;\n  --dsw-static-neutral-bluish-750: #3e4452 !important;\n  --dsw-static-neutral-bluish-800: #323842 !important;\n  --dsw-static-neutral-bluish-850: #2c313c !important;\n  --dsw-static-neutral-bluish-875: #2c313a !important;\n  --dsw-static-neutral-bluish-900: #1e2227 !important;\n  --dsw-static-neutral-bluish-950: #23272e !important;\n  --dsw-static-neutral-bluish-1000: #181a1f !important;\n\n  /* raw palette: brand blues */\n  --dsw-static-deepseek-50: #23272e !important;\n  --dsw-static-deepseek-100: #2c313c !important;\n  --dsw-static-deepseek-200: #323842 !important;\n  --dsw-static-deepseek-300: #3e4452 !important;\n  --dsw-static-deepseek-400: #61afef !important;\n  --dsw-static-deepseek-450: #528bff !important;\n  --dsw-static-deepseek-500: #4d78cc !important;\n  --dsw-static-deepseek-600: #528bff !important;\n  --dsw-static-deepseek-700: #4d78cc !important;\n  --dsw-static-deepseek-700-delete: #4d78cc !important;\n  --dsw-static-deepseek-800: #2c313c !important;\n  --dsw-static-deepseek-900: #2c313c !important;\n\n  /* raw palette: status hues */\n  --dsw-static-red-400: #e06c75 !important;\n  --dsw-static-red-500: #e06c75 !important;\n  --dsw-static-red-600: #c24038 !important;\n  --dsw-static-red-900: rgba(224, 108, 117, .15) !important;\n  --dsw-static-green-400: #98c379 !important;\n  --dsw-static-green-500: #98c379 !important;\n  --dsw-static-green-900: rgba(152, 195, 121, .15) !important;\n  --dsw-static-amber-400: #d19a66 !important;\n  --dsw-static-amber-500: #d19a66 !important;\n  --dsw-static-amber-600: #d19a66 !important;\n  --dsw-static-amber-900: rgba(209, 154, 102, .15) !important;\n  --dsw-static-blue-400: #61afef !important;\n  --dsw-static-blue-450: #528bff !important;\n  --dsw-static-blue-500: #4d78cc !important;\n  --dsw-static-blue-600: #528bff !important;\n  --dsw-static-blue-800: #2c313c !important;\n  --dsw-static-blue-950: #23272e !important;\n\n  /* semantic layer */\n  --dsw-alias-bg-base: #23272e !important;\n  --dsw-alias-bg-skeleton: #2c313a !important;\n  --dsw-alias-interactive-bg-hover: #2c313a !important;\n  --dsw-alias-interactive-bg-hover-accent: #323842 !important;\n  --dsw-alias-interactive-bg-active: #2c313c !important;\n  --dsw-alias-interactive-bg-hover-danger: rgba(224, 108, 117, .15) !important;\n  --dsw-alias-interactive-bg-hover-solid: #2c313a !important;\n  --dsw-alias-brand-primary: #4d78cc !important;\n  --dsw-alias-brand-primary-invert: #ffffff !important;\n  --dsw-alias-brand-text: #61afef !important;\n  --dsw-alias-button-primary-fill: #4d78cc !important;\n  --dsw-alias-button-primary-hover: #528bff !important;\n  --dsw-alias-button-primary-dimmed: #323842 !important;\n  --dsw-alias-button-info-fill: #4d78cc !important;\n  --dsw-alias-button-info-hover: #528bff !important;\n  --dsw-alias-button-elevated-fill: #323842 !important;\n  --dsw-alias-button-floating-fill: #323842 !important;\n  --dsw-alias-button-floating-hover: #3e4452 !important;\n  --dsw-alias-button-ghost-active-fill: #2c313c !important;\n  --dsw-alias-button-ghost-active-hover: #323842 !important;\n  --dsw-alias-button-ghost-active-border: #4d78cc !important;\n  --dsw-alias-button-tool-bar-fill: rgba(44, 49, 58, .6) !important;\n  --dsw-alias-button-tool-bar-hover: rgba(44, 49, 58, .8) !important;\n  --dsw-alias-button-tool-bar-fill-invisible: rgba(24, 26, 31, .36) !important;\n  --dsw-alias-button-contrast-fill: #abb2bf !important;\n  --dsw-alias-label-primary: #abb2bf !important;\n  --dsw-alias-label-primary-dimmed: #9da5b4 !important;\n  --dsw-alias-label-secondary: #9da5b4 !important;\n  --dsw-alias-label-tertiary: #8b939f !important;\n  --dsw-alias-label-caption: #9da5b4 !important;\n  --dsw-alias-label-dimmed: #7f848e !important;\n  --dsw-alias-label-primary-foreground: #ffffff !important;\n  --dsw-alias-label-primary-inverted: #23272e !important;\n  --dsw-alias-markdown-code-block: #1e2227 !important;\n  --dsw-alias-markdown-code-block-banner: #23272e !important;\n  --dsw-alias-markdown-inline-code: #2c313c !important;\n  --dsw-alias-markdown-citation: #2c313c !important;\n  --dsw-alias-markdown-tag: #2c313c !important;\n  --dsw-alias-markdown-placeholder: #2c313c !important;\n  --dsw-alias-markdown-code-segment-selected: #323842 !important;\n  --dsw-alias-markdown-code-segment-unselected: #2c313c !important;\n  --dsw-alias-scrollbar-bg-l1: #3e4452 !important;\n  --dsw-alias-scrollbar-bg-l2: #495162 !important;\n  --dsw-alias-scrollbar-hover-l1: #495162 !important;\n  --dsw-alias-scrollbar-hover-l2: #515a6b !important;\n  --dsw-alias-toast-bg: #323842 !important;\n  --dsw-alias-tooltip-bg: #323842 !important;\n  --dsw-specific-bubble: #2c313a !important;\n  --dsw-specific-bubble-highlight: #323842 !important;\n  --dsw-specific-input-major: #1d1f23 !important;\n  --dsw-specific-login-input: #1e2227 !important;\n  --dsw-specific-menu: #323842 !important;\n  --dsw-specific-selector: #2c313c !important;\n  --dsw-specific-sidebar-fill: #1e2227 !important;\n  --dsw-specific-sidebar-nav-item-hover: #2c313a !important;\n  --dsw-specific-sidebar-nav-item-active: #323842 !important;\n  --dsw-specific-sidebar-nav-item-active-accent: #3e4452 !important;\n  --dsw-linear-gradient-think: linear-gradient(180deg, #23272e 20.19%, rgba(35, 39, 46, 0) 100%) !important;\n  --scroll-color: rgba(78, 86, 102, .6) !important;\n  --dsl-a-text-color: #61afef !important;\n  --dsl-a-text-hover-color: #528bff !important;\n  --dsw-alias-bg-document-preview: #2c313c !important;\n  --dsw-alias-bg-document-selection: #3d4555 !important;\n  --dsw-alias-label-document-preview: #abb2bf !important;\n  --dsw-alias-label-primary-bluish: #abb2bf !important;\n  --dsw-alias-label-deep-diving: #9da5b4 !important;\n  --dsw-alias-label-deep-diving-shimmer: #9da5b4 !important;\n  --dsw-alias-label-shimmer: #9da5b4 !important;\n  --dsw-alias-link: #61afef !important;\n  --dsw-alias-menu-group-header-fill: #2c313c !important;\n  --dsw-alias-menu-icon: #9da5b4 !important;\n  --dsw-menu-surface-fill: #323842 !important;\n  --dsw-alias-switch-thumb: #dcdcdc !important;\n  --dsw-alias-toast-label: #abb2bf !important;\n  --dsw-alias-tooltip-key-bg: #2c313c !important;\n  --dsw-alias-turn-trigger-bg: #2c313c !important;\n  --dsw-alias-turn-trigger-bg-hover: #323842 !important;\n  --dsw-alias-border-l1: #343943 !important;\n  --dsw-alias-border-l2: #343943 !important;\n  --dsw-alias-border-l2-darkmode-thin: #343943 !important;\n  --dsw-alias-border-l3: #343943 !important;\n  --dsw-alias-border-l4: #343943 !important;\n  --dsw-alias-border-inverted: #343943 !important;\n  --dsw-alias-border-inverted2: #343943 !important;\n  --dsw-alias-bg-layer-1: #24272d !important;\n  --dsw-alias-bg-layer-2: #262a31 !important;\n  --dsw-alias-bg-layer-3: #2a2e35 !important;\n  --dsw-alias-bg-layer-4: #2e323a !important;\n  --dsw-alias-bg-overlay: #262a31 !important;\n  --dsw-alias-bg-multi-select: #2a2e35 !important;\n  --dsw-alias-bg-module-platform: #23272e !important;\n  --dsw-alias-state-idle-primary: #9da5b4 !important;\n  --dsw-alias-brand-primary-new-colorprimary-new-color: #4d78cc !important;\n  --dsw-alias-code-diff-added: rgba(152, 195, 121, .14) !important;\n  --dsw-alias-code-diff-deleted: rgba(224, 108, 117, .14) !important;\n  --dsw-alias-file-diff-added-bg: rgba(152, 195, 121, .08) !important;\n  --dsw-alias-file-diff-added-gutter: rgba(152, 195, 121, .22) !important;\n  --dsw-alias-file-diff-added-marker: #98c379 !important;\n  --dsw-alias-file-diff-deleted-bg: rgba(224, 108, 117, .08) !important;\n  --dsw-alias-file-diff-deleted-gutter: rgba(224, 108, 117, .22) !important;\n  --dsw-alias-file-diff-deleted-marker: #e06c75 !important;\n}\n\n/* Native controls (the language select and its popup) follow the\n   browser colour-scheme, which the app never declares, so they render\n   light. Declaring dark keeps the popup in the theme. */\nbody[data-ds-dark-theme] {\n  color-scheme: dark;\n}\n\nbody[data-ds-dark-theme] select {\n  color: var(--dsw-alias-label-primary);\n  background-color: var(--dsw-alias-bg-base);\n  border: 1px solid #343943;\n  border-radius: 4px;\n  padding: 2px 8px;\n  color-scheme: dark;\n}\n\nbody[data-ds-dark-theme] option {\n  color: var(--dsw-alias-label-primary);\n  background-color: var(--dsw-alias-bg-base);\n}\n\n/* The plugin fields are native selects; without an explicit border they\n   inherit the light default from the browser. */\nbody[data-ds-dark-theme] select[class] {\n  border: 1px solid var(--dsw-alias-border-l2);\n  border-radius: 3px;\n}\n\n/* code font: same stack the editor uses on this platform */\nbody[data-ds-dark-theme] {\n  --ds-font-family-code: \"Cascadia Mono\", Consolas, \"Microsoft YaHei Mono\", monospace;\n  --dsh-font-family-code: \"Cascadia Mono\", Consolas, \"Microsoft YaHei Mono\", monospace;\n}\n\n/* code block syntax: Shiki css-variables palette */\nbody[data-ds-dark-theme] {\n  --shiki-foreground: #abb2bf !important;\n  --shiki-background: transparent !important;\n  --shiki-token-comment: #7f848e !important;\n  --shiki-token-keyword: #c678dd !important;\n  --shiki-token-string: #98c379 !important;\n  --shiki-token-string-expression: #98c379 !important;\n  --shiki-token-constant: #d19a66 !important;\n  --shiki-token-function: #61afef !important;\n  --shiki-token-parameter: #e06c75 !important;\n  --shiki-token-punctuation: #abb2bf !important;\n  --shiki-token-link: #61afef !important;\n  --shiki-token-inserted: #98c379 !important;\n  --shiki-token-deleted: #e06c75 !important;\n  --shiki-token-changed: #e5c07b !important;\n}\n\nbody[data-ds-dark-theme] [class*=\"selector\"],\nbody[data-ds-dark-theme] [role=\"dialog\"] button[aria-haspopup] {\n    border: 1px solid #343943;\n    border-radius: var(--dsw-radius-md, 6px);\n}\n\n/* reasoning row: a process column under the answer */\n._3GBCTG_thinkBody {\n    border-left: 1px solid var(--dsw-alias-border-l3);\n    padding-bottom: 14px;\n}\n\n/* Reasoning text: one grey step below the answer. The rule covers every\n   descendant because the reasoning markdown does not always wrap text in <p>;\n   code keeps its inline Shiki colours, links keep the brand colour. */\n._3GBCTG_thinkBody :not(pre):not(code):not(a):not(.md-code-block) {\n    color: color-mix(in srgb, var(--dsw-alias-label-tertiary) 65%, var(--dsw-alias-bg-base));\n}\n\n._3GBCTG_thinkBody :is(p, li) {\n    line-height: 19px;\n}\n\n/* the collapsed summary line gets the same step down */\n._3GBCTG_summary {\n    color: color-mix(in srgb, var(--dsw-alias-label-tertiary) 78%, var(--dsw-alias-bg-base));\n}\n\n";
         var TAG_ID = "dsh-onedark/onedark.css";
-        var MODES = {"github":"\n/* Selectors are plain elements: the frontend classes are build hashes. The\n   first/last cell rules are restated because the frontend zeroes the outer\n   padding at a higher specificity. */\nbody[data-ds-dark-theme] table {\n    width: max-content;\n    max-width: none;\n    font-variant-numeric: tabular-nums;\n}\n\nbody[data-ds-dark-theme] .md-table-wide {\n    overflow-x: auto;\n}\n\nbody[data-ds-dark-theme] table :is(th, td) {\n    padding: 5px 12px;\n    white-space: nowrap;\n    max-width: none;\n}\n\nbody[data-ds-dark-theme] table:has(:is(th, td):only-child) {\n    width: 100%;\n    max-width: 100%;\n}\n\nbody[data-ds-dark-theme] table :is(th, td):only-child {\n    white-space: normal;\n}\n\nbody[data-ds-dark-theme] table :is(th:first-child, td:first-child) {\n    padding-left: 12px;\n}\n\nbody[data-ds-dark-theme] table :is(th:last-child, td:last-child) {\n    padding-right: 12px;\n}\n\nbody[data-ds-dark-theme] table th {\n    font-weight: 600;\n}\n\nbody[data-ds-dark-theme] table :is(th, td) {\n    border: 1px solid #343943;\n}\n\nbody[data-ds-dark-theme] table tbody tr:nth-child(odd) {\n    background: #262a31;\n}\n\nbody[data-ds-dark-theme] table tbody tr:nth-child(even) {\n    background: transparent;\n}\n","zebra":"\n/* Selectors are plain elements: the frontend classes are build hashes. The\n   first/last cell rules are restated because the frontend zeroes the outer\n   padding at a higher specificity. */\nbody[data-ds-dark-theme] table {\n    width: max-content;\n    max-width: none;\n    font-variant-numeric: tabular-nums;\n}\n\nbody[data-ds-dark-theme] .md-table-wide {\n    overflow-x: auto;\n}\n\nbody[data-ds-dark-theme] table :is(th, td) {\n    padding: 5px 12px;\n    white-space: nowrap;\n    max-width: none;\n}\n\nbody[data-ds-dark-theme] table:has(:is(th, td):only-child) {\n    width: 100%;\n    max-width: 100%;\n}\n\nbody[data-ds-dark-theme] table :is(th, td):only-child {\n    white-space: normal;\n}\n\nbody[data-ds-dark-theme] table :is(th:first-child, td:first-child) {\n    padding-left: 12px;\n}\n\nbody[data-ds-dark-theme] table :is(th:last-child, td:last-child) {\n    padding-right: 12px;\n}\n\nbody[data-ds-dark-theme] table th {\n    font-weight: 600;\n}\n\nbody[data-ds-dark-theme] table th {\n    border-bottom: 1px solid #3e4452;\n}\n\nbody[data-ds-dark-theme] table tbody tr:nth-child(odd) {\n    background: #262a31;\n}\n\nbody[data-ds-dark-theme] table tbody tr:nth-child(even) {\n    background: transparent;\n}\n","rules":"\n/* Selectors are plain elements: the frontend classes are build hashes. The\n   first/last cell rules are restated because the frontend zeroes the outer\n   padding at a higher specificity. */\nbody[data-ds-dark-theme] table {\n    width: max-content;\n    max-width: none;\n    font-variant-numeric: tabular-nums;\n}\n\nbody[data-ds-dark-theme] .md-table-wide {\n    overflow-x: auto;\n}\n\nbody[data-ds-dark-theme] table :is(th, td) {\n    padding: 5px 12px;\n    white-space: nowrap;\n    max-width: none;\n}\n\nbody[data-ds-dark-theme] table:has(:is(th, td):only-child) {\n    width: 100%;\n    max-width: 100%;\n}\n\nbody[data-ds-dark-theme] table :is(th, td):only-child {\n    white-space: normal;\n}\n\nbody[data-ds-dark-theme] table :is(th:first-child, td:first-child) {\n    padding-left: 12px;\n}\n\nbody[data-ds-dark-theme] table :is(th:last-child, td:last-child) {\n    padding-right: 12px;\n}\n\nbody[data-ds-dark-theme] table th {\n    font-weight: 600;\n}\n\nbody[data-ds-dark-theme] table :is(th, td) {\n    border-bottom: 1px solid #343943;\n}\n","plain":"\n/* Selectors are plain elements: the frontend classes are build hashes. The\n   first/last cell rules are restated because the frontend zeroes the outer\n   padding at a higher specificity. */\nbody[data-ds-dark-theme] table {\n    width: max-content;\n    max-width: none;\n    font-variant-numeric: tabular-nums;\n}\n\nbody[data-ds-dark-theme] .md-table-wide {\n    overflow-x: auto;\n}\n\nbody[data-ds-dark-theme] table :is(th, td) {\n    padding: 5px 12px;\n    white-space: nowrap;\n    max-width: none;\n}\n\nbody[data-ds-dark-theme] table:has(:is(th, td):only-child) {\n    width: 100%;\n    max-width: 100%;\n}\n\nbody[data-ds-dark-theme] table :is(th, td):only-child {\n    white-space: normal;\n}\n\nbody[data-ds-dark-theme] table :is(th:first-child, td:first-child) {\n    padding-left: 12px;\n}\n\nbody[data-ds-dark-theme] table :is(th:last-child, td:last-child) {\n    padding-right: 12px;\n}\n\nbody[data-ds-dark-theme] table th {\n    font-weight: 600;\n}\n\nbody[data-ds-dark-theme] table th {\n    border-bottom: 1px solid #3e4452;\n}\n","off":""};
+        var PARTS = {"base":"\n/* Selectors are plain elements: the frontend classes are build hashes. The\n   first/last cell rules are restated because the frontend zeroes the outer\n   padding at a higher specificity. */\nbody[data-ds-dark-theme] table {\n    width: max-content;\n    max-width: none;\n    font-variant-numeric: tabular-nums;\n}\n\nbody[data-ds-dark-theme] .md-table-wide {\n    overflow-x: auto;\n}\n\nbody[data-ds-dark-theme] table :is(th, td) {\n    padding: 5px 12px;\n    white-space: nowrap;\n    max-width: none;\n}\n\nbody[data-ds-dark-theme] table:has(:is(th, td):only-child) {\n    width: 100%;\n    max-width: 100%;\n}\n\nbody[data-ds-dark-theme] table :is(th, td):only-child {\n    white-space: normal;\n}\n\nbody[data-ds-dark-theme] table :is(th:first-child, td:first-child) {\n    padding-left: 12px;\n}\n\nbody[data-ds-dark-theme] table :is(th:last-child, td:last-child) {\n    padding-right: 12px;\n}\n\nbody[data-ds-dark-theme] table th {\n    font-weight: 600;\n}\n","borders":{"grid":"\nbody[data-ds-dark-theme] table :is(th, td) {\n    border: 1px solid #343943;\n}\n","rows":"\nbody[data-ds-dark-theme] table :is(th, td) {\n    border-bottom: 1px solid #343943;\n}\n","none":"\nbody[data-ds-dark-theme] table th {\n    border-bottom: 1px solid #3e4452;\n}\n"},"stripes":{"after":"\nbody[data-ds-dark-theme] table tbody tr:nth-child(odd) {\n    background: transparent;\n}\n\nbody[data-ds-dark-theme] table tbody tr:nth-child(even) {\n    background: #262a31;\n}\n","first":"\nbody[data-ds-dark-theme] table tbody tr:nth-child(odd) {\n    background: #262a31;\n}\n\nbody[data-ds-dark-theme] table tbody tr:nth-child(even) {\n    background: transparent;\n}\n","none":""}};
         var TABLE_TAG_ID = "dsh-onedark/table.css";
-        var STORAGE_KEY = "onedark.tableStyle";
-        var DEFAULT_MODE = "github";
-        var OPTIONS = [
-            ["github", "网格"],
-            ["zebra", "隔行底色"],
-            ["rules", "只留横线"],
-            ["plain", "无框线"],
-            ["off", "关闭"],
+        var BORDER_KEY = "onedark.tableBorder";
+        var STRIPE_KEY = "onedark.tableStripe";
+        var LEGACY_KEY = "onedark.tableStyle";
+        var BORDERS = [
+            ["grid", "全框线"],
+            ["rows", "只留横线"],
+            ["none", "无框线"],
         ];
+        var STRIPES = [
+            ["after", "表头后交替"],
+            ["first", "从首行交替"],
+            ["none", "不交替"],
+        ];
+        var LEGACY = {
+            github: ["grid", "after"],
+            zebra: ["none", "first"],
+            rules: ["rows", "none"],
+            plain: ["none", "none"],
+            off: ["off", "off"],
+        };
+        var PALETTE = [
+            ["底色", "#23272e"],
+            ["面板", "#262a31"],
+            ["浮层", "#2a2e35"],
+            ["分隔线", "#343943"],
+            ["正文", "#abb2bf"],
+            ["次要", "#9da5b4"],
+            ["强调", "#4d78cc"],
+            ["链接", "#61afef"],
+            ["字符串", "#98c379"],
+            ["数字", "#d19a66"],
+            ["关键字", "#c678dd"],
+            ["注释", "#7f848e"],
+        ];
+
+        function readSetting(key, allowed, fallback) {
+            try {
+                var stored = window.localStorage.getItem(key);
+                if (stored !== null && allowed.indexOf(stored) >= 0) return stored;
+            } catch (error) {
+                // storage may be unavailable
+            }
+            return fallback;
+        }
+
+        function writeSetting(key, value) {
+            try {
+                window.localStorage.setItem(key, value);
+            } catch (error) {
+                // the choice stays for this session only
+            }
+        }
+
+        // earlier builds stored one combined mode; map it onto the two axes
+        function migrate() {
+            try {
+                var legacy = window.localStorage.getItem(LEGACY_KEY);
+                if (legacy === null) return;
+                var pair = LEGACY[legacy];
+                if (pair) {
+                    window.localStorage.setItem(BORDER_KEY, pair[0]);
+                    window.localStorage.setItem(STRIPE_KEY, pair[1]);
+                }
+                window.localStorage.removeItem(LEGACY_KEY);
+            } catch (error) {
+                // ignore
+            }
+        }
+
+        function readTable() {
+            return {
+                border: readSetting(BORDER_KEY, ["grid", "rows", "none", "off"], "grid"),
+                stripe: readSetting(STRIPE_KEY, ["after", "first", "none", "off"], "after"),
+            };
+        }
+
+        function tableCss(state) {
+            if (state.border === "off" || state.stripe === "off") return "";
+            return PARTS.base + (PARTS.borders[state.border] || "") + (PARTS.stripes[state.stripe] || "");
+        }
 
         function ensureStyle(attribute, id, text) {
             if (typeof document === "undefined" || !document.head) return null;
@@ -40,55 +111,18 @@ window.__ModuleLoader__.load({
             return tag;
         }
 
-        function readMode() {
-            try {
-                var stored = window.localStorage.getItem(STORAGE_KEY);
-                if (stored !== null && Object.prototype.hasOwnProperty.call(MODES, stored)) return stored;
-            } catch (error) {
-                // storage may be unavailable; fall through to the default
-            }
-            return DEFAULT_MODE;
+        function applyTable(state) {
+            ensureStyle("onedark-table", TABLE_TAG_ID, tableCss(state));
         }
 
-        function writeMode(mode) {
-            try {
-                window.localStorage.setItem(STORAGE_KEY, mode);
-            } catch (error) {
-                // the choice stays for this session only
-            }
-        }
-
-        function applyTable(mode) {
-            ensureStyle("onedark-table", TABLE_TAG_ID, MODES[mode] || "");
-        }
-
-        var rowStyle = {
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "24px",
-            padding: "16px 0",
-            borderBottom: "0.5px solid var(--dsw-alias-border-l2)",
-        };
-        var textStyle = { display: "flex", flexDirection: "column", gap: "4px", minWidth: "0" };
-        var titleStyle = {
-            fontSize: "14px",
-            lineHeight: "20px",
-            color: "var(--dsw-alias-label-primary)",
-        };
-        var descStyle = {
-            fontSize: "12px",
-            lineHeight: "18px",
-            color: "var(--dsw-alias-label-tertiary)",
-        };
-        // Matches the app's own chooser: 36px tall, no border, surface fill,
-        // chevron on the right, hover lightens the fill.
-        var CHEVRON = "url(\"data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'12'%20height%3D'12'%20viewBox%3D'0%200%2012%2012'%3E%3Cpath%20d%3D'M3%204.5%206%207.5%209%204.5'%20fill%3D'none'%20stroke%3D'%239da5b4'%20stroke-width%3D'1.4'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%2F%3E%3C%2Fsvg%3E\")";
-        var selectStyle = {
+        // Matches the app's own chooser: 36px tall, hairline border, surface
+        // fill, chevron on the right, hover lightens the fill.
+        var CHEVRON = "url(\"data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'12'%20height%3D'12'%20viewBox%3D'0%200%2012%2012'%3E%3Cpath%20d%3D'M3%204.5%206%207.5%209%204.5'%20fill%3D'none'%20stroke%3D'%239da5b4'%20stroke-width%3D'1.4'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%2F%3E%3C%2Fsvg%3E\"";
+        var SELECT = {
             appearance: "none",
             WebkitAppearance: "none",
             height: "36px",
-            minWidth: "160px",
+            minWidth: "148px",
             padding: "0 32px 0 14px",
             border: "1px solid var(--dsw-alias-border-l2)",
             borderRadius: "6px",
@@ -102,68 +136,145 @@ window.__ModuleLoader__.load({
             lineHeight: "20px",
             cursor: "pointer",
         };
+        var ROW = {
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "24px",
+            padding: "16px 0",
+            borderBottom: "0.5px solid var(--dsw-alias-border-l2)",
+        };
+        var TEXT = { display: "flex", flexDirection: "column", gap: "4px", minWidth: "0" };
+        var TITLE = { fontSize: "14px", lineHeight: "20px", color: "var(--dsw-alias-label-primary)" };
+        var DESC = { fontSize: "12px", lineHeight: "18px", color: "var(--dsw-alias-label-tertiary)" };
 
-        function TableStyleRow() {
-            var state = React.useState(readMode());
-            var mode = state[0];
-            var setMode = state[1];
+        function paint(event, hot) {
+            var el = event.currentTarget;
+            el.style.background = hot
+                ? "var(--dsw-alias-interactive-bg-hover)"
+                : "var(--dsw-alias-bg-module-platform)";
+            el.style.backgroundImage = CHEVRON;
+            el.style.backgroundRepeat = "no-repeat";
+            el.style.backgroundPosition = "right 12px center";
+        }
 
-            function change(event) {
-                var next = event.target.value;
-                setMode(next);
-                writeMode(next);
-                applyTable(next);
+        function Chooser(props) {
+            return h(
+                "select",
+                {
+                    value: props.value,
+                    onChange: props.onChange,
+                    style: SELECT,
+                    onMouseEnter: (event) => paint(event, true),
+                    onMouseLeave: (event) => paint(event, false),
+                },
+                props.options.map(function (option) {
+                    return h("option", { key: option[0], value: option[0] }, option[1]);
+                }),
+            );
+        }
+
+        function SettingRow(props) {
+            return h(
+                "div",
+                { style: ROW },
+                h(
+                    "div",
+                    { style: TEXT },
+                    h("div", { style: TITLE }, props.title),
+                    h("div", { style: DESC }, props.description),
+                ),
+                h(Chooser, { value: props.value, options: props.options, onChange: props.onChange }),
+            );
+        }
+
+        function PaletteSection() {
+            var tableState = React.useState(readTable());
+            var table = tableState[0];
+            var setTable = tableState[1];
+
+            function pick(axis, key) {
+                return function (event) {
+                    var next = Object.assign({}, table);
+                    next[axis] = event.target.value;
+                    setTable(next);
+                    writeSetting(axis === "border" ? BORDER_KEY : STRIPE_KEY, next[axis]);
+                    applyTable(next);
+                };
             }
 
             return h(
                 "div",
-                { style: rowStyle },
+                { style: { display: "flex", flexDirection: "column", width: "100%" } },
                 h(
                     "div",
-                    { style: textStyle },
-                    h("div", { style: titleStyle }, "表格样式"),
-                    h("div", { style: descStyle }, "Markdown 表格的边框、隔行底色与列宽。"),
+                    { style: { padding: "16px 0" } },
+                    h("div", { style: { fontSize: "14px", lineHeight: "22px", color: "var(--dsw-alias-label-primary)" } }, "One Dark Pro Darker"),
+                    h(
+                        "div",
+                        { style: { ...DESC, marginTop: "4px" } },
+                        "来源 zhuangtongfa.material-theme 3.20.3，取自主题文件的 Darker 变体。",
+                    ),
+                    h(
+                        "div",
+                        { style: { display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "12px" } },
+                        PALETTE.map(function (entry) {
+                            return h(
+                                "div",
+                                {
+                                    key: entry[0],
+                                    style: { display: "flex", alignItems: "center", gap: "6px", minWidth: "112px" },
+                                },
+                                h("span", {
+                                    style: {
+                                        width: "12px",
+                                        height: "12px",
+                                        borderRadius: "3px",
+                                        border: "1px solid var(--dsw-alias-border-l2)",
+                                        background: entry[1],
+                                        display: "inline-block",
+                                    },
+                                }),
+                                h("span", { style: { ...DESC, lineHeight: "18px" } }, entry[0] + " " + entry[1]),
+                            );
+                        }),
+                    ),
                 ),
-                h(
-                    "select",
-                    {
-                        value: mode,
-                        onChange: change,
-                        style: selectStyle,
-                        onMouseEnter: (event) => {
-                            event.currentTarget.style.background = "var(--dsw-alias-interactive-bg-hover)";
-                            event.currentTarget.style.backgroundImage = CHEVRON;
-                            event.currentTarget.style.backgroundRepeat = "no-repeat";
-                            event.currentTarget.style.backgroundPosition = "right 12px center";
-                        },
-                        onMouseLeave: (event) => {
-                            event.currentTarget.style.background = "var(--dsw-alias-bg-module-platform)";
-                            event.currentTarget.style.backgroundImage = CHEVRON;
-                            event.currentTarget.style.backgroundRepeat = "no-repeat";
-                            event.currentTarget.style.backgroundPosition = "right 12px center";
-                        },
-                    },
-                    OPTIONS.map(function (option) {
-                        return h("option", { key: option[0], value: option[0] }, option[1]);
-                    }),
-                ),
+                h(SettingRow, {
+                    title: "表格边框",
+                    description: "Markdown 表格的框线样式。",
+                    value: table.border,
+                    options: BORDERS,
+                    onChange: pick("border"),
+                }),
+                h(SettingRow, {
+                    title: "表格交替",
+                    description: "隔行底色的起始行。",
+                    value: table.stripe,
+                    options: STRIPES,
+                    onChange: pick("stripe"),
+                }),
             );
         }
 
-        // The stylesheet installs even without any service; the settings row is
-        // registered once the slot service is available.
         var inject = [];
 
         function apply(ctx) {
+            migrate();
             ensureStyle("onedark-table", TABLE_TAG_ID);
             ensureStyle("plugin-css", TAG_ID, CSS);
-            applyTable(readMode());
+            applyTable(readTable());
 
             ctx.inject(["slots"], function (scoped) {
-                scoped.slots.inject("settings.general.item", function () {
+                scoped.slots.inject("settings.section", function () {
                     return scoped.slots.register(
-                        { name: "settings.general.item", id: "onedark-table-style", order: 60 },
-                        TableStyleRow,
+                        {
+                            name: "settings.section",
+                            id: "onedark-palette",
+                            order: 60,
+                            label: function () { return "配色方案"; },
+                        },
+                        PaletteSection,
                     );
                 });
             });

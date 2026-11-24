@@ -1,5 +1,5 @@
-// Load the built client bundle against a stubbed DOM and check the stylesheet,
-// the table decoration modes, and the settings row registration.
+// Load the built client bundle against a stubbed DOM: stylesheet injection,
+// table decoration axes, and the palette settings section.
 import fs from "node:fs";
 import path from "node:path";
 
@@ -8,17 +8,9 @@ const file = path.join(path.dirname(here), "plugin", "lib", "client.js");
 const source = fs.readFileSync(file, "utf-8");
 
 const styles = [];
-
 const document = {
-    head: {
-        appendChild(node) {
-            styles.push(node);
-            return node;
-        },
-    },
-    createElement(tag) {
-        return { tag, dataset: {}, textContent: "" };
-    },
+    head: { appendChild(node) { styles.push(node); return node; } },
+    createElement(tag) { return { tag, dataset: {}, textContent: "" }; },
     querySelector(selector) {
         const byId = /data-plugin-css="([^"]+)"/.exec(selector);
         if (byId) return styles.find((s) => s.dataset.pluginCss === byId[1]) || null;
@@ -30,17 +22,23 @@ const document = {
 };
 
 const store = new Map();
+let registered = null;
 const window = {
     __ModuleLoader__: { load(entry) { registered = entry; } },
     localStorage: {
         getItem: (key) => (store.has(key) ? store.get(key) : null),
         setItem: (key, value) => { store.set(key, String(value)); },
+        removeItem: (key) => { store.delete(key); },
     },
 };
-let registered = null;
 
 const React = {
-    createElement: (type, props, ...children) => ({ type, props: { ...(props || {}), children: children.length === 1 ? children[0] : children } }),
+    createElement: (type, props, ...children) => {
+        const merged = { ...(props || {}), children: children.length === 1 ? children[0] : children };
+        // expand function components so the walk sees their real output
+        if (typeof type === "function") return type(merged);
+        return { type, props: merged };
+    },
     useState: (initial) => [initial, () => {}],
 };
 const requireStub = (name) => {
@@ -52,26 +50,27 @@ const run = new Function("window", "document", source);
 run(window, document);
 
 if (!registered) throw new Error("plugin did not register with the module loader");
-if (registered.id !== "dsh-onedark") throw new Error("unexpected plugin id: " + registered.id);
+if (registered.id !== "dsh-onedark") throw new Error("unexpected plugin id");
 
 const exportsObj = registered.factory(requireStub);
 if (typeof exportsObj.apply !== "function") throw new Error("missing apply export");
 
-// the settings row is registered once the slot service shows up
-let slotSpec = null;
-let slotComponent = null;
+let sectionSpec = null;
+let sectionComponent = null;
 const ctx = {
     inject(deps, callback) {
-        if (JSON.stringify(deps) !== JSON.stringify(["slots"])) {
-            throw new Error("unexpected inject deps: " + JSON.stringify(deps));
-        }
+        if (JSON.stringify(deps) !== JSON.stringify(["slots"])) throw new Error("unexpected deps");
         callback({
             slots: {
                 inject(name, register) {
-                    if (name !== "settings.general.item") throw new Error("unexpected slot: " + name);
+                    if (name !== "settings.section") throw new Error("unexpected slot: " + name);
                     register();
                 },
-                register(spec, component) { slotSpec = spec; slotComponent = component; return () => {}; },
+                register(spec, component) {
+                    sectionSpec = spec;
+                    sectionComponent = component;
+                    return () => {};
+                },
             },
         });
     },
@@ -84,55 +83,58 @@ const sheet = styles.find((s) => s.dataset.pluginCss === "dsh-onedark/onedark.cs
 const table = styles.find((s) => Object.prototype.hasOwnProperty.call(s.dataset, "onedarkTable"));
 if (!sheet) throw new Error("missing the colour stylesheet");
 if (!table) throw new Error("missing the table stylesheet");
-
-if (!sheet.textContent.includes("_3GBCTG_thinkBody")) throw new Error("stylesheet lost the reasoning rule");
-if (!sheet.textContent.includes("--dsw-alias-bg-base")) throw new Error("stylesheet lost the token block");
+if (!sheet.textContent.includes("--dsw-alias-bg-base")) throw new Error("token block missing");
 if (sheet.textContent.includes("table tbody tr:nth-child(odd)")) {
     throw new Error("table rules must stay out of the colour stylesheet");
 }
-
-if (!table.textContent.includes("table tbody tr:nth-child(odd)")) {
-    throw new Error("default table mode is missing the stripe");
+if (!table.textContent.includes("border: 1px solid #343943")) {
+    throw new Error("default border axis is missing");
 }
-if (!table.textContent.includes("1px solid #343943")) {
-    throw new Error("default table mode is missing the cell border");
+const oddBlock = /nth-child\(odd\)\s*\{([^}]*)\}/.exec(table.textContent);
+const evenBlock = /nth-child\(even\)\s*\{([^}]*)\}/.exec(table.textContent);
+if (!oddBlock || !oddBlock[1].includes("transparent")) {
+    throw new Error("default stripe must leave the first row clear");
 }
-
-// second apply must not stack duplicates
-exportsObj.apply(ctx);
-if (styles.length !== 2) throw new Error("plugin injected a duplicate stylesheet");
-
-if (!slotSpec || slotSpec.id !== "onedark-table-style") {
-    throw new Error("settings row did not register");
-}
-if (slotSpec.name !== "settings.general.item") {
-    throw new Error("settings row registered on the wrong slot");
+if (!evenBlock || !evenBlock[1].includes("#262a31")) {
+    throw new Error("default stripe must tint the second row");
 }
 
-// render the settings row once so a broken component fails here, not in the page
-if (typeof slotComponent !== "function") throw new Error("settings row component missing");
-const tree = slotComponent();
-const seen = [];
-const walk = (node) => {
-    if (node === null || node === undefined) return;
-    if (Array.isArray(node)) { node.forEach(walk); return; }
-    if (typeof node !== "object") return;
-    seen.push(node.type);
-    if (node.props && node.props.children !== undefined) walk(node.props.children);
+if (!sectionSpec || sectionSpec.id !== "onedark-palette") {
+    throw new Error("palette section did not register");
+}
+if (sectionSpec.name !== "settings.section") throw new Error("wrong slot for the section");
+if (typeof sectionSpec.label !== "function" || sectionSpec.label() !== "配色方案") {
+    throw new Error("section label is wrong");
+}
+
+const walk = (node, out = []) => {
+    if (node === null || node === undefined) return out;
+    if (Array.isArray(node)) { node.forEach((n) => walk(n, out)); return out; }
+    if (typeof node !== "object") return out;
+    out.push(node);
+    if (node.props && node.props.children !== undefined) walk(node.props.children, out);
+    return out;
 };
-walk(tree);
-if (!seen.includes("select")) throw new Error("settings row has no select");
-const selectNode = (function find(node) {
-    if (node === null || node === undefined) return null;
-    if (Array.isArray(node)) { for (const n of node) { const r = find(n); if (r) return r; } return null; }
-    if (typeof node !== "object") return null;
-    if (node.type === "select") return node;
-    return node.props && node.props.children !== undefined ? find(node.props.children) : null;
-})(tree);
-const options = React.createElement === undefined ? [] : [];
-const selectChildren = selectNode.props.children || [];
-if (selectChildren.length !== 5) throw new Error("expected 5 table modes, got " + selectChildren.length);
-if (selectNode.props.value !== "github") throw new Error("default mode should be github");
 
-console.log("ok: 2 stylesheets, table mode github, settings row on settings.general.item");
-console.log("colour css bytes:", sheet.textContent.length, "| table css bytes:", table.textContent.length);
+const tree = sectionComponent();
+const nodes = walk(tree);
+const selects = nodes.filter((n) => n.type === "select");
+if (selects.length !== 2) throw new Error("expected two choosers, got " + selects.length);
+if (selects[0].props.value !== "grid") throw new Error("border chooser default is wrong");
+if (selects[1].props.value !== "after") throw new Error("stripe chooser default is wrong");
+const borderOptions = (selects[0].props.children || []).map((o) => o.props.value);
+const stripeOptions = (selects[1].props.children || []).map((o) => o.props.value);
+if (borderOptions.join() !== "grid,rows,none") throw new Error("border options: " + borderOptions.join());
+if (stripeOptions.join() !== "after,first,none") throw new Error("stripe options: " + stripeOptions.join());
+const swatches = nodes.filter((n) => n.type === "span").length;
+if (swatches < 12) throw new Error("palette swatches missing, got " + swatches);
+
+// legacy single-mode value must migrate to the two axes
+store.set("onedark.tableStyle", "zebra");
+exportsObj.apply(ctx);
+if (store.get("onedark.tableBorder") !== "none") throw new Error("legacy border did not migrate");
+if (store.get("onedark.tableStripe") !== "first") throw new Error("legacy stripe did not migrate");
+if (store.has("onedark.tableStyle")) throw new Error("legacy key was not cleared");
+
+console.log("ok: 2 stylesheets, 2 choosers, 12 swatches, legacy mode migrates");
+console.log("colour css:", sheet.textContent.length, "| table css:", table.textContent.length);

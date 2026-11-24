@@ -141,25 +141,38 @@ body[data-ds-dark-theme] table th {
 }
 """
 
-TABLE_CELL_LINE = """
+TABLE_BORDERS = {
+    "grid": """
 body[data-ds-dark-theme] table :is(th, td) {
     border: 1px solid #343943;
 }
-"""
-
-TABLE_ROW_LINE = """
+""",
+    "rows": """
 body[data-ds-dark-theme] table :is(th, td) {
     border-bottom: 1px solid #343943;
 }
-"""
-
-TABLE_HEAD_RULE = """
+""",
+    "none": """
 body[data-ds-dark-theme] table th {
     border-bottom: 1px solid #3e4452;
 }
-"""
+""",
+}
 
-TABLE_STRIPE = """
+# after: the first data row stays flush with the header, striping starts on the
+# second row (the GitHub arrangement). first: the first data row is already
+# tinted. none: a flat surface.
+TABLE_STRIPES = {
+    "after": """
+body[data-ds-dark-theme] table tbody tr:nth-child(odd) {
+    background: transparent;
+}
+
+body[data-ds-dark-theme] table tbody tr:nth-child(even) {
+    background: #262a31;
+}
+""",
+    "first": """
 body[data-ds-dark-theme] table tbody tr:nth-child(odd) {
     background: #262a31;
 }
@@ -167,14 +180,14 @@ body[data-ds-dark-theme] table tbody tr:nth-child(odd) {
 body[data-ds-dark-theme] table tbody tr:nth-child(even) {
     background: transparent;
 }
-"""
+""",
+    "none": "",
+}
 
-TABLE_MODES = {
-    "github": TABLE_BASE + TABLE_CELL_LINE + TABLE_STRIPE,
-    "zebra": TABLE_BASE + TABLE_HEAD_RULE + TABLE_STRIPE,
-    "rules": TABLE_BASE + TABLE_ROW_LINE,
-    "plain": TABLE_BASE + TABLE_HEAD_RULE,
-    "off": "",
+TABLE_PARTS = {
+    "base": TABLE_BASE,
+    "borders": TABLE_BORDERS,
+    "stripes": TABLE_STRIPES,
 }
 
 
@@ -286,7 +299,7 @@ def main():
 
     tables = os.path.join(HERE, "table-modes.json")
     with open(tables, "w", encoding="utf-8", newline="\n") as fh:
-        json.dump(TABLE_MODES, fh, indent=2, ensure_ascii=False)
+        json.dump(TABLE_PARTS, fh, indent=2, ensure_ascii=False)
         fh.write("\n")
     print("wrote", tables)
     path = os.path.join(ROOT, "onedark.css")
