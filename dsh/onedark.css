@@ -227,11 +227,11 @@ body[data-ds-dark-theme] {
   --shiki-token-changed: #e5c07b !important;
 }
 
-body[data-ds-dark-theme] :is([role="dialog"], ._dialog_1ytzq_33) button[aria-haspopup],
-body[data-ds-dark-theme] button[class*="_selector"] {
+body[data-ds-dark-theme] button[class*="selector"],
+body[data-ds-dark-theme] [role="dialog"] button[aria-haspopup] {
     border: 1px solid #343943;
-    border-radius: 4px;
-    padding: 2px 8px;
+    border-radius: var(--dsw-radius-md, 6px);
+    padding: 0 10px;
 }
 
 /* Tables follow GitHub markdown: full cell borders, a bold header with no
@@ -255,6 +255,7 @@ body[data-ds-dark-theme] table :is(th, td) {
     padding: 5px 12px;
     border: 1px solid #343943;
     min-width: 0;
+    white-space: nowrap;
 }
 
 body[data-ds-dark-theme] table :is(th:first-child, td:first-child) {

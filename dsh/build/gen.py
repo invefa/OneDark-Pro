@@ -7,6 +7,7 @@ same `--dsw-*` design tokens; this generator loads that module and reuses its
 
 import importlib.util
 import os
+import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -83,11 +84,11 @@ DSH_ALIAS = {
 # the control reads as plain text. The class names are build hashes, hence the
 # attribute and suffix selectors.
 CHOOSERS = """
-body[data-ds-dark-theme] :is([role="dialog"], ._dialog_1ytzq_33) button[aria-haspopup],
-body[data-ds-dark-theme] button[class*="_selector"] {
+body[data-ds-dark-theme] button[class*="selector"],
+body[data-ds-dark-theme] [role="dialog"] button[aria-haspopup] {
     border: 1px solid #343943;
-    border-radius: 4px;
-    padding: 2px 8px;
+    border-radius: var(--dsw-radius-md, 6px);
+    padding: 0 10px;
 }
 """
 
@@ -116,6 +117,7 @@ body[data-ds-dark-theme] table :is(th, td) {
     padding: 5px 12px;
     border: 1px solid #343943;
     min-width: 0;
+    white-space: nowrap;
 }
 
 body[data-ds-dark-theme] table :is(th:first-child, td:first-child) {
@@ -223,8 +225,25 @@ def build_css():
     return "\n".join(out)
 
 
+def check_tokens(css):
+    """A var() that the frontend never defines resolves to nothing, which
+    silently drops the declaration."""
+    known = set()
+    for name in ("index.css", "tokens.css"):
+        path = os.path.join(HERE, name)
+        if not os.path.exists(path):
+            continue
+        text = open(path, encoding="utf-8", errors="replace").read()
+        known |= set(re.findall(r"(--dsw-[a-z0-9-]+)\s*:", text))
+    used = set(re.findall(r"var\((--dsw-[a-z0-9-]+)", css))
+    missing = sorted(used - known)
+    if missing:
+        print("warning: frontend snapshot lacks " + ", ".join(missing))
+
+
 def main():
     css = build_css()
+    check_tokens(css)
     path = os.path.join(ROOT, "onedark.css")
     with open(path, "w", encoding="utf-8", newline="\n") as fh:
         fh.write(css)
