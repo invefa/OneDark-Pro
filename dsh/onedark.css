@@ -258,6 +258,9 @@ body[data-ds-dark-theme] table :is(th, td) {
     padding: 5px 12px;
     border: 1px solid #343943;
     white-space: nowrap;
+    /* the frontend caps a cell at min(30vw, 320px), which a long path exceeds
+       and then spills over the border */
+    max-width: none;
 }
 
 /* A one-column table carries prose, not data: it wraps and takes the column
@@ -283,7 +286,9 @@ body[data-ds-dark-theme] table th {
     font-weight: 600;
 }
 
-body[data-ds-dark-theme] table tr:nth-child(2n) {
+/* Counted inside tbody so the first data row stays clear: the header is a
+   row of its own, and counting from the table made that first row striped. */
+body[data-ds-dark-theme] table tbody tr:nth-child(2n) {
     background: #262a31;
 }
 
