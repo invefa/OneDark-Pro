@@ -81,7 +81,27 @@ window.__ModuleLoader__.load({
             lineHeight: "18px",
             color: "var(--dsw-alias-label-tertiary)",
         };
-        var selectStyle = { minWidth: "160px" };
+        // Matches the app's own chooser: 36px tall, no border, surface fill,
+        // chevron on the right, hover lightens the fill.
+        var CHEVRON = "url(\"data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'12'%20height%3D'12'%20viewBox%3D'0%200%2012%2012'%3E%3Cpath%20d%3D'M3%204.5%206%207.5%209%204.5'%20fill%3D'none'%20stroke%3D'%239da5b4'%20stroke-width%3D'1.4'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%2F%3E%3C%2Fsvg%3E\")";
+        var selectStyle = {
+            appearance: "none",
+            WebkitAppearance: "none",
+            height: "36px",
+            minWidth: "160px",
+            padding: "0 32px 0 14px",
+            border: "1px solid var(--dsw-alias-border-l2)",
+            borderRadius: "6px",
+            background: "var(--dsw-alias-bg-module-platform)",
+            backgroundImage: CHEVRON,
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "right 12px center",
+            color: "var(--dsw-alias-label-primary)",
+            font: "inherit",
+            fontSize: "14px",
+            lineHeight: "20px",
+            cursor: "pointer",
+        };
 
         function TableStyleRow() {
             var state = React.useState(readMode());
@@ -106,7 +126,23 @@ window.__ModuleLoader__.load({
                 ),
                 h(
                     "select",
-                    { value: mode, onChange: change, style: selectStyle },
+                    {
+                        value: mode,
+                        onChange: change,
+                        style: selectStyle,
+                        onMouseEnter: (event) => {
+                            event.currentTarget.style.background = "var(--dsw-alias-interactive-bg-hover)";
+                            event.currentTarget.style.backgroundImage = CHEVRON;
+                            event.currentTarget.style.backgroundRepeat = "no-repeat";
+                            event.currentTarget.style.backgroundPosition = "right 12px center";
+                        },
+                        onMouseLeave: (event) => {
+                            event.currentTarget.style.background = "var(--dsw-alias-bg-module-platform)";
+                            event.currentTarget.style.backgroundImage = CHEVRON;
+                            event.currentTarget.style.backgroundRepeat = "no-repeat";
+                            event.currentTarget.style.backgroundPosition = "right 12px center";
+                        },
+                    },
                     OPTIONS.map(function (option) {
                         return h("option", { key: option[0], value: option[0] }, option[1]);
                     }),
