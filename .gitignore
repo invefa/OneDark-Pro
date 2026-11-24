@@ -15,3 +15,7 @@ dsh/build/profile*/
 **/__pycache__/
 *.pyc
 *.log
+# the table decoration modes are a source file, not a build artifact
+!dsh/build/table-modes.json
+# scratch space for local verification runs
+.work/

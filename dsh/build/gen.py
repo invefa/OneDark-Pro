@@ -6,6 +6,7 @@ same `--dsw-*` design tokens; this generator loads that module and reuses its
 """
 
 import importlib.util
+import json
 import os
 import re
 
@@ -94,39 +95,30 @@ body[data-ds-dark-theme] [role="dialog"] button[aria-haspopup] {
 
 # Table cells carry 10px 16px of padding from the frontend, which reads loose for
 # data rows. The class name is a build hash of @deepseek-ai/dsh-client-ui-chat.
-TABLE = """
-/* Tables follow GitHub markdown: full cell borders, a bold header with no
-   fill, a fill on every other row, column widths from the content, and
-   tabular figures so number columns line up. The border and stripe tones are
-   pulled in from GitHub's own values to suit this darker surface.
-   Selectors are plain elements because the frontend classes are build hashes;
-   the first/last cell rules are restated because the frontend zeroes the
-   outer padding at a higher specificity. */
+# Table decoration is applied at runtime, not baked into the stylesheet: the
+# client plugin writes one of these blocks into its own style tag, chosen from
+# the setting under Settings - General. "off" leaves the frontend's own table
+# styling untouched.
+TABLE_BASE = """
+/* Selectors are plain elements: the frontend classes are build hashes. The
+   first/last cell rules are restated because the frontend zeroes the outer
+   padding at a higher specificity. */
 body[data-ds-dark-theme] table {
-    /* the frontend stretches tables to the column width; take the content
-       width instead, and let the scroller below handle the overflow */
     width: max-content;
     max-width: none;
     font-variant-numeric: tabular-nums;
 }
 
-/* The frontend hides the horizontal scrollbar until hover, which leaves a wide
-   table looking cut off. Keep the scroller available. */
 body[data-ds-dark-theme] .md-table-wide {
     overflow-x: auto;
 }
 
 body[data-ds-dark-theme] table :is(th, td) {
     padding: 5px 12px;
-    border: 1px solid #343943;
     white-space: nowrap;
-    /* the frontend caps a cell at min(30vw, 320px), which a long path exceeds
-       and then spills over the border */
     max-width: none;
 }
 
-/* A one-column table carries prose, not data: it wraps and takes the column
-   width instead of running past it on a single line. */
 body[data-ds-dark-theme] table:has(:is(th, td):only-child) {
     width: 100%;
     max-width: 100%;
@@ -147,9 +139,27 @@ body[data-ds-dark-theme] table :is(th:last-child, td:last-child) {
 body[data-ds-dark-theme] table th {
     font-weight: 600;
 }
+"""
 
-/* Counted inside tbody and starting on the first row, so the first data row
-   is tinted and reads apart from the header. */
+TABLE_CELL_LINE = """
+body[data-ds-dark-theme] table :is(th, td) {
+    border: 1px solid #343943;
+}
+"""
+
+TABLE_ROW_LINE = """
+body[data-ds-dark-theme] table :is(th, td) {
+    border-bottom: 1px solid #343943;
+}
+"""
+
+TABLE_HEAD_RULE = """
+body[data-ds-dark-theme] table th {
+    border-bottom: 1px solid #3e4452;
+}
+"""
+
+TABLE_STRIPE = """
 body[data-ds-dark-theme] table tbody tr:nth-child(odd) {
     background: #262a31;
 }
@@ -158,6 +168,15 @@ body[data-ds-dark-theme] table tbody tr:nth-child(even) {
     background: transparent;
 }
 """
+
+TABLE_MODES = {
+    "github": TABLE_BASE + TABLE_CELL_LINE + TABLE_STRIPE,
+    "zebra": TABLE_BASE + TABLE_HEAD_RULE + TABLE_STRIPE,
+    "rules": TABLE_BASE + TABLE_ROW_LINE,
+    "plain": TABLE_BASE + TABLE_HEAD_RULE,
+    "off": "",
+}
+
 
 
 # Reasoning rows are rendered with the body colour, so they need their own step
@@ -240,8 +259,6 @@ def build_css():
     out.append("")
     out.append(CHOOSERS.strip())
     out.append("")
-    out.append(TABLE.strip())
-    out.append("")
     out.append(REASONING.strip())
     out.append("")
     return "\n".join(out)
@@ -266,6 +283,12 @@ def check_tokens(css):
 def main():
     css = build_css()
     check_tokens(css)
+
+    tables = os.path.join(HERE, "table-modes.json")
+    with open(tables, "w", encoding="utf-8", newline="\n") as fh:
+        json.dump(TABLE_MODES, fh, indent=2, ensure_ascii=False)
+        fh.write("\n")
+    print("wrote", tables)
     path = os.path.join(ROOT, "onedark.css")
     with open(path, "w", encoding="utf-8", newline="\n") as fh:
         fh.write(css)
