@@ -1,5 +1,9 @@
 {
   "base": "\n/* Selectors are plain elements: the frontend classes are build hashes. The\n   first/last cell rules are restated because the frontend zeroes the outer\n   padding at a higher specificity. */\nbody[data-ds-dark-theme] table {\n    font-variant-numeric: tabular-nums;\n}\n\nbody[data-ds-dark-theme] table :is(th, td) {\n    padding: 5px 12px;\n    max-width: none;\n}\n\nbody[data-ds-dark-theme] table :is(th:first-child, td:first-child) {\n    padding-left: 12px;\n}\n\nbody[data-ds-dark-theme] table :is(th:last-child, td:last-child) {\n    padding-right: 12px;\n}\n\nbody[data-ds-dark-theme] table th {\n    font-weight: 600;\n}\n",
+  "sizes": {
+    "full": "\nbody[data-ds-dark-theme] table {\n    width: 100%;\n    max-width: 100%;\n    table-layout: auto;\n}\n",
+    "content": "\nbody[data-ds-dark-theme] table {\n    width: max-content;\n    max-width: none;\n}\n"
+  },
   "borders": {
     "grid": "\nbody[data-ds-dark-theme] table :is(th, td) {\n    border: 1px solid #343943;\n}\n",
     "rows": "\nbody[data-ds-dark-theme] table :is(th, td) {\n    border-bottom: 1px solid #343943;\n}\n",
@@ -11,7 +15,7 @@
     "none": ""
   },
   "flows": {
-    "wrap": "\nbody[data-ds-dark-theme] table {\n    width: 100%;\n    max-width: 100%;\n    table-layout: auto;\n}\n\nbody[data-ds-dark-theme] table :is(th, td) {\n    white-space: normal;\n    overflow-wrap: anywhere;\n}\n",
-    "scroll": "\nbody[data-ds-dark-theme] table {\n    width: max-content;\n    max-width: none;\n}\n\nbody[data-ds-dark-theme] .md-table-wide {\n    overflow-x: auto;\n}\n\nbody[data-ds-dark-theme] table :is(th, td) {\n    white-space: nowrap;\n}\n\nbody[data-ds-dark-theme] table:has(:is(th, td):only-child) {\n    width: 100%;\n    max-width: 100%;\n}\n\nbody[data-ds-dark-theme] table :is(th, td):only-child {\n    white-space: normal;\n}\n"
+    "wrap": "\nbody[data-ds-dark-theme] table :is(th, td) {\n    white-space: normal;\n    overflow-wrap: anywhere;\n}\n",
+    "scroll": "\nbody[data-ds-dark-theme] .md-table-wide {\n    overflow-x: auto;\n}\n\nbody[data-ds-dark-theme] table :is(th, td) {\n    white-space: nowrap;\n}\n\nbody[data-ds-dark-theme] table :is(th, td):only-child {\n    white-space: normal;\n}\n"
   }
 }

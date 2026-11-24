@@ -155,39 +155,38 @@ body[data-ds-dark-theme] table th {
 }
 """
 
-# How a table that is wider than the column behaves: wrap folds the long cells
-# onto more lines and keeps the table inside the column; scroll keeps every cell
-# on one line and lets the table run past it, with a horizontal scroller.
-TABLE_FLOWS = {
-    "wrap": """
+# Table width and cell wrapping are separate choices: the width decides how far
+# the table box reaches, the flow decides whether a long cell wraps or runs on.
+TABLE_SIZES = {
+    "full": """
 body[data-ds-dark-theme] table {
     width: 100%;
     max-width: 100%;
     table-layout: auto;
 }
+""",
+    "content": """
+body[data-ds-dark-theme] table {
+    width: max-content;
+    max-width: none;
+}
+""",
+}
 
+TABLE_FLOWS = {
+    "wrap": """
 body[data-ds-dark-theme] table :is(th, td) {
     white-space: normal;
     overflow-wrap: anywhere;
 }
 """,
     "scroll": """
-body[data-ds-dark-theme] table {
-    width: max-content;
-    max-width: none;
-}
-
 body[data-ds-dark-theme] .md-table-wide {
     overflow-x: auto;
 }
 
 body[data-ds-dark-theme] table :is(th, td) {
     white-space: nowrap;
-}
-
-body[data-ds-dark-theme] table:has(:is(th, td):only-child) {
-    width: 100%;
-    max-width: 100%;
 }
 
 body[data-ds-dark-theme] table :is(th, td):only-child {
@@ -241,6 +240,7 @@ body[data-ds-dark-theme] table tbody tr:nth-child(even) {
 
 TABLE_PARTS = {
     "base": TABLE_BASE,
+    "sizes": TABLE_SIZES,
     "borders": TABLE_BORDERS,
     "stripes": TABLE_STRIPES,
     "flows": TABLE_FLOWS,
