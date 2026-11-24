@@ -50,11 +50,11 @@ DSH_ALIAS = {
     "--dsw-alias-turn-trigger-bg-hover": INACTIVE,
     # Borders sit one step below the site skin values: there the separators read
     # brighter than the surfaces around them, which looks cheap next to Codex.
-    "--dsw-alias-border-l1": "#262a31",
-    "--dsw-alias-border-l2": "#323842",
-    "--dsw-alias-border-l2-darkmode-thin": "#262a31",
-    "--dsw-alias-border-l3": "#3e4452",
-    "--dsw-alias-border-l4": "#495162",
+    "--dsw-alias-border-l1": "#24272c",
+    "--dsw-alias-border-l2": "#292d34",
+    "--dsw-alias-border-l2-darkmode-thin": "#24272c",
+    "--dsw-alias-border-l3": "#303540",
+    "--dsw-alias-border-l4": "#3a3f4b",
     "--dsw-alias-state-idle-primary": FG_MUTED,
     "--dsw-alias-brand-primary-new-colorprimary-new-color": ACCENT,
     "--dsw-alias-code-diff-added": "rgba(152, 195, 121, .14)",
