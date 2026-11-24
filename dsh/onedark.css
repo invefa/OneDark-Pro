@@ -149,13 +149,13 @@ body[data-ds-dark-theme] {
   --dsw-alias-tooltip-key-bg: #2c313c !important;
   --dsw-alias-turn-trigger-bg: #2c313c !important;
   --dsw-alias-turn-trigger-bg-hover: #323842 !important;
-  --dsw-alias-border-l1: transparent !important;
-  --dsw-alias-border-l2: transparent !important;
-  --dsw-alias-border-l2-darkmode-thin: transparent !important;
-  --dsw-alias-border-l3: transparent !important;
-  --dsw-alias-border-l4: transparent !important;
-  --dsw-alias-border-inverted: transparent !important;
-  --dsw-alias-border-inverted2: transparent !important;
+  --dsw-alias-border-l1: #2b2f37 !important;
+  --dsw-alias-border-l2: #2b2f37 !important;
+  --dsw-alias-border-l2-darkmode-thin: #2b2f37 !important;
+  --dsw-alias-border-l3: #2b2f37 !important;
+  --dsw-alias-border-l4: #2b2f37 !important;
+  --dsw-alias-border-inverted: #2b2f37 !important;
+  --dsw-alias-border-inverted2: #2b2f37 !important;
   --dsw-alias-bg-layer-1: #262a31 !important;
   --dsw-alias-bg-layer-2: #2a2e35 !important;
   --dsw-alias-bg-layer-3: #2e323a !important;
@@ -224,16 +224,9 @@ body[data-ds-dark-theme] ._tableScroll_1ypvv_192 :is(th, td) {
     padding: 4px 10px;
 }
 
-body[data-ds-dark-theme] :is(input, textarea),
-body[data-ds-dark-theme] select[class],
-body[data-ds-dark-theme] :is(pre, .md-code-block),
-body[data-ds-dark-theme] ._tableScroll_1ypvv_192 :is(th, td) {
-    border-color: #2f343d !important;
-}
-
 /* reasoning row: a process column under the answer */
 ._3GBCTG_thinkBody {
-    border-left: 1px solid #2f343d;
+    border-left: 1px solid var(--dsw-alias-border-l3);
     padding-bottom: 14px;
 }
 

@@ -48,16 +48,16 @@ DSH_ALIAS = {
     "--dsw-alias-tooltip-key-bg": RAISED,
     "--dsw-alias-turn-trigger-bg": RAISED,
     "--dsw-alias-turn-trigger-bg-hover": INACTIVE,
-    # The palette reads cheap with separators, so they go away entirely and
-    # the surfaces below carry the structure. Containers that still need an
-    # edge get one from the borderless block instead of a token.
-    "--dsw-alias-border-l1": "transparent",
-    "--dsw-alias-border-l2": "transparent",
-    "--dsw-alias-border-l2-darkmode-thin": "transparent",
-    "--dsw-alias-border-l3": "transparent",
-    "--dsw-alias-border-l4": "transparent",
-    "--dsw-alias-border-inverted": "transparent",
-    "--dsw-alias-border-inverted2": "transparent",
+    # One faint weight for every separator. The frontend draws 24 of them, so
+    # the tone has to sit near the surface: visible as an edge, never as a line
+    # competing with the text. Structure comes from the layer steps below.
+    "--dsw-alias-border-l1": "#2b2f37",
+    "--dsw-alias-border-l2": "#2b2f37",
+    "--dsw-alias-border-l2-darkmode-thin": "#2b2f37",
+    "--dsw-alias-border-l3": "#2b2f37",
+    "--dsw-alias-border-l4": "#2b2f37",
+    "--dsw-alias-border-inverted": "#2b2f37",
+    "--dsw-alias-border-inverted2": "#2b2f37",
     # Four even steps instead of the site's jumps: layer 3 lands on a full
     # line colour there, which reads heavy as a fill.
     "--dsw-alias-bg-layer-1": "#262a31",
@@ -79,18 +79,6 @@ DSH_ALIAS = {
     "--dsw-alias-file-diff-deleted-marker": RED,
 }
 
-# Separators are removed through the border tokens; these are the containers
-# that still need an edge to read as a box.
-EDGES = """
-body[data-ds-dark-theme] :is(input, textarea),
-body[data-ds-dark-theme] select[class],
-body[data-ds-dark-theme] :is(pre, .md-code-block),
-body[data-ds-dark-theme] ._tableScroll_1ypvv_192 :is(th, td) {
-    border-color: #2f343d !important;
-}
-"""
-
-
 # Table cells carry 10px 16px of padding from the frontend, which reads loose for
 # data rows. The class name is a build hash of @deepseek-ai/dsh-client-ui-chat.
 TABLE = """
@@ -105,7 +93,7 @@ body[data-ds-dark-theme] ._tableScroll_1ypvv_192 :is(th, td) {
 REASONING = """
 /* reasoning row: a process column under the answer */
 ._3GBCTG_thinkBody {
-    border-left: 1px solid #2f343d;
+    border-left: 1px solid var(--dsw-alias-border-l3);
     padding-bottom: 14px;
 }
 
@@ -177,8 +165,6 @@ def build_css():
     out.append("}")
     out.append("")
     out.append(TABLE.strip())
-    out.append("")
-    out.append(EDGES.strip())
     out.append("")
     out.append(REASONING.strip())
     out.append("")
