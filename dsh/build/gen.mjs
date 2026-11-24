@@ -62,20 +62,30 @@ window.__ModuleLoader__.load({
             plain: ["none", "none"],
             off: ["off", "off"],
         };
+        // Entries beginning with -- are read from the live tokens, so the swatch
+        // can never drift from the stylesheet. The rest are syntax colours taken
+        // from the theme's tokenColors, which are not part of the token system.
         var PALETTE = [
-            ["底色", "#23272e"],
-            ["面板", "#262a31"],
-            ["浮层", "#2a2e35"],
-            ["分隔线", "#343943"],
-            ["正文", "#abb2bf"],
-            ["次要", "#9da5b4"],
-            ["强调", "#4d78cc"],
-            ["链接", "#61afef"],
+            ["底色", "--dsw-alias-bg-base"],
+            ["面板", "--dsw-alias-bg-layer-2"],
+            ["浮层", "--dsw-alias-bg-layer-4"],
+            ["分隔线", "--dsw-alias-border-l2"],
+            ["正文", "--dsw-alias-label-primary"],
+            ["次要", "--dsw-alias-label-tertiary"],
+            ["强调", "--dsw-alias-brand-primary"],
+            ["链接", "--dsw-alias-brand-text"],
             ["字符串", "#98c379"],
             ["数字", "#d19a66"],
             ["关键字", "#c678dd"],
             ["注释", "#7f848e"],
         ];
+
+        function resolveColor(source) {
+            if (source.charAt(0) !== "-") return source;
+            if (typeof document === "undefined" || !document.body) return source;
+            var value = getComputedStyle(document.body).getPropertyValue(source);
+            return value ? value.trim() : source;
+        }
 
         function readSetting(key, allowed, fallback) {
             try {
@@ -285,11 +295,15 @@ window.__ModuleLoader__.load({
                                         height: "12px",
                                         borderRadius: "3px",
                                         border: "1px solid var(--dsw-alias-border-l2)",
-                                        background: entry[1],
+                                        background: resolveColor(entry[1]),
                                         display: "inline-block",
                                     },
                                 }),
-                                h("span", { style: { ...DESC, lineHeight: "18px" } }, entry[0] + " " + entry[1]),
+                                h(
+                                    "span",
+                                    { style: { ...DESC, lineHeight: "18px" } },
+                                    entry[0] + " " + resolveColor(entry[1]),
+                                ),
                             );
                         }),
                     ),
