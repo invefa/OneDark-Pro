@@ -182,11 +182,18 @@ body[data-ds-dark-theme] {
   color-scheme: dark;
 }
 
-body[data-ds-dark-theme] select,
+body[data-ds-dark-theme] select {
+  color: var(--dsw-alias-label-primary);
+  background-color: var(--dsw-alias-bg-base);
+  border: 1px solid #343943;
+  border-radius: 4px;
+  padding: 2px 8px;
+  color-scheme: dark;
+}
+
 body[data-ds-dark-theme] option {
   color: var(--dsw-alias-label-primary);
   background-color: var(--dsw-alias-bg-base);
-  color-scheme: dark;
 }
 
 /* The plugin fields are native selects; without an explicit border they
