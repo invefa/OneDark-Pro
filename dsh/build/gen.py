@@ -60,6 +60,15 @@ DSH_ALIAS = {
     "--dsw-alias-file-diff-deleted-marker": RED,
 }
 
+# Table cells carry 10px 16px of padding from the frontend, which reads loose for
+# data rows. The class name is a build hash of @deepseek-ai/dsh-client-ui-chat.
+TABLE = """
+body[data-ds-dark-theme] ._tableScroll_1ypvv_192 :is(th, td) {
+    padding: 5px 12px;
+}
+"""
+
+
 # Reasoning rows are rendered with the body colour, so they need their own step
 # down. The class names are build hashes of @deepseek-ai/dsh-client-ui-chat.
 REASONING = """
@@ -135,6 +144,8 @@ def build_css():
     for name, value in SHIKI.items():
         out.append("  --shiki-{}: {} !important;".format(name, value))
     out.append("}")
+    out.append("")
+    out.append(TABLE.strip())
     out.append("")
     out.append(REASONING.strip())
     out.append("")

@@ -206,6 +206,10 @@ body[data-ds-dark-theme] {
   --shiki-token-changed: #e5c07b !important;
 }
 
+body[data-ds-dark-theme] ._tableScroll_1ypvv_192 :is(th, td) {
+    padding: 5px 12px;
+}
+
 /* reasoning row: a process column under the answer */
 ._3GBCTG_thinkBody {
     border-left: 1px solid var(--dsw-alias-border-l3);
