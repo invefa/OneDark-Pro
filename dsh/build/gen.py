@@ -79,6 +79,19 @@ DSH_ALIAS = {
     "--dsw-alias-file-diff-deleted-marker": RED,
 }
 
+# Settings rows end in a bare button with aria-haspopup: no fill, no border, so
+# the control reads as plain text. The class names are build hashes, hence the
+# attribute and suffix selectors.
+CHOOSERS = """
+body[data-ds-dark-theme] :is([role="dialog"], ._dialog_1ytzq_33) button[aria-haspopup],
+body[data-ds-dark-theme] button[class*="_selector"] {
+    border: 1px solid #343943;
+    border-radius: 4px;
+    padding: 2px 8px;
+}
+"""
+
+
 # Table cells carry 10px 16px of padding from the frontend, which reads loose for
 # data rows. The class name is a build hash of @deepseek-ai/dsh-client-ui-chat.
 TABLE = """
@@ -90,10 +103,12 @@ TABLE = """
    the first/last cell rules are restated because the frontend zeroes the
    outer padding at a higher specificity. */
 body[data-ds-dark-theme] table {
+    display: block;
     border-collapse: collapse;
     border-spacing: 0;
     width: max-content;
     max-width: 100%;
+    overflow-x: auto;
     font-variant-numeric: tabular-nums;
 }
 
@@ -198,6 +213,8 @@ def build_css():
     for name, value in SHIKI.items():
         out.append("  --shiki-{}: {} !important;".format(name, value))
     out.append("}")
+    out.append("")
+    out.append(CHOOSERS.strip())
     out.append("")
     out.append(TABLE.strip())
     out.append("")
