@@ -260,6 +260,12 @@ body[data-ds-dark-theme] table :is(th, td) {
     white-space: nowrap;
 }
 
+/* A one-column table carries prose, not data, so it wraps instead of being
+   clipped by the nowrap above. */
+body[data-ds-dark-theme] table :is(th, td):only-child {
+    white-space: normal;
+}
+
 body[data-ds-dark-theme] table :is(th:first-child, td:first-child) {
     padding-left: 12px;
 }
