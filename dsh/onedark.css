@@ -60,20 +60,7 @@ body[data-ds-dark-theme] {
 
   /* semantic layer */
   --dsw-alias-bg-base: #23272e !important;
-  --dsw-alias-bg-layer-1: #2c313c !important;
-  --dsw-alias-bg-layer-2: #323842 !important;
-  --dsw-alias-bg-layer-3: #3e4452 !important;
-  --dsw-alias-bg-overlay: #323842 !important;
-  --dsw-alias-bg-multi-select: #323842 !important;
-  --dsw-alias-bg-module-platform: #323842 !important;
   --dsw-alias-bg-skeleton: #2c313a !important;
-  --dsw-alias-border-l1: #323842 !important;
-  --dsw-alias-border-l2: #3e4452 !important;
-  --dsw-alias-border-l2-darkmode-thin: #323842 !important;
-  --dsw-alias-border-l3: #495162 !important;
-  --dsw-alias-border-l4: #515a6b !important;
-  --dsw-alias-border-inverted: #2c313c !important;
-  --dsw-alias-border-inverted2: #3e4452 !important;
   --dsw-alias-interactive-bg-hover: #2c313a !important;
   --dsw-alias-interactive-bg-hover-accent: #323842 !important;
   --dsw-alias-interactive-bg-active: #2c313c !important;

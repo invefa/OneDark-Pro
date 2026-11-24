@@ -209,7 +209,7 @@ def build_css():
     out.append("   declared by the DSH frontend only. Code blocks read the Shiki css-variables")
     out.append("   palette, so their token colours are set here as well. */")
     out.append("")
-    out.extend(site.token_block(DSH_ALIAS))
+    out.extend(site.token_block(DSH_ALIAS, skip=set(DSH_ALIAS)))
 
     out.append("/* Native controls (the language select and its popup) follow the")
     out.append("   browser colour-scheme, which the app never declares, so they render")

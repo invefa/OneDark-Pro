@@ -272,8 +272,12 @@ SCOPE = "body[data-ds-dark-theme]"
 CODE = SCOPE + " .md-code-block.md-code-block-dark"
 
 
-def token_block(extra_alias=None):
-    """Emit the design-token override block shared by every DSH/DeepSeek skin."""
+def token_block(extra_alias=None, skip=()):
+    """Emit the design-token override block shared by every DSH/DeepSeek skin.
+
+    Keys in `skip` are left out, so a caller that overrides them can emit its
+    own value once instead of repeating the property in the same block.
+    """
     lines = [SCOPE + " {"]
     lines.append("  /* raw palette: neutral ramp */")
     for step, value in RAMP.items():
@@ -289,6 +293,8 @@ def token_block(extra_alias=None):
     lines.append("")
     lines.append("  /* semantic layer */")
     for name, value in ALIAS.items():
+        if name in skip:
+            continue
         lines.append("  {}: {} !important;".format(name, value))
     for name, value in (extra_alias or {}).items():
         lines.append("  {}: {} !important;".format(name, value))
