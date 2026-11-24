@@ -220,29 +220,22 @@ body[data-ds-dark-theme] {
   --shiki-token-changed: #e5c07b !important;
 }
 
-/* Tables: a faint header fill with one heavier edge, then alternating rows
-   instead of rules. Selectors are plain elements on purpose: the frontend
-   class names are build hashes and changed between releases, which silently
-   dropped the whole block. The frontend pins min-width:100px per cell, which
-   leaves short tables padded out with dead space, so that is released too. */
+/* Tables follow GitHub: a rule under every row, no vertical lines, a bold
+   header with no fill. Selectors are plain elements on purpose, since the
+   frontend class names are build hashes that change between releases. */
 body[data-ds-dark-theme] table :is(th, td) {
-    padding: 4px 10px;
-    border-bottom: none;
+    padding: 5px 12px;
+    border-bottom: 1px solid #3e4452;
     min-width: 0;
 }
 
 body[data-ds-dark-theme] table th {
-    background: #2a2e35;
-    border-bottom: 1px solid #3e4452;
     font-weight: 600;
-}
-
-body[data-ds-dark-theme] table tbody tr:nth-child(even) {
-    background: #262a31;
+    border-bottom-color: #4a505c;
 }
 
 body[data-ds-dark-theme] table tbody tr:hover {
-    background: #2e323a;
+    background: #262a31;
 }
 
 /* reasoning row: a process column under the answer */
