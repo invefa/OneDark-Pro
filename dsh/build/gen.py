@@ -48,6 +48,13 @@ DSH_ALIAS = {
     "--dsw-alias-tooltip-key-bg": RAISED,
     "--dsw-alias-turn-trigger-bg": RAISED,
     "--dsw-alias-turn-trigger-bg-hover": INACTIVE,
+    # Borders sit one step below the site skin values: there the separators read
+    # brighter than the surfaces around them, which looks cheap next to Codex.
+    "--dsw-alias-border-l1": "#262a31",
+    "--dsw-alias-border-l2": "#323842",
+    "--dsw-alias-border-l2-darkmode-thin": "#262a31",
+    "--dsw-alias-border-l3": "#3e4452",
+    "--dsw-alias-border-l4": "#495162",
     "--dsw-alias-state-idle-primary": FG_MUTED,
     "--dsw-alias-brand-primary-new-colorprimary-new-color": ACCENT,
     "--dsw-alias-code-diff-added": "rgba(152, 195, 121, .14)",
@@ -64,7 +71,7 @@ DSH_ALIAS = {
 # data rows. The class name is a build hash of @deepseek-ai/dsh-client-ui-chat.
 TABLE = """
 body[data-ds-dark-theme] ._tableScroll_1ypvv_192 :is(th, td) {
-    padding: 5px 12px;
+    padding: 4px 10px;
 }
 """
 

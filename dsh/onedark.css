@@ -149,6 +149,11 @@ body[data-ds-dark-theme] {
   --dsw-alias-tooltip-key-bg: #2c313c !important;
   --dsw-alias-turn-trigger-bg: #2c313c !important;
   --dsw-alias-turn-trigger-bg-hover: #323842 !important;
+  --dsw-alias-border-l1: #262a31 !important;
+  --dsw-alias-border-l2: #323842 !important;
+  --dsw-alias-border-l2-darkmode-thin: #262a31 !important;
+  --dsw-alias-border-l3: #3e4452 !important;
+  --dsw-alias-border-l4: #495162 !important;
   --dsw-alias-state-idle-primary: #9da5b4 !important;
   --dsw-alias-brand-primary-new-colorprimary-new-color: #4d78cc !important;
   --dsw-alias-code-diff-added: rgba(152, 195, 121, .14) !important;
@@ -207,7 +212,7 @@ body[data-ds-dark-theme] {
 }
 
 body[data-ds-dark-theme] ._tableScroll_1ypvv_192 :is(th, td) {
-    padding: 5px 12px;
+    padding: 4px 10px;
 }
 
 /* reasoning row: a process column under the answer */
