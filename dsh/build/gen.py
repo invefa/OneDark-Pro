@@ -137,6 +137,14 @@ body[data-ds-dark-theme] table {
     font-variant-numeric: tabular-nums;
 }
 
+/* A table's max-width is ignored while it is display: table, so the column box
+   is what keeps it inside the text column: full width, always scrollable. */
+body[data-ds-dark-theme] .md-table-wide {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
 body[data-ds-dark-theme] table :is(th, td) {
     padding: 5px 12px;
     max-width: none;
@@ -168,7 +176,6 @@ body[data-ds-dark-theme] table {
     "content": """
 body[data-ds-dark-theme] table {
     width: max-content;
-    max-width: none;
 }
 """,
 }
@@ -181,10 +188,6 @@ body[data-ds-dark-theme] table :is(th, td) {
 }
 """,
     "scroll": """
-body[data-ds-dark-theme] .md-table-wide {
-    overflow-x: auto;
-}
-
 body[data-ds-dark-theme] table :is(th, td) {
     white-space: nowrap;
 }
