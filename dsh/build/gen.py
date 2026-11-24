@@ -138,8 +138,10 @@ body[data-ds-dark-theme] table {
 }
 
 /* A table's max-width is ignored while it is display: table, so the column box
-   is what keeps it inside the text column: always scrollable, never wider. */
-body[data-ds-dark-theme] .md-table-wide {
+   is what keeps it inside the text column. Keyed on the wrapper itself: the
+   frontend only tags wide tables with md-table-wide, so that class alone let
+   short tables keep their own width. */
+body[data-ds-dark-theme] :has(> table) {
     max-width: 100%;
     overflow-x: auto;
 }
@@ -159,6 +161,8 @@ body[data-ds-dark-theme] table :is(th:last-child, td:last-child) {
 
 body[data-ds-dark-theme] table th {
     font-weight: 600;
+    /* GitHub left-aligns headers; the browser default centres them */
+    text-align: start;
 }
 """
 
@@ -169,7 +173,7 @@ body[data-ds-dark-theme] table th {
 # the table inside fills the box (so long cells wrap) or takes its own width.
 TABLE_SIZES = {
     "full": """
-body[data-ds-dark-theme] .md-table-wide {
+body[data-ds-dark-theme] :has(> table) {
     width: 100%;
 }
 
@@ -179,7 +183,7 @@ body[data-ds-dark-theme] table {
 }
 """,
     "content": """
-body[data-ds-dark-theme] .md-table-wide {
+body[data-ds-dark-theme] :has(> table) {
     width: fit-content;
     max-width: 100%;
 }
