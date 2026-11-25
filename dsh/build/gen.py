@@ -141,9 +141,12 @@ body[data-ds-dark-theme] table {
    is what keeps it inside the text column. Keyed on the wrapper itself: the
    frontend only tags wide tables with md-table-wide, so that class alone let
    short tables keep their own width. */
-body[data-ds-dark-theme] :has(> table) {
+body[data-ds-dark-theme] :has(> table),
+body[data-ds-dark-theme] .md-table-wide {
     max-width: 100%;
+    max-height: none;
     overflow-x: auto;
+    overflow-y: visible;
 }
 
 body[data-ds-dark-theme] table :is(th, td) {
@@ -173,7 +176,8 @@ body[data-ds-dark-theme] table th {
 # the table inside fills the box (so long cells wrap) or takes its own width.
 TABLE_SIZES = {
     "full": """
-body[data-ds-dark-theme] :has(> table) {
+body[data-ds-dark-theme] :has(> table),
+body[data-ds-dark-theme] .md-table-wide {
     width: 100%;
 }
 
@@ -183,7 +187,8 @@ body[data-ds-dark-theme] table {
 }
 """,
     "content": """
-body[data-ds-dark-theme] :has(> table) {
+body[data-ds-dark-theme] :has(> table),
+body[data-ds-dark-theme] .md-table-wide {
     width: fit-content;
     max-width: 100%;
 }
