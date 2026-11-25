@@ -187,10 +187,11 @@ body[data-ds-dark-theme] table {
 }
 """,
     "content": """
+/* Leave the width alone: the frontend already fills narrow tables and lets a
+   table of four or more columns take its content width. */
 body[data-ds-dark-theme] :has(> table),
 body[data-ds-dark-theme] .md-table-wide {
-    width: fit-content;
-    max-width: 100%;
+    width: 100%;
 }
 
 body[data-ds-dark-theme] table {
