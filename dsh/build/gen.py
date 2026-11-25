@@ -170,31 +170,39 @@ body[data-ds-dark-theme] table th {
 """
 
 # Table width and cell wrapping are separate choices. The column box owns the
-# boundary: it is always scrollable and never wider than the text column, so a
-# table can never paint outside it. The width choice decides whether that box
-# spans the column or shrinks to the content; the flow choice decides whether
-# the table inside fills the box (so long cells wrap) or takes its own width.
+# boundary; the width choice sets how wide that box gets and how wide the table
+# inside it may become. The flow choice only decides whether cells wrap.
+#
+# The inner selectors are written as ":has(> table) > table" so they beat the
+# frontend's own "._tableFill table { width: 100% }", which would otherwise keep
+# a two column table stretched even when the width choice says content.
 TABLE_SIZES = {
     "full": """
 body[data-ds-dark-theme] :has(> table),
 body[data-ds-dark-theme] .md-table-wide {
     width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
 }
 
-/* a short table still fills the column */
-body[data-ds-dark-theme] table {
+/* a table narrower than the column is stretched to it */
+body[data-ds-dark-theme] :has(> table) > table,
+body[data-ds-dark-theme] .md-table-wide > table {
+    width: 100%;
     min-width: 100%;
 }
 """,
     "content": """
-/* Leave the width alone: the frontend already fills narrow tables and lets a
-   table of four or more columns take its content width. */
 body[data-ds-dark-theme] :has(> table),
 body[data-ds-dark-theme] .md-table-wide {
-    width: 100%;
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
 }
 
-body[data-ds-dark-theme] table {
+body[data-ds-dark-theme] :has(> table) > table,
+body[data-ds-dark-theme] .md-table-wide > table {
+    width: auto;
     min-width: 0;
 }
 """,
@@ -202,18 +210,17 @@ body[data-ds-dark-theme] table {
 
 TABLE_FLOWS = {
     "wrap": """
-body[data-ds-dark-theme] table {
-    width: 100%;
-    table-layout: auto;
-}
-
+/* no width here: the size choice decides how far the table may grow, so a short
+   table is not stretched just because its cells are allowed to wrap */
 body[data-ds-dark-theme] table :is(th, td) {
     white-space: normal;
     overflow-wrap: anywhere;
+    word-break: break-word;
 }
 """,
     "scroll": """
-body[data-ds-dark-theme] table {
+body[data-ds-dark-theme] :has(> table) > table,
+body[data-ds-dark-theme] .md-table-wide > table {
     width: max-content;
 }
 
