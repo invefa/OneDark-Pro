@@ -211,8 +211,11 @@ body[data-ds-dark-theme] .md-table-wide > table {
 TABLE_FLOWS = {
     "wrap": """
 /* no width here: the size choice decides how far the table may grow, so a short
-   table is not stretched just because its cells are allowed to wrap */
+   table is not stretched just because its cells are allowed to wrap. The
+   frontend floors every cell at 100px, which six columns overflow before a
+   single line breaks, so wrapping has to lift that floor. */
 body[data-ds-dark-theme] table :is(th, td) {
+    min-width: 0;
     white-space: normal;
     overflow-wrap: anywhere;
     word-break: break-word;

@@ -15,7 +15,7 @@
     "none": ""
   },
   "flows": {
-    "wrap": "\n/* no width here: the size choice decides how far the table may grow, so a short\n   table is not stretched just because its cells are allowed to wrap */\nbody[data-ds-dark-theme] table :is(th, td) {\n    white-space: normal;\n    overflow-wrap: anywhere;\n    word-break: break-word;\n}\n",
+    "wrap": "\n/* no width here: the size choice decides how far the table may grow, so a short\n   table is not stretched just because its cells are allowed to wrap. The\n   frontend floors every cell at 100px, which six columns overflow before a\n   single line breaks, so wrapping has to lift that floor. */\nbody[data-ds-dark-theme] table :is(th, td) {\n    min-width: 0;\n    white-space: normal;\n    overflow-wrap: anywhere;\n    word-break: break-word;\n}\n",
     "scroll": "\nbody[data-ds-dark-theme] :has(> table) > table,\nbody[data-ds-dark-theme] .md-table-wide > table {\n    width: max-content;\n}\n\nbody[data-ds-dark-theme] table :is(th, td) {\n    white-space: nowrap;\n}\n\nbody[data-ds-dark-theme] table :is(th, td):only-child {\n    white-space: normal;\n}\n"
   }
 }
